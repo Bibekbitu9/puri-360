@@ -1,4 +1,4 @@
-import React from 'react';
+
 import { ThemeToggle } from './components/ThemeToggle';
 import { LocationButton } from './components/LocationButton';
 import { LocationCard } from './components/LocationCard';
@@ -6,7 +6,7 @@ import { ErrorState } from './components/ErrorState';
 import { useGeolocation } from './hooks/useGeolocation';
 
 function App() {
-  const { location, loading, error, permissionGranted, requestLocation, resetLocation } = useGeolocation();
+  const { location, loading, error, permissionGranted, requestLocation } = useGeolocation();
 
   return (
     <div className="app-container">
