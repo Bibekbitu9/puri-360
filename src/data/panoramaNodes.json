@@ -1,0 +1,26 @@
+[
+  {
+    "id": "node1",
+    "title": "Badabil Cave Entrance",
+    "latitude": 21.091500,
+    "longitude": 84.494545
+  },
+  {
+    "id": "node2",
+    "title": "Badabil Cave Interior 1",
+    "latitude": 21.091349,
+    "longitude": 84.494426
+  },
+  {
+    "id": "node3",
+    "title": "Badabil Cave Interior 2",
+    "latitude": 21.091287,
+    "longitude": 84.494403
+  },
+  {
+    "id": "node18",
+    "title": "Ambjohlkhol Outlook",
+    "latitude": 21.194162,
+    "longitude": 84.498779
+  }
+]
