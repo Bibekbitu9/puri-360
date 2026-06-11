@@ -26,8 +26,6 @@ export const useGeolocation = () => {
       return;
     }
 
-    setState((prev) => ({ ...prev, loading: true, error: null }));
-
     const startGeolocation = (highAccuracy: boolean) => {
       navigator.geolocation.getCurrentPosition(
         (position) => {
@@ -78,7 +76,11 @@ export const useGeolocation = () => {
       );
     };
 
+    // Call getCurrentPosition first synchronously to satisfy Safari's user gesture rule
     startGeolocation(true);
+
+    // Update loading state in React afterwards
+    setState((prev) => ({ ...prev, loading: true, error: null }));
   }, []);
 
   const resetLocation = useCallback(() => {
