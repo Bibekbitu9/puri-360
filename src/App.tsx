@@ -1,77 +1,229 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo, useRef } from 'react';
 import { ThemeToggle } from './components/ThemeToggle';
 import { LocationButton } from './components/LocationButton';
-import { LocationCard } from './components/LocationCard';
 import { ErrorState } from './components/ErrorState';
-import { NearestPanoramaCard } from './components/NearestPanoramaCard';
-import { PanoViewer } from './components/PanoViewer';
 import { useGeolocation } from './hooks/useGeolocation';
 import { MetadataService } from './services/MetadataService';
-import { findNearestNode } from './gis/haversine';
-import type { PanoramaNode, DistanceResult } from './types/gis';
+import { sortNodesByDistance } from './gis/haversine';
+import { formatDistanceMiles } from './utils/distanceFormatter';
+import { PanoService } from './services/PanoService';
+import { LocationDetailsDrawer } from './components/LocationDetailsDrawer';
+import { Compass, Share2, Map, ChevronRight, ExternalLink, Loader2, Copy } from 'lucide-react';
+import type { PanoramaNode } from './types/gis';
 
 function App() {
   const { location, loading, error, permissionGranted, requestLocation } = useGeolocation();
   const [panoramas, setPanoramas] = useState<PanoramaNode[]>([]);
-  const [nearestResult, setNearestResult] = useState<DistanceResult>({ nearestNode: null, distanceMeters: null });
-  const [isViewerOpen, setIsViewerOpen] = useState(false);
+  const [activeNodeId, setActiveNodeId] = useState<string | null>(null);
+  const [isDetailsOpen, setIsDetailsOpen] = useState(false);
+  const [showToast, setShowToast] = useState(false);
+  const iframeRef = useRef<HTMLIFrameElement>(null);
+
+  // Check URL query parameters for deep linked node on mount
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const nodeId = params.get('node');
+    if (nodeId) {
+      setActiveNodeId(nodeId);
+    }
+  }, []);
 
   // Load panoramas on mount
   useEffect(() => {
     MetadataService.getPanoramas().then(setPanoramas);
   }, []);
 
-  // Recalculate nearest node when location or panoramas change
-  useEffect(() => {
+  // Sort panoramas by distance based on user location
+  const sortedNodes = useMemo(() => {
     if (permissionGranted && location.latitude !== null && location.longitude !== null && panoramas.length > 0) {
-      const result = findNearestNode(
+      return sortNodesByDistance(
         { latitude: location.latitude, longitude: location.longitude },
         panoramas
       );
-      setNearestResult(result);
     }
+    return [];
   }, [location.latitude, location.longitude, permissionGranted, panoramas]);
 
+  // Determine active node and its sorted index
+  const activeResult = useMemo(() => {
+    if (sortedNodes.length === 0) return null;
+    
+    const index = sortedNodes.findIndex((item) => item.node.id === activeNodeId);
+    if (index !== -1) {
+      return { item: sortedNodes[index], index };
+    }
+    
+    return { item: sortedNodes[0], index: 0 };
+  }, [sortedNodes, activeNodeId]);
+
+  // Set initial active node once sorted nodes are calculated
+  useEffect(() => {
+    if (sortedNodes.length > 0 && !activeNodeId) {
+      setActiveNodeId(sortedNodes[0].node.id);
+    }
+  }, [sortedNodes, activeNodeId]);
+
+  // Navigate iframe when active node changes
+  useEffect(() => {
+    if (activeResult && iframeRef.current) {
+      iframeRef.current.src = PanoService.getNodeUrl(activeResult.item.node.id);
+    }
+  }, [activeResult]);
+
+  const handleNextNearest = () => {
+    if (sortedNodes.length <= 1 || !activeResult) return;
+    const nextIndex = (activeResult.index + 1) % sortedNodes.length;
+    setActiveNodeId(sortedNodes[nextIndex].node.id);
+  };
+
+  const handleShare = () => {
+    if (!activeResult) return;
+    const shareUrl = `${window.location.origin}${window.location.pathname}?node=${activeResult.item.node.id}`;
+    
+    if (navigator.share) {
+      navigator.share({
+        title: `Puri 360° - ${activeResult.item.node.title}`,
+        text: `Explore this 360° panorama: ${activeResult.item.node.title}`,
+        url: shareUrl,
+      }).catch((err) => console.log('Share failed:', err));
+    } else {
+      navigator.clipboard.writeText(shareUrl)
+        .then(() => {
+          setShowToast(true);
+          setTimeout(() => setShowToast(false), 2500);
+        })
+        .catch((err) => console.error('Failed to copy link:', err));
+    }
+  };
+
+  // Render Onboarding/Location Permission Page
+  if (!permissionGranted || error || sortedNodes.length === 0) {
+    return (
+      <div className="app-container">
+        <div className="header-container">
+          <ThemeToggle />
+        </div>
+
+        <main className="card">
+          <h1 className="title">GIS Navigator</h1>
+          <p className="description">
+            Find and navigate to the nearest 360° Virtual Tour based on your current location.
+          </p>
+
+          {loading && !error && (
+            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '1rem', marginBottom: '1.5rem' }}>
+              <Loader2 size={32} className="animate-spin" style={{ color: 'var(--accent-primary)' }} />
+              <p style={{ fontSize: '0.875rem', color: 'var(--text-secondary)' }}>Retrieving your coordinates...</p>
+            </div>
+          )}
+
+          {!permissionGranted && !error && !loading && (
+            <LocationButton onClick={requestLocation} loading={loading} />
+          )}
+
+          {error && (
+            <ErrorState message={error} onRetry={requestLocation} />
+          )}
+        </main>
+      </div>
+    );
+  }
+
+  if (!activeResult) {
+    return null;
+  }
+
+  // Render Full-Screen Viewport Interface
+  const activeNode = activeResult.item.node;
+  const activeDistance = activeResult.item.distanceMeters;
+
   return (
-    <div className="app-container">
-      <div className="header-container">
-        <ThemeToggle />
+    <div className="viewport-container">
+      {/* 360° Panorama Viewport */}
+      <iframe
+        ref={iframeRef}
+        title="360 Viewport"
+        className="pano-iframe"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowFullScreen
+      />
+
+      {/* Floating Header */}
+      <header className="viewport-header">
+        <button 
+          className="viewport-header-btn" 
+          onClick={() => setIsDetailsOpen(true)}
+          aria-label="Compass details"
+        >
+          <Compass size={18} />
+          <span>Compass</span>
+        </button>
+
+        <button 
+          className="viewport-header-btn" 
+          onClick={handleShare}
+          aria-label="Share current spot"
+        >
+          <Share2 size={18} />
+          <span>Share</span>
+        </button>
+      </header>
+
+      {/* Floating Bottom Navigation Card */}
+      <div className="viewport-nav-card">
+        <div className="viewport-spot-info">
+          <span style={{ fontSize: '1.25rem' }}>📍</span>
+          <span className="viewport-spot-title" style={{ flex: 1 }}>
+            Nearest Spot: <strong>{activeNode.title}</strong>
+          </span>
+          <span className="viewport-spot-distance">
+            ({formatDistanceMiles(activeDistance)})
+          </span>
+        </div>
+
+        <div className="viewport-actions-row">
+          <button className="viewport-action-btn" onClick={() => setIsDetailsOpen(true)}>
+            <span>View Details</span>
+          </button>
+
+          <a 
+            className="viewport-action-btn" 
+            href={`https://www.google.com/maps/search/?api=1&query=${activeNode.latitude},${activeNode.longitude}`} 
+            target="_blank" 
+            rel="noopener noreferrer"
+            style={{ textDecoration: 'none' }}
+          >
+            <Map size={14} />
+            <span>See on Map</span>
+            <ExternalLink size={10} style={{ opacity: 0.7 }} />
+          </a>
+
+          <button 
+            className="viewport-action-btn primary" 
+            onClick={handleNextNearest}
+            disabled={sortedNodes.length <= 1}
+          >
+            <span>Next Nearest</span>
+            <ChevronRight size={14} />
+          </button>
+        </div>
       </div>
 
-      <main className="card">
-        <h1 className="title">GIS Navigator</h1>
-        <p className="description">
-          Find and navigate to the nearest 360° Virtual Tour based on your current location.
-        </p>
+      {/* Location Details Slide-out Drawer */}
+      <LocationDetailsDrawer
+        isOpen={isDetailsOpen}
+        onClose={() => setIsDetailsOpen(false)}
+        location={location}
+        onRefresh={requestLocation}
+        loading={loading}
+      />
 
-        {!permissionGranted && !error && (
-          <LocationButton onClick={requestLocation} loading={loading} />
-        )}
-
-        {error && (
-          <ErrorState message={error} onRetry={requestLocation} />
-        )}
-
-        {permissionGranted && !error && (
-          <>
-            <LocationCard location={location} onRefresh={requestLocation} />
-            
-            {nearestResult.nearestNode && nearestResult.distanceMeters !== null && (
-              <NearestPanoramaCard 
-                node={nearestResult.nearestNode} 
-                distanceMeters={nearestResult.distanceMeters}
-                onOpen={() => setIsViewerOpen(true)}
-              />
-            )}
-          </>
-        )}
-      </main>
-
-      {isViewerOpen && nearestResult.nearestNode && (
-        <PanoViewer 
-          nodeId={nearestResult.nearestNode.id} 
-          onClose={() => setIsViewerOpen(false)} 
-        />
+      {/* Share Toast Notification */}
+      {showToast && (
+        <div className="toast-msg">
+          <Copy size={16} />
+          <span>Link copied to clipboard!</span>
+        </div>
       )}
     </div>
   );

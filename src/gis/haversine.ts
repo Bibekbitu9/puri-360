@@ -63,3 +63,27 @@ export function findNearestNode(userCoords: Coordinate, nodes: PanoramaNode[]): 
 
   return { nearestNode, distanceMeters: Math.round(minDistance) };
 }
+
+export interface SortedNodeResult {
+  node: PanoramaNode;
+  distanceMeters: number;
+}
+
+/**
+ * Sorts all panorama nodes by distance to the user's coordinates.
+ */
+export function sortNodesByDistance(userCoords: Coordinate, nodes: PanoramaNode[]): SortedNodeResult[] {
+  if (!nodes || nodes.length === 0) {
+    return [];
+  }
+
+  const results: SortedNodeResult[] = [];
+
+  for (const node of nodes) {
+    if (!validateCoordinates(node.latitude, node.longitude)) continue;
+    const dist = calculateDistance(userCoords, { latitude: node.latitude, longitude: node.longitude });
+    results.push({ node, distanceMeters: Math.round(dist) });
+  }
+
+  return results.sort((a, b) => a.distanceMeters - b.distanceMeters);
+}

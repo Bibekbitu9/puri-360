@@ -20,67 +20,56 @@ export const useGeolocation = () => {
     if (!('geolocation' in navigator)) {
       setState((prev) => ({
         ...prev,
-        error: 'Geolocation is not supported by your browser',
+        error: 'Geolocation is not supported by your browser (requires secure HTTPS connection)',
         loading: false,
       }));
       return;
     }
 
-    const startGeolocation = (highAccuracy: boolean) => {
-      navigator.geolocation.getCurrentPosition(
-        (position) => {
-          setState({
-            location: {
-              latitude: position.coords.latitude,
-              longitude: position.coords.longitude,
-              accuracy: position.coords.accuracy,
-              timestamp: position.timestamp,
-            },
-            loading: false,
-            error: null,
-            permissionGranted: true,
-          });
-        },
-        (error) => {
-          // If high accuracy failed (due to timeout or unavailability), retry with low accuracy
-          if (highAccuracy && (error.code === error.TIMEOUT || error.code === error.POSITION_UNAVAILABLE)) {
-            console.warn('High accuracy geolocation failed. Retrying with lower accuracy...');
-            startGeolocation(false);
-            return;
-          }
-
-          let errorMessage = 'An unknown error occurred';
-          switch (error.code) {
-            case error.PERMISSION_DENIED:
-              errorMessage = 'Permission to access location was denied';
-              break;
-            case error.POSITION_UNAVAILABLE:
-              errorMessage = 'Location information is unavailable';
-              break;
-            case error.TIMEOUT:
-              errorMessage = 'The request to get user location timed out';
-              break;
-          }
-          setState((prev) => ({
-            ...prev,
-            loading: false,
-            error: errorMessage,
-            permissionGranted: false,
-          }));
-        },
-        {
-          enableHighAccuracy: highAccuracy,
-          timeout: highAccuracy ? 10000 : 15000,
-          maximumAge: 0,
-        }
-      );
-    };
-
-    // Call getCurrentPosition first synchronously to satisfy Safari's user gesture rule
-    startGeolocation(true);
-
-    // Update loading state in React afterwards
+    // Update loading state first, before invoking geolocation API.
+    // This prevents race conditions/state overwrites if the API returns immediately.
     setState((prev) => ({ ...prev, loading: true, error: null }));
+
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        setState({
+          location: {
+            latitude: position.coords.latitude,
+            longitude: position.coords.longitude,
+            accuracy: position.coords.accuracy,
+            timestamp: position.timestamp,
+          },
+          loading: false,
+          error: null,
+          permissionGranted: true,
+        });
+      },
+      (error) => {
+        let errorMessage = 'An unknown error occurred';
+        switch (error.code) {
+          case error.PERMISSION_DENIED:
+            errorMessage = 'Permission to access location was denied. Please check your browser/system settings.';
+            break;
+          case error.POSITION_UNAVAILABLE:
+            errorMessage = 'Location information is unavailable.';
+            break;
+          case error.TIMEOUT:
+            errorMessage = 'The request to get user location timed out.';
+            break;
+        }
+        setState((prev) => ({
+          ...prev,
+          loading: false,
+          error: errorMessage,
+          permissionGranted: false,
+        }));
+      },
+      {
+        enableHighAccuracy: true,
+        timeout: 10000,
+        maximumAge: 10000, // Allow using cached location if it is fresh (<10s) to speed up lock on mobile devices
+      }
+    );
   }, []);
 
   const resetLocation = useCallback(() => {
