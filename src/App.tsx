@@ -8,8 +8,10 @@ import { sortNodesByDistance } from './gis/haversine';
 import { formatDistanceMiles } from './utils/distanceFormatter';
 import { PanoService } from './services/PanoService';
 import { LocationDetailsDrawer } from './components/LocationDetailsDrawer';
-import { Compass, Share2, Map, ChevronRight, ExternalLink, Loader2, Copy } from 'lucide-react';
+import { Compass, Share2, Map, ChevronRight, ExternalLink, Loader2, Copy, ChevronUp, ChevronDown } from 'lucide-react';
 import type { PanoramaNode } from './types/gis';
+import { ServiceSelectorModal } from './components/ServiceSelectorModal';
+import type { ServiceOption } from './components/ServiceSelectorModal';
 
 function App() {
   const { location, loading, error, permissionGranted, requestLocation } = useGeolocation();
@@ -21,6 +23,16 @@ function App() {
   const [isDetailsOpen, setIsDetailsOpen] = useState(false);
   const [showToast, setShowToast] = useState(false);
   const iframeRef = useRef<HTMLIFrameElement>(null);
+
+  const [isServiceModalOpen, setIsServiceModalOpen] = useState(false);
+  const [selectedService, setSelectedService] = useState<ServiceOption | null>(null);
+  const [isNavCardExpanded, setIsNavCardExpanded] = useState(false);
+
+  const handleSelectService = (service: ServiceOption) => {
+    setSelectedService(service);
+    setIsServiceModalOpen(false);
+    requestLocation();
+  };
 
   // Load panoramas on mount
   useEffect(() => {
@@ -112,13 +124,19 @@ function App() {
           )}
 
           {!permissionGranted && !error && !loading && (
-            <LocationButton onClick={requestLocation} loading={loading} />
+            <LocationButton onClick={() => setIsServiceModalOpen(true)} loading={loading} />
           )}
 
           {error && (
             <ErrorState message={error} onRetry={requestLocation} />
           )}
         </main>
+
+        <ServiceSelectorModal
+          isOpen={isServiceModalOpen}
+          onClose={() => setIsServiceModalOpen(false)}
+          onSelectService={handleSelectService}
+        />
       </div>
     );
   }
@@ -163,45 +181,86 @@ function App() {
         </button>
       </header>
 
-      {/* Floating Bottom Navigation Card */}
-      <div className="viewport-nav-card">
-        <div className="viewport-spot-info">
-          <span style={{ fontSize: '1.25rem' }}>📍</span>
-          <span className="viewport-spot-title" style={{ flex: 1 }}>
-            Nearest Spot: <strong>{activeNode.title}</strong>
-          </span>
-          <span className="viewport-spot-distance">
-            ({formatDistanceMiles(activeDistance)})
-          </span>
+      {/* Floating Bottom Navigation Card Controls */}
+      {!isNavCardExpanded ? (
+        <button
+          className="viewport-nav-collapsed-btn"
+          onClick={() => setIsNavCardExpanded(true)}
+          aria-label="Expand navigation panel"
+        >
+          <span>📍 {activeNode.title}</span>
+          <ChevronUp size={16} />
+        </button>
+      ) : (
+        <div className="viewport-nav-card">
+          <div className="viewport-spot-info">
+            <button
+              onClick={() => setIsNavCardExpanded(false)}
+              style={{
+                background: 'transparent',
+                border: 'none',
+                color: '#ffffff',
+                cursor: 'pointer',
+                padding: '0.2rem',
+                marginRight: '0.25rem',
+                display: 'inline-flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                opacity: 0.8
+              }}
+              title="Collapse navigation panel"
+            >
+              <ChevronDown size={18} />
+            </button>
+            <span className="viewport-spot-title" style={{ flex: 1 }}>
+              Nearest Spot: <strong>{activeNode.title}</strong>
+            </span>
+            <span className="viewport-spot-distance">
+              ({formatDistanceMiles(activeDistance)})
+            </span>
+          </div>
+
+          {selectedService && (
+            <div style={{ display: 'flex', justifyContent: 'flex-start', margin: '-0.25rem 0 0.25rem 0' }}>
+              <button
+                className="active-service-badge"
+                onClick={() => setIsServiceModalOpen(true)}
+                title="Click to change service category"
+              >
+                <span>Category: {selectedService.title}</span>
+                <span style={{ fontSize: '0.65rem', opacity: 0.65, fontWeight: 400 }}>(Change)</span>
+              </button>
+            </div>
+          )}
+
+          <div className="viewport-actions-row">
+            <button className="viewport-action-btn" onClick={() => setIsDetailsOpen(true)}>
+              <span>View Details</span>
+            </button>
+
+            <a
+              className="viewport-action-btn"
+              href={`https://www.google.com/maps/search/?api=1&query=${activeNode.latitude},${activeNode.longitude}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{ textDecoration: 'none' }}
+            >
+              <Map size={14} />
+              <span>See on Map</span>
+              <ExternalLink size={10} style={{ opacity: 0.7 }} />
+            </a>
+
+            <button
+              className="viewport-action-btn primary"
+              onClick={handleNextNearest}
+              disabled={sortedNodes.length <= 1}
+            >
+              <span>Next Nearest</span>
+              <ChevronRight size={14} />
+            </button>
+          </div>
         </div>
-
-        <div className="viewport-actions-row">
-          <button className="viewport-action-btn" onClick={() => setIsDetailsOpen(true)}>
-            <span>View Details</span>
-          </button>
-
-          <a
-            className="viewport-action-btn"
-            href={`https://www.google.com/maps/search/?api=1&query=${activeNode.latitude},${activeNode.longitude}`}
-            target="_blank"
-            rel="noopener noreferrer"
-            style={{ textDecoration: 'none' }}
-          >
-            <Map size={14} />
-            <span>See on Map</span>
-            <ExternalLink size={10} style={{ opacity: 0.7 }} />
-          </a>
-
-          <button
-            className="viewport-action-btn primary"
-            onClick={handleNextNearest}
-            disabled={sortedNodes.length <= 1}
-          >
-            <span>Next Nearest</span>
-            <ChevronRight size={14} />
-          </button>
-        </div>
-      </div>
+      )}
 
       {/* Location Details Slide-out Drawer */}
       <LocationDetailsDrawer
@@ -219,6 +278,16 @@ function App() {
           <span>Link copied to clipboard!</span>
         </div>
       )}
+
+      {/* Service Selection Modal */}
+      <ServiceSelectorModal
+        isOpen={isServiceModalOpen}
+        onClose={() => setIsServiceModalOpen(false)}
+        onSelectService={(service) => {
+          setSelectedService(service);
+          setIsServiceModalOpen(false);
+        }}
+      />
     </div>
   );
 }
