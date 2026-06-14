@@ -5,8 +5,7 @@ export class PanoService {
   static getNodeUrl(nodeId: string): string {
     // We assume the Pano2VR output is hosted at this path.
     // In Pano2VR, passing startnode=ID or node=ID in URL hash or query params
-    // usually sets the starting node. Let's use the hash #nodeId which is standard.
-    return `/projects/west_odisha_cave_test/index.html#${nodeId}`;
+    return `/projects/puri_walk_through/index.html#${nodeId}`;
   }
 
   /**
