@@ -1,26 +1,896 @@
 [
   {
-    "id": "node1",
-    "title": "Badabil Cave Entrance",
-    "latitude": 21.091500,
-    "longitude": 84.494545
+    "id": "node76",
+    "title": "DCIM\\Camera01\\IMG_20260613_092432_00_149.ins",
+    "latitude": 19.802867,
+    "longitude": 85.82348
   },
   {
-    "id": "node2",
-    "title": "Badabil Cave Interior 1",
-    "latitude": 21.091349,
-    "longitude": 84.494426
+    "id": "node77",
+    "title": "DCIM\\Camera01\\IMG_20260613_092432_00_149.ins",
+    "latitude": 19.80326,
+    "longitude": 85.823005
   },
   {
-    "id": "node3",
-    "title": "Badabil Cave Interior 2",
-    "latitude": 21.091287,
-    "longitude": 84.494403
+    "id": "node79",
+    "title": "DCIM\\Camera01\\IMG_20260613_092454_00_151.ins",
+    "latitude": 19.803679,
+    "longitude": 85.822566
   },
   {
-    "id": "node18",
-    "title": "Ambjohlkhol Outlook",
-    "latitude": 21.194162,
-    "longitude": 84.498779
+    "id": "node80",
+    "title": "DCIM\\Camera01\\IMG_20260613_092505_00_152.ins",
+    "latitude": 19.803886,
+    "longitude": 85.82239
+  },
+  {
+    "id": "node81",
+    "title": "DCIM\\Camera01\\IMG_20260613_092516_00_153.ins",
+    "latitude": 19.804089,
+    "longitude": 85.822057
+  },
+  {
+    "id": "node82",
+    "title": "DCIM\\Camera01\\IMG_20260613_092527_00_154.ins",
+    "latitude": 19.804244,
+    "longitude": 85.821634
+  },
+  {
+    "id": "node83",
+    "title": "DCIM\\Camera01\\IMG_20260613_092538_00_155.ins",
+    "latitude": 19.804356,
+    "longitude": 85.821163
+  },
+  {
+    "id": "node84",
+    "title": "DCIM\\Camera01\\IMG_20260613_092549_00_156.ins",
+    "latitude": 19.804382,
+    "longitude": 85.820814
+  },
+  {
+    "id": "node85",
+    "title": "DCIM\\Camera01\\IMG_20260613_092600_00_157.ins",
+    "latitude": 19.804413,
+    "longitude": 85.820544
+  },
+  {
+    "id": "node87",
+    "title": "DCIM\\Camera01\\IMG_20260613_092622_00_159.ins",
+    "latitude": 19.804477,
+    "longitude": 85.820102
+  },
+  {
+    "id": "node88",
+    "title": "DCIM\\Camera01\\IMG_20260613_092633_00_160.ins",
+    "latitude": 19.804496,
+    "longitude": 85.820051
+  },
+  {
+    "id": "node89",
+    "title": "DCIM\\Camera01\\IMG_20260613_092644_00_161.ins",
+    "latitude": 19.8045,
+    "longitude": 85.819874
+  },
+  {
+    "id": "node90",
+    "title": "DCIM\\Camera01\\IMG_20260613_092654_00_162.ins",
+    "latitude": 19.804476,
+    "longitude": 85.819747
+  },
+  {
+    "id": "node91",
+    "title": "DCIM\\Camera01\\IMG_20260613_092718_00_164.ins",
+    "latitude": 19.804832,
+    "longitude": 85.819704
+  },
+  {
+    "id": "node92",
+    "title": "DCIM\\Camera01\\IMG_20260613_092729_00_165.ins",
+    "latitude": 19.805043,
+    "longitude": 85.819807
+  },
+  {
+    "id": "node93",
+    "title": "DCIM\\Camera01\\IMG_20260613_092740_00_166.ins",
+    "latitude": 19.805328,
+    "longitude": 85.820025
+  },
+  {
+    "id": "node94",
+    "title": "DCIM\\Camera01\\IMG_20260613_092751_00_167.ins",
+    "latitude": 19.805511,
+    "longitude": 85.82014
+  },
+  {
+    "id": "node96",
+    "title": "DCIM\\Camera01\\IMG_20260613_092813_00_169.ins",
+    "latitude": 19.805715,
+    "longitude": 85.820253
+  },
+  {
+    "id": "node97",
+    "title": "DCIM\\Camera01\\IMG_20260613_092824_00_170.ins",
+    "latitude": 19.805834,
+    "longitude": 85.820345
+  },
+  {
+    "id": "node99",
+    "title": "DCIM\\Camera01\\IMG_20260613_092847_00_172.ins",
+    "latitude": 19.806031,
+    "longitude": 85.820503
+  },
+  {
+    "id": "node100",
+    "title": "DCIM\\Camera01\\IMG_20260613_092858_00_173.ins",
+    "latitude": 19.806297,
+    "longitude": 85.820766
+  },
+  {
+    "id": "node101",
+    "title": "DCIM\\Camera01\\IMG_20260613_092909_00_174.ins",
+    "latitude": 19.806548,
+    "longitude": 85.821002
+  },
+  {
+    "id": "node102",
+    "title": "DCIM\\Camera01\\IMG_20260613_092920_00_175.ins",
+    "latitude": 19.8069,
+    "longitude": 85.821331
+  },
+  {
+    "id": "node103",
+    "title": "DCIM\\Camera01\\IMG_20260613_092932_00_176.ins",
+    "latitude": 19.807286,
+    "longitude": 85.821669
+  },
+  {
+    "id": "node104",
+    "title": "DCIM\\Camera01\\IMG_20260613_092943_00_177.ins",
+    "latitude": 19.807659,
+    "longitude": 85.82207
+  },
+  {
+    "id": "node105",
+    "title": "DCIM\\Camera01\\IMG_20260613_092954_00_178.ins",
+    "latitude": 19.808118,
+    "longitude": 85.822568
+  },
+  {
+    "id": "node106",
+    "title": "DCIM\\Camera01\\IMG_20260613_093005_00_179.ins",
+    "latitude": 19.808663,
+    "longitude": 85.823169
+  },
+  {
+    "id": "node107",
+    "title": "DCIM\\Camera01\\IMG_20260613_093016_00_180.ins",
+    "latitude": 19.809304,
+    "longitude": 85.823867
+  },
+  {
+    "id": "node108",
+    "title": "DCIM\\Camera01\\IMG_20260613_093028_00_181.ins",
+    "latitude": 19.80984,
+    "longitude": 85.824595
+  },
+  {
+    "id": "node109",
+    "title": "DCIM\\Camera01\\IMG_20260613_093041_00_182.ins",
+    "latitude": 19.810124,
+    "longitude": 85.824989
+  },
+  {
+    "id": "node110",
+    "title": "DCIM\\Camera01\\IMG_20260613_093052_00_183.ins",
+    "latitude": 19.810337,
+    "longitude": 85.825316
+  },
+  {
+    "id": "node111",
+    "title": "DCIM\\Camera01\\IMG_20260613_093104_00_184.ins",
+    "latitude": 19.810713,
+    "longitude": 85.825829
+  },
+  {
+    "id": "node112",
+    "title": "DCIM\\Camera01\\IMG_20260613_093115_00_185.ins",
+    "latitude": 19.81114,
+    "longitude": 85.82647
+  },
+  {
+    "id": "node113",
+    "title": "DCIM\\Camera01\\IMG_20260613_093126_00_186.ins",
+    "latitude": 19.811695,
+    "longitude": 85.827261
+  },
+  {
+    "id": "node114",
+    "title": "DCIM\\Camera01\\IMG_20260613_093137_00_187.ins",
+    "latitude": 19.812244,
+    "longitude": 85.828054
+  },
+  {
+    "id": "node115",
+    "title": "DCIM\\Camera01\\IMG_20260613_093149_00_188.ins",
+    "latitude": 19.812634,
+    "longitude": 85.828962
+  },
+  {
+    "id": "node116",
+    "title": "DCIM\\Camera01\\IMG_20260613_093200_00_189.ins",
+    "latitude": 19.812935,
+    "longitude": 85.829855
+  },
+  {
+    "id": "node117",
+    "title": "DCIM\\Camera01\\IMG_20260613_093211_00_190.ins",
+    "latitude": 19.813143,
+    "longitude": 85.830408
+  },
+  {
+    "id": "node118",
+    "title": "DCIM\\Camera01\\IMG_20260613_093222_00_191.ins",
+    "latitude": 19.813345,
+    "longitude": 85.83104
+  },
+  {
+    "id": "node119",
+    "title": "DCIM\\Camera01\\IMG_20260613_093234_00_192.ins",
+    "latitude": 19.813571,
+    "longitude": 85.831814
+  },
+  {
+    "id": "node120",
+    "title": "DCIM\\Camera01\\IMG_20260613_093245_00_193.ins",
+    "latitude": 19.813824,
+    "longitude": 85.832502
+  },
+  {
+    "id": "node121",
+    "title": "DCIM\\Camera01\\IMG_20260613_093256_00_194.ins",
+    "latitude": 19.81406,
+    "longitude": 85.83307
+  },
+  {
+    "id": "node122",
+    "title": "DCIM\\Camera01\\IMG_20260613_093308_00_195.ins",
+    "latitude": 19.81429,
+    "longitude": 85.833792
+  },
+  {
+    "id": "node139",
+    "title": "DCIM\\Camera01\\IMG_20260613_093319_00_196.ins",
+    "latitude": 19.814441,
+    "longitude": 85.834141
+  },
+  {
+    "id": "node138",
+    "title": "DCIM\\Camera01\\IMG_20260613_093330_00_197.ins",
+    "latitude": 19.814673,
+    "longitude": 85.834695
+  },
+  {
+    "id": "node125",
+    "title": "DCIM\\Camera01\\IMG_20260613_093341_00_198.ins",
+    "latitude": 19.815024,
+    "longitude": 85.835478
+  },
+  {
+    "id": "node126",
+    "title": "DCIM\\Camera01\\IMG_20260613_093353_00_199.ins",
+    "latitude": 19.815413,
+    "longitude": 85.836339
+  },
+  {
+    "id": "node127",
+    "title": "DCIM\\Camera01\\IMG_20260613_093404_00_200.ins",
+    "latitude": 19.815854,
+    "longitude": 85.837235
+  },
+  {
+    "id": "node128",
+    "title": "DCIM\\Camera01\\IMG_20260613_093415_00_201.ins",
+    "latitude": 19.816341,
+    "longitude": 85.837971
+  },
+  {
+    "id": "node129",
+    "title": "DCIM\\Camera01\\IMG_20260613_093426_00_202.ins",
+    "latitude": 19.816864,
+    "longitude": 85.838562
+  },
+  {
+    "id": "node130",
+    "title": "DCIM\\Camera01\\IMG_20260613_093438_00_203.ins",
+    "latitude": 19.817231,
+    "longitude": 85.839033
+  },
+  {
+    "id": "node131",
+    "title": "DCIM\\Camera01\\IMG_20260613_093448_00_204.ins",
+    "latitude": 19.817534,
+    "longitude": 85.839558
+  },
+  {
+    "id": "node132",
+    "title": "DCIM\\Camera01\\IMG_20260613_093500_00_205.ins",
+    "latitude": 19.818014,
+    "longitude": 85.840012
+  },
+  {
+    "id": "node133",
+    "title": "DCIM\\Camera01\\IMG_20260613_093511_00_206.ins",
+    "latitude": 19.818334,
+    "longitude": 85.840416
+  },
+  {
+    "id": "node134",
+    "title": "DCIM\\Camera01\\IMG_20260613_093522_00_207.ins",
+    "latitude": 19.818767,
+    "longitude": 85.841053
+  },
+  {
+    "id": "node135",
+    "title": "DCIM\\Camera01\\IMG_20260613_093533_00_208.ins",
+    "latitude": 19.819081,
+    "longitude": 85.841659
+  },
+  {
+    "id": "node136",
+    "title": "DCIM\\Camera01\\IMG_20260613_093544_00_209.ins",
+    "latitude": 19.819358,
+    "longitude": 85.842278
+  },
+  {
+    "id": "node137",
+    "title": "DCIM\\Camera01\\IMG_20260613_093556_00_210.ins",
+    "latitude": 19.819615,
+    "longitude": 85.842784
+  },
+  {
+    "id": "node140",
+    "title": "DCIM\\Camera01\\IMG_20260613_093607_00_211.ins",
+    "latitude": 19.820048,
+    "longitude": 85.843522
+  },
+  {
+    "id": "node141",
+    "title": "DCIM\\Camera01\\IMG_20260613_093618_00_212.ins",
+    "latitude": 19.820446,
+    "longitude": 85.844187
+  },
+  {
+    "id": "node142",
+    "title": "DCIM\\Camera01\\IMG_20260613_093630_00_213.ins",
+    "latitude": 19.820644,
+    "longitude": 85.844532
+  },
+  {
+    "id": "node143",
+    "title": "DCIM\\Camera01\\IMG_20260613_093643_00_214.ins",
+    "latitude": 19.820646,
+    "longitude": 85.844504
+  },
+  {
+    "id": "node144",
+    "title": "DCIM\\Camera01\\IMG_20260613_095307_00_219.ins",
+    "latitude": 19.821394,
+    "longitude": 85.845632
+  },
+  {
+    "id": "node146",
+    "title": "DCIM\\Camera01\\IMG_20260613_095331_00_221.ins",
+    "latitude": 19.822186,
+    "longitude": 85.84625
+  },
+  {
+    "id": "node147",
+    "title": "DCIM\\Camera01\\IMG_20260613_095343_00_222.ins",
+    "latitude": 19.822827,
+    "longitude": 85.846857
+  },
+  {
+    "id": "node148",
+    "title": "DCIM\\Camera01\\IMG_20260613_095354_00_223.ins",
+    "latitude": 19.823488,
+    "longitude": 85.847683
+  },
+  {
+    "id": "node149",
+    "title": "DCIM\\Camera01\\IMG_20260613_095405_00_224.ins",
+    "latitude": 19.823815,
+    "longitude": 85.84858
+  },
+  {
+    "id": "node150",
+    "title": "DCIM\\Camera01\\IMG_20260613_095417_00_225.ins",
+    "latitude": 19.824113,
+    "longitude": 85.849355
+  },
+  {
+    "id": "node151",
+    "title": "DCIM\\Camera01\\IMG_20260613_095428_00_226.ins",
+    "latitude": 19.824289,
+    "longitude": 85.849938
+  },
+  {
+    "id": "node152",
+    "title": "DCIM\\Camera01\\IMG_20260613_095440_00_227.ins",
+    "latitude": 19.824234,
+    "longitude": 85.850304
+  },
+  {
+    "id": "node153",
+    "title": "DCIM\\Camera01\\IMG_20260613_095451_00_228.ins",
+    "latitude": 19.824315,
+    "longitude": 85.851142
+  },
+  {
+    "id": "node154",
+    "title": "DCIM\\Camera01\\IMG_20260613_095504_00_229.ins",
+    "latitude": 19.824314,
+    "longitude": 85.852103
+  },
+  {
+    "id": "node155",
+    "title": "DCIM\\Camera01\\IMG_20260613_095515_00_230.ins",
+    "latitude": 19.824345,
+    "longitude": 85.852897
+  },
+  {
+    "id": "node156",
+    "title": "DCIM\\Camera01\\IMG_20260613_095527_00_231.ins",
+    "latitude": 19.824413,
+    "longitude": 85.853971
+  },
+  {
+    "id": "node157",
+    "title": "DCIM\\Camera01\\IMG_20260613_095538_00_232.ins",
+    "latitude": 19.824499,
+    "longitude": 85.854992
+  },
+  {
+    "id": "node158",
+    "title": "DCIM\\Camera01\\IMG_20260613_095550_00_233.ins",
+    "latitude": 19.824301,
+    "longitude": 85.855645
+  },
+  {
+    "id": "node159",
+    "title": "DCIM\\Camera01\\IMG_20260613_095601_00_234.ins",
+    "latitude": 19.823454,
+    "longitude": 85.855484
+  },
+  {
+    "id": "node160",
+    "title": "DCIM\\Camera01\\IMG_20260613_095612_00_235.ins",
+    "latitude": 19.82241,
+    "longitude": 85.855724
+  },
+  {
+    "id": "node161",
+    "title": "DCIM\\Camera01\\IMG_20260613_095626_00_236.ins",
+    "latitude": 19.821249,
+    "longitude": 85.85621
+  },
+  {
+    "id": "node162",
+    "title": "DCIM\\Camera01\\IMG_20260613_095637_00_237.ins",
+    "latitude": 19.821503,
+    "longitude": 85.857261
+  },
+  {
+    "id": "node163",
+    "title": "DCIM\\Camera01\\IMG_20260613_095649_00_238.ins",
+    "latitude": 19.820867,
+    "longitude": 85.858003
+  },
+  {
+    "id": "node164",
+    "title": "DCIM\\Camera01\\IMG_20260613_095700_00_239.ins",
+    "latitude": 19.819846,
+    "longitude": 85.858323
+  },
+  {
+    "id": "node165",
+    "title": "DCIM\\Camera01\\IMG_20260613_095712_00_240.ins",
+    "latitude": 19.818797,
+    "longitude": 85.858678
+  },
+  {
+    "id": "node166",
+    "title": "DCIM\\Camera01\\IMG_20260613_095723_00_241.ins",
+    "latitude": 19.81777,
+    "longitude": 85.859026
+  },
+  {
+    "id": "node167",
+    "title": "DCIM\\Camera01\\IMG_20260613_095734_00_242.ins",
+    "latitude": 19.816733,
+    "longitude": 85.859392
+  },
+  {
+    "id": "node168",
+    "title": "DCIM\\Camera01\\IMG_20260613_095745_00_243.ins",
+    "latitude": 19.815578,
+    "longitude": 85.859891
+  },
+  {
+    "id": "node169",
+    "title": "DCIM\\Camera01\\IMG_20260613_095756_00_244.ins",
+    "latitude": 19.814748,
+    "longitude": 85.860178
+  },
+  {
+    "id": "node170",
+    "title": "DCIM\\Camera01\\IMG_20260613_095807_00_245.ins",
+    "latitude": 19.81456,
+    "longitude": 85.859601
+  },
+  {
+    "id": "node171",
+    "title": "DCIM\\Camera01\\IMG_20260613_095819_00_246.ins",
+    "latitude": 19.814225,
+    "longitude": 85.858695
+  },
+  {
+    "id": "node172",
+    "title": "DCIM\\Camera01\\IMG_20260613_095830_00_247.ins",
+    "latitude": 19.813597,
+    "longitude": 85.857204
+  },
+  {
+    "id": "node173",
+    "title": "DCIM\\Camera01\\IMG_20260613_095841_00_248.ins",
+    "latitude": 19.813063,
+    "longitude": 85.85594
+  },
+  {
+    "id": "node174",
+    "title": "DCIM\\Camera01\\IMG_20260613_095853_00_249.ins",
+    "latitude": 19.812554,
+    "longitude": 85.854713
+  },
+  {
+    "id": "node175",
+    "title": "DCIM\\Camera01\\IMG_20260613_095904_00_250.ins",
+    "latitude": 19.812023,
+    "longitude": 85.853386
+  },
+  {
+    "id": "node176",
+    "title": "DCIM\\Camera01\\IMG_20260613_095915_00_251.ins",
+    "latitude": 19.811719,
+    "longitude": 85.85272
+  },
+  {
+    "id": "node177",
+    "title": "DCIM\\Camera01\\IMG_20260613_095926_00_252.ins",
+    "latitude": 19.811358,
+    "longitude": 85.851826
+  },
+  {
+    "id": "node178",
+    "title": "DCIM\\Camera01\\IMG_20260613_095938_00_253.ins",
+    "latitude": 19.811058,
+    "longitude": 85.851045
+  },
+  {
+    "id": "node179",
+    "title": "DCIM\\Camera01\\IMG_20260613_095951_00_254.ins",
+    "latitude": 19.810829,
+    "longitude": 85.850511
+  },
+  {
+    "id": "node180",
+    "title": "DCIM\\Camera01\\IMG_20260613_100002_00_255.ins",
+    "latitude": 19.810439,
+    "longitude": 85.849576
+  },
+  {
+    "id": "node181",
+    "title": "DCIM\\Camera01\\IMG_20260613_100013_00_256.ins",
+    "latitude": 19.810091,
+    "longitude": 85.848752
+  },
+  {
+    "id": "node182",
+    "title": "DCIM\\Camera01\\IMG_20260613_100024_00_257.ins",
+    "latitude": 19.809553,
+    "longitude": 85.848281
+  },
+  {
+    "id": "node183",
+    "title": "DCIM\\Camera01\\IMG_20260613_100036_00_258.ins",
+    "latitude": 19.808602,
+    "longitude": 85.848788
+  },
+  {
+    "id": "node184",
+    "title": "DCIM\\Camera01\\IMG_20260613_100047_00_259.ins",
+    "latitude": 19.807853,
+    "longitude": 85.849727
+  },
+  {
+    "id": "node185",
+    "title": "DCIM\\Camera01\\IMG_20260613_100059_00_260.ins",
+    "latitude": 19.806769,
+    "longitude": 85.850462
+  },
+  {
+    "id": "node186",
+    "title": "DCIM\\Camera01\\IMG_20260613_100110_00_261.ins",
+    "latitude": 19.805725,
+    "longitude": 85.850996
+  },
+  {
+    "id": "node187",
+    "title": "DCIM\\Camera01\\IMG_20260613_100122_00_262.ins",
+    "latitude": 19.805064,
+    "longitude": 85.851152
+  },
+  {
+    "id": "node188",
+    "title": "DCIM\\Camera01\\IMG_20260613_100133_00_263.ins",
+    "latitude": 19.80494,
+    "longitude": 85.850485
+  },
+  {
+    "id": "node189",
+    "title": "DCIM\\Camera01\\IMG_20260613_100144_00_264.ins",
+    "latitude": 19.804747,
+    "longitude": 85.849697
+  },
+  {
+    "id": "node190",
+    "title": "DCIM\\Camera01\\IMG_20260613_100156_00_265.ins",
+    "latitude": 19.804524,
+    "longitude": 85.848817
+  },
+  {
+    "id": "node191",
+    "title": "DCIM\\Camera01\\IMG_20260613_100207_00_266.ins",
+    "latitude": 19.804414,
+    "longitude": 85.848267
+  },
+  {
+    "id": "node192",
+    "title": "DCIM\\Camera01\\IMG_20260613_100219_00_267.ins",
+    "latitude": 19.804296,
+    "longitude": 85.847692
+  },
+  {
+    "id": "node193",
+    "title": "DCIM\\Camera01\\IMG_20260613_100230_00_268.ins",
+    "latitude": 19.804151,
+    "longitude": 85.847203
+  },
+  {
+    "id": "node194",
+    "title": "DCIM\\Camera01\\IMG_20260613_100242_00_269.ins",
+    "latitude": 19.804021,
+    "longitude": 85.846792
+  },
+  {
+    "id": "node195",
+    "title": "DCIM\\Camera01\\IMG_20260613_100253_00_270.ins",
+    "latitude": 19.803849,
+    "longitude": 85.84618
+  },
+  {
+    "id": "node196",
+    "title": "DCIM\\Camera01\\IMG_20260613_100305_00_271.ins",
+    "latitude": 19.803576,
+    "longitude": 85.845351
+  },
+  {
+    "id": "node197",
+    "title": "DCIM\\Camera01\\IMG_20260613_100316_00_272.ins",
+    "latitude": 19.803396,
+    "longitude": 85.844983
+  },
+  {
+    "id": "node198",
+    "title": "DCIM\\Camera01\\IMG_20260613_100327_00_273.ins",
+    "latitude": 19.803322,
+    "longitude": 85.844615
+  },
+  {
+    "id": "node199",
+    "title": "DCIM\\Camera01\\IMG_20260613_100339_00_274.ins",
+    "latitude": 19.803314,
+    "longitude": 85.844099
+  },
+  {
+    "id": "node200",
+    "title": "DCIM\\Camera01\\IMG_20260613_100350_00_275.ins",
+    "latitude": 19.803183,
+    "longitude": 85.843513
+  },
+  {
+    "id": "node201",
+    "title": "DCIM\\Camera01\\IMG_20260613_100401_00_276.ins",
+    "latitude": 19.802957,
+    "longitude": 85.842713
+  },
+  {
+    "id": "node202",
+    "title": "DCIM\\Camera01\\IMG_20260613_100413_00_277.ins",
+    "latitude": 19.802865,
+    "longitude": 85.842246
+  },
+  {
+    "id": "node203",
+    "title": "DCIM\\Camera01\\IMG_20260613_100424_00_278.ins",
+    "latitude": 19.802614,
+    "longitude": 85.841388
+  },
+  {
+    "id": "node204",
+    "title": "DCIM\\Camera01\\IMG_20260613_100435_00_279.ins",
+    "latitude": 19.802371,
+    "longitude": 85.840614
+  },
+  {
+    "id": "node205",
+    "title": "DCIM\\Camera01\\IMG_20260613_100447_00_280.ins",
+    "latitude": 19.802136,
+    "longitude": 85.839883
+  },
+  {
+    "id": "node206",
+    "title": "DCIM\\Camera01\\IMG_20260613_100458_00_281.ins",
+    "latitude": 19.801953,
+    "longitude": 85.839183
+  },
+  {
+    "id": "node207",
+    "title": "DCIM\\Camera01\\IMG_20260613_100509_00_282.ins",
+    "latitude": 19.801785,
+    "longitude": 85.838587
+  },
+  {
+    "id": "node208",
+    "title": "DCIM\\Camera01\\IMG_20260613_100521_00_283.ins",
+    "latitude": 19.801554,
+    "longitude": 85.837935
+  },
+  {
+    "id": "node209",
+    "title": "DCIM\\Camera01\\IMG_20260613_100532_00_284.ins",
+    "latitude": 19.801354,
+    "longitude": 85.837248
+  },
+  {
+    "id": "node210",
+    "title": "DCIM\\Camera01\\IMG_20260613_100544_00_285.ins",
+    "latitude": 19.801157,
+    "longitude": 85.836529
+  },
+  {
+    "id": "node211",
+    "title": "DCIM\\Camera01\\IMG_20260613_100555_00_286.ins",
+    "latitude": 19.800945,
+    "longitude": 85.835807
+  },
+  {
+    "id": "node212",
+    "title": "DCIM\\Camera01\\IMG_20260613_100607_00_287.ins",
+    "latitude": 19.800646,
+    "longitude": 85.834888
+  },
+  {
+    "id": "node213",
+    "title": "DCIM\\Camera01\\IMG_20260613_100618_00_288.ins",
+    "latitude": 19.800412,
+    "longitude": 85.834091
+  },
+  {
+    "id": "node214",
+    "title": "DCIM\\Camera01\\IMG_20260613_100630_00_289.ins",
+    "latitude": 19.800141,
+    "longitude": 85.833234
+  },
+  {
+    "id": "node215",
+    "title": "DCIM\\Camera01\\IMG_20260613_100641_00_290.ins",
+    "latitude": 19.799917,
+    "longitude": 85.832545
+  },
+  {
+    "id": "node216",
+    "title": "DCIM\\Camera01\\IMG_20260613_100652_00_291.ins",
+    "latitude": 19.799894,
+    "longitude": 85.831813
+  },
+  {
+    "id": "node217",
+    "title": "DCIM\\Camera01\\IMG_20260613_100703_00_292.ins",
+    "latitude": 19.799879,
+    "longitude": 85.830819
+  },
+  {
+    "id": "node218",
+    "title": "DCIM\\Camera01\\IMG_20260613_100716_00_293.ins",
+    "latitude": 19.799235,
+    "longitude": 85.829581
+  },
+  {
+    "id": "node219",
+    "title": "DCIM\\Camera01\\IMG_20260613_100727_00_294.ins",
+    "latitude": 19.798566,
+    "longitude": 85.828603
+  },
+  {
+    "id": "node220",
+    "title": "DCIM\\Camera01\\IMG_20260613_100739_00_295.ins",
+    "latitude": 19.798026,
+    "longitude": 85.827828
+  },
+  {
+    "id": "node221",
+    "title": "DCIM\\Camera01\\IMG_20260613_100750_00_296.ins",
+    "latitude": 19.797695,
+    "longitude": 85.827291
+  },
+  {
+    "id": "node222",
+    "title": "DCIM\\Camera01\\IMG_20260613_100802_00_297.ins",
+    "latitude": 19.797275,
+    "longitude": 85.82663
+  },
+  {
+    "id": "node223",
+    "title": "DCIM\\Camera01\\IMG_20260613_100813_00_298.ins",
+    "latitude": 19.796843,
+    "longitude": 85.825836
+  },
+  {
+    "id": "node224",
+    "title": "DCIM\\Camera01\\IMG_20260613_100824_00_299.ins",
+    "latitude": 19.796938,
+    "longitude": 85.825615
+  },
+  {
+    "id": "node225",
+    "title": "DCIM\\Camera01\\IMG_20260613_100836_00_300.ins",
+    "latitude": 19.797277,
+    "longitude": 85.825666
+  },
+  {
+    "id": "node226",
+    "title": "DCIM\\Camera01\\IMG_20260613_100847_00_301.ins",
+    "latitude": 19.797567,
+    "longitude": 85.825722
+  },
+  {
+    "id": "node227",
+    "title": "DCIM\\Camera01\\IMG_20260613_100858_00_302.ins",
+    "latitude": 19.798082,
+    "longitude": 85.825832
+  },
+  {
+    "id": "node228",
+    "title": "DCIM\\Camera01\\IMG_20260613_100909_00_303.ins",
+    "latitude": 19.798535,
+    "longitude": 85.825949
+  },
+  {
+    "id": "node229",
+    "title": "DCIM\\Camera01\\IMG_20260613_100920_00_304.ins",
+    "latitude": 19.798867,
+    "longitude": 85.826036
+  },
+  {
+    "id": "node230",
+    "title": "DCIM\\Camera01\\IMG_20260613_100932_00_305.ins",
+    "latitude": 19.799649,
+    "longitude": 85.826224
+  },
+  {
+    "id": "node231",
+    "title": "DCIM\\Camera01\\IMG_20260613_100943_00_306.ins",
+    "latitude": 19.799806,
+    "longitude": 85.826383
   }
 ]
