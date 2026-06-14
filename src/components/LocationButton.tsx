@@ -1,5 +1,5 @@
 import React from 'react';
-import { MapPin, Loader2 } from 'lucide-react';
+import { Bell, Loader2 } from 'lucide-react';
 
 interface LocationButtonProps {
   onClick: () => void;
@@ -8,11 +8,11 @@ interface LocationButtonProps {
 
 export const LocationButton: React.FC<LocationButtonProps> = ({ onClick, loading }) => {
   return (
-    <button 
-      className="btn" 
-      onClick={onClick} 
+    <button
+      className="btn"
+      onClick={onClick}
       disabled={loading}
-      aria-label="Share My Location"
+      aria-label="Start Virtual Guide"
     >
       {loading ? (
         <>
@@ -21,8 +21,9 @@ export const LocationButton: React.FC<LocationButtonProps> = ({ onClick, loading
         </>
       ) : (
         <>
-          <MapPin size={20} />
-          <span>Share My Location</span>
+          <Bell className="bell-icon-left" size={20} />
+          <span>Start</span>
+          <Bell className="bell-icon-right" size={20} />
         </>
       )}
     </button>

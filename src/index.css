@@ -1,42 +1,70 @@
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400..900&family=Marcellus&display=swap');
+
 :root {
   /* Premium Colors */
-  --bg-primary: #f8fafc;
+  --bg-primary: #faf9f6;
+  /* Warm Alabaster/Cream */
   --bg-secondary: #ffffff;
-  --text-primary: #0f172a;
-  --text-secondary: #64748b;
-  --accent-primary: #3b82f6;
-  --accent-hover: #2563eb;
-  --border-color: #e2e8f0;
+  --text-primary: #1c1917;
+  /* Warm stone-900 */
+  --text-secondary: #78716c;
+  /* Warm stone-500 */
+  --accent-primary: #c2410c;
+  /* Deep terracotta/Rathyatra rust-orange */
+  --accent-hover: #9a3412;
+  /* Darker rust-orange */
+  --accent-color: var(--accent-primary);
+  --border-color: #e7e5e4;
+  /* stone-200 */
   --error-bg: #fef2f2;
   --error-text: #ef4444;
   --success-bg: #f0fdf4;
   --success-text: #22c55e;
-  
+
   /* Glassmorphism */
-  --glass-bg: rgba(255, 255, 255, 0.7);
-  --glass-border: rgba(255, 255, 255, 0.5);
-  --glass-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.07);
+  --glass-bg: rgba(255, 255, 255, 0.82);
+  --glass-border: rgba(255, 255, 255, 0.45);
+  --glass-shadow: 0 8px 32px 0 rgba(194, 65, 12, 0.08);
 
   /* Typography */
   --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  --font-divine: 'Marcellus', 'Cinzel', serif;
+
+  /* Background Overlay Gradient */
+  --bg-overlay-gradient: linear-gradient(135deg, rgba(194, 65, 12, 0.35), rgba(249, 115, 22, 0.15));
 }
 
 [data-theme='dark'] {
-  --bg-primary: #0f172a;
-  --bg-secondary: #1e293b;
-  --text-primary: #f8fafc;
-  --text-secondary: #94a3b8;
-  --accent-primary: #3b82f6;
-  --accent-hover: #60a5fa;
-  --border-color: #334155;
+  --bg-primary: #1c1917;
+  /* Warm stone-900 */
+  --bg-secondary: #292524;
+  /* stone-800 */
+  --text-primary: #faf9f6;
+  /* Warm Alabaster/Cream */
+  --text-secondary: #a8a29e;
+  /* stone-400 */
+  --accent-primary: #ea580c;
+  /* Bright orange */
+  --accent-hover: #f97316;
+  /* Deeper orange */
+  --accent-color: var(--accent-primary);
+  --border-color: #44403c;
+  /* stone-700 */
   --error-bg: #7f1d1d;
   --error-text: #fca5a5;
   --success-bg: #14532d;
   --success-text: #86efac;
-  
-  --glass-bg: rgba(30, 41, 59, 0.7);
-  --glass-border: rgba(255, 255, 255, 0.1);
-  --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+
+  --glass-bg: rgba(41, 37, 36, 0.8);
+  --glass-border: rgba(255, 255, 255, 0.08);
+  --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.4);
+
+  /* Typography */
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  --font-divine: 'Marcellus', 'Cinzel', serif;
+
+  /* Background Overlay Gradient */
+  --bg-overlay-gradient: linear-gradient(135deg, rgba(194, 65, 12, 0.55), rgba(12, 10, 9, 0.8));
 }
 
 * {
@@ -69,13 +97,47 @@ body {
   justify-content: center;
   min-height: 100vh;
   padding: 1.5rem;
-  background: radial-gradient(circle at top right, var(--bg-secondary) 0%, var(--bg-primary) 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Cinematic Background Zoom Layer (Ken Burns Effect) */
+.app-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: var(--bg-overlay-gradient), url('./assets/rathyatra-tablet.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  z-index: 0;
+  animation: bgZoom 25s ease-in-out infinite alternate;
+  pointer-events: none;
+}
+
+@media (min-width: 769px) {
+  .app-container::before {
+    background-image: var(--bg-overlay-gradient), url('./assets/rathyatra-desktop.png');
+  }
+}
+
+@keyframes bgZoom {
+  0% {
+    transform: scale(1.0);
+  }
+  100% {
+    transform: scale(1.12); /* smooth 12% zoom-in */
+  }
 }
 
 .header-container {
   position: absolute;
   top: 1rem;
   right: 1rem;
+  z-index: 10;
 }
 
 .card {
@@ -127,6 +189,7 @@ body {
   transition: all 0.2s ease;
   width: 100%;
   box-shadow: 0 4px 6px -1px rgba(59, 130, 246, 0.2);
+  margin-top: 40px;
 }
 
 .btn:hover {
@@ -143,6 +206,206 @@ body {
   opacity: 0.7;
   cursor: not-allowed;
   transform: none;
+}
+
+.app-container .card {
+  background: linear-gradient(135deg, rgba(194, 65, 12, 0.55), rgba(249, 115, 22, 0.42));
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(254, 240, 138, 0.35);
+  border-radius: 2rem;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3), 0 0 35px rgba(234, 88, 12, 0.15);
+  color: #ffffff;
+  padding: 3rem 2.5rem;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  position: relative;
+  z-index: 10;
+}
+
+.app-container .card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.35), 0 0 45px rgba(234, 88, 12, 0.25);
+}
+
+.app-container .card .title {
+  font-family: var(--font-divine);
+  font-size: 2.2rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  color: #ffffff;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+  line-height: 1.25;
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.app-container .card .subtitle {
+  font-family: var(--font-divine);
+  font-size: 0.95rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  color: #fef08a; /* soft gold */
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+  text-transform: uppercase;
+}
+
+.app-container .card .tagline {
+  font-family: var(--font-divine);
+  font-size: 1.15rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  color: #fef08a; /* soft gold */
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.6);
+  margin-top: 0.5rem;
+  margin-bottom: 0.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.65rem;
+}
+
+.app-container .card .tagline .divider-dot {
+  color: rgba(255, 255, 255, 0.6);
+  font-weight: 300;
+  font-size: 0.85rem;
+  margin: 0 0.15rem;
+}
+
+.app-container .card .description {
+  color: rgba(255, 255, 255, 0.92);
+  font-size: 1.05rem;
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
+  font-family: var(--font-sans);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+/* Divine Divider decoration */
+.divine-divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  margin: 1.5rem 0;
+  color: #fef08a;
+  opacity: 0.9;
+}
+
+.divine-divider::before,
+.divine-divider::after {
+  content: '';
+  height: 1px;
+  width: 80px;
+  background: linear-gradient(to var(--direction, right), rgba(254, 240, 138, 0), rgba(254, 240, 138, 0.85));
+}
+
+.divine-divider::before {
+  --direction: left;
+}
+
+.divine-divider::after {
+  --direction: right;
+}
+
+.divine-symbol {
+  font-size: 1.5rem;
+  text-shadow: 0 0 8px rgba(254, 240, 138, 0.6);
+  animation: glowPulse 2s ease-in-out infinite alternate;
+}
+
+@keyframes glowPulse {
+  0% { text-shadow: 0 0 4px rgba(254, 240, 138, 0.4); }
+  100% { text-shadow: 0 0 12px rgba(254, 240, 138, 0.9); }
+}
+
+/* Divine Button styling */
+.app-container .btn {
+  background: linear-gradient(135deg, #f59e0b, #d97706);
+  color: #1c1917 !important;
+  font-family: var(--font-divine);
+  font-weight: 700;
+  font-size: 1.2rem;
+  letter-spacing: 0.1em;
+  border: 1px solid #fef08a;
+  border-radius: 1rem;
+  box-shadow: 0 8px 20px rgba(217, 119, 6, 0.45), inset 0 2px 4px rgba(255, 255, 255, 0.4);
+  padding: 1rem 2.25rem;
+  text-transform: uppercase;
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.85rem;
+  width: 100%;
+  margin-top: 0.75rem; /* override default .btn margin-top of 40px */
+}
+
+.app-container .btn:hover {
+  background: linear-gradient(135deg, #fbbf24, #f59e0b);
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 12px 25px rgba(217, 119, 6, 0.55), 0 0 15px rgba(254, 240, 138, 0.4);
+  color: #1c1917 !important;
+}
+
+.app-container .btn:active {
+  transform: translateY(-1px) scale(1.0);
+}
+
+.app-container .btn .bell-icon-left,
+.app-container .btn .bell-icon-right {
+  color: #1c1917;
+  transition: transform 0.2s ease;
+  display: inline-block;
+  transform-origin: top center;
+}
+
+/* Bell swing animations on hover */
+.app-container .btn:hover .bell-icon-left {
+  animation: swingLeft 0.8s ease-in-out infinite alternate;
+}
+
+.app-container .btn:hover .bell-icon-right {
+  animation: swingRight 0.8s ease-in-out infinite alternate-reverse;
+}
+
+@keyframes swingLeft {
+  0% { transform: rotate(-12deg); }
+  100% { transform: rotate(18deg); }
+}
+
+@keyframes swingRight {
+  0% { transform: rotate(12deg); }
+  100% { transform: rotate(-18deg); }
+}
+
+/* Mobile responsive adjustments for small screens */
+@media (max-width: 480px) {
+  .app-container .card {
+    padding: 2rem 1.25rem;
+    border-radius: 1.5rem;
+  }
+  .app-container .card .title {
+    font-size: 1.65rem;
+  }
+  .app-container .card .subtitle {
+    font-size: 0.85rem;
+    letter-spacing: 0.15em;
+  }
+  .app-container .card .tagline {
+    font-size: 0.8rem;
+    letter-spacing: 0.1em;
+    gap: 0.25rem;
+    margin-bottom: 0.5rem;
+  }
+  .app-container .card .tagline .divider-dot {
+    font-size: 0.75rem;
+    margin: 0 0.05rem;
+  }
+  .app-container .btn {
+    font-size: 1.05rem;
+    padding: 0.85rem 1.5rem;
+    margin-top: 0.5rem;
+  }
 }
 
 .btn-secondary {
@@ -260,8 +523,13 @@ body {
 
 /* Animations */
 @keyframes spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 .animate-spin {
@@ -269,20 +537,49 @@ body {
 }
 
 @keyframes slideUp {
-  0% { opacity: 0; transform: translateY(20px); }
-  100% { opacity: 1; transform: translateY(0); }
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 @keyframes fadeIn {
-  0% { opacity: 0; }
-  100% { opacity: 1; }
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
 }
 
 @keyframes shake {
-  10%, 90% { transform: translate3d(-1px, 0, 0); }
-  20%, 80% { transform: translate3d(2px, 0, 0); }
-  30%, 50%, 70% { transform: translate3d(-4px, 0, 0); }
-  40%, 60% { transform: translate3d(4px, 0, 0); }
+
+  10%,
+  90% {
+    transform: translate3d(-1px, 0, 0);
+  }
+
+  20%,
+  80% {
+    transform: translate3d(2px, 0, 0);
+  }
+
+  30%,
+  50%,
+  70% {
+    transform: translate3d(-4px, 0, 0);
+  }
+
+  40%,
+  60% {
+    transform: translate3d(4px, 0, 0);
+  }
 }
 
 /* 360° Viewport Layout Styles */
@@ -479,8 +776,13 @@ body {
 }
 
 @keyframes slideDrawerUp {
-  0% { transform: translateY(100%); }
-  100% { transform: translateY(0); }
+  0% {
+    transform: translateY(100%);
+  }
+
+  100% {
+    transform: translateY(0);
+  }
 }
 
 .drawer-header {
@@ -536,8 +838,23 @@ body {
 }
 
 @keyframes toastFadeInOut {
-  0% { opacity: 0; transform: translate(-50%, -20px); }
-  10% { opacity: 1; transform: translate(-50%, 0); }
-  90% { opacity: 1; transform: translate(-50%, 0); }
-  100% { opacity: 0; transform: translate(-50%, -20px); }
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -20px);
+  }
+
+  10% {
+    opacity: 1;
+    transform: translate(-50%, 0);
+  }
+
+  90% {
+    opacity: 1;
+    transform: translate(-50%, 0);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -20px);
+  }
 }

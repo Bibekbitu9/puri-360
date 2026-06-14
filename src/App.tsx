@@ -14,19 +14,13 @@ import type { PanoramaNode } from './types/gis';
 function App() {
   const { location, loading, error, permissionGranted, requestLocation } = useGeolocation();
   const [panoramas, setPanoramas] = useState<PanoramaNode[]>([]);
-  const [activeNodeId, setActiveNodeId] = useState<string | null>(null);
+  const [activeNodeId, setActiveNodeId] = useState<string | null>(() => {
+    const params = new URLSearchParams(window.location.search);
+    return params.get('node');
+  });
   const [isDetailsOpen, setIsDetailsOpen] = useState(false);
   const [showToast, setShowToast] = useState(false);
   const iframeRef = useRef<HTMLIFrameElement>(null);
-
-  // Check URL query parameters for deep linked node on mount
-  useEffect(() => {
-    const params = new URLSearchParams(window.location.search);
-    const nodeId = params.get('node');
-    if (nodeId) {
-      setActiveNodeId(nodeId);
-    }
-  }, []);
 
   // Load panoramas on mount
   useEffect(() => {
@@ -47,20 +41,13 @@ function App() {
   // Determine active node and its sorted index
   const activeResult = useMemo(() => {
     if (sortedNodes.length === 0) return null;
-    
+
     const index = sortedNodes.findIndex((item) => item.node.id === activeNodeId);
     if (index !== -1) {
       return { item: sortedNodes[index], index };
     }
-    
-    return { item: sortedNodes[0], index: 0 };
-  }, [sortedNodes, activeNodeId]);
 
-  // Set initial active node once sorted nodes are calculated
-  useEffect(() => {
-    if (sortedNodes.length > 0 && !activeNodeId) {
-      setActiveNodeId(sortedNodes[0].node.id);
-    }
+    return { item: sortedNodes[0], index: 0 };
   }, [sortedNodes, activeNodeId]);
 
   // Navigate iframe when active node changes
@@ -79,7 +66,7 @@ function App() {
   const handleShare = () => {
     if (!activeResult) return;
     const shareUrl = `${window.location.origin}${window.location.pathname}?node=${activeResult.item.node.id}`;
-    
+
     if (navigator.share) {
       navigator.share({
         title: `Puri 360° - ${activeResult.item.node.title}`,
@@ -105,11 +92,18 @@ function App() {
         </div>
 
         <main className="card">
-          <h1 className="title">GIS Navigator</h1>
-          <p className="description">
-            Find and navigate to the nearest 360° Virtual Tour based on your current location.
-          </p>
-
+          <div className="subtitle">Smart Virtual Guide</div>
+          <h1 className="title">Puri Rath Yatra</h1>
+          <div className="divine-divider">
+            <span className="divine-symbol">☸</span>
+          </div>
+          <div className="tagline">
+            <span>SCAN</span>
+            <span className="divider-dot">•</span>
+            <span>NAVIGATE</span>
+            <span className="divider-dot">•</span>
+            <span>REACH</span>
+          </div>
           {loading && !error && (
             <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '1rem', marginBottom: '1.5rem' }}>
               <Loader2 size={32} className="animate-spin" style={{ color: 'var(--accent-primary)' }} />
@@ -150,8 +144,8 @@ function App() {
 
       {/* Floating Header */}
       <header className="viewport-header">
-        <button 
-          className="viewport-header-btn" 
+        <button
+          className="viewport-header-btn"
           onClick={() => setIsDetailsOpen(true)}
           aria-label="Compass details"
         >
@@ -159,8 +153,8 @@ function App() {
           <span>Compass</span>
         </button>
 
-        <button 
-          className="viewport-header-btn" 
+        <button
+          className="viewport-header-btn"
           onClick={handleShare}
           aria-label="Share current spot"
         >
@@ -186,10 +180,10 @@ function App() {
             <span>View Details</span>
           </button>
 
-          <a 
-            className="viewport-action-btn" 
-            href={`https://www.google.com/maps/search/?api=1&query=${activeNode.latitude},${activeNode.longitude}`} 
-            target="_blank" 
+          <a
+            className="viewport-action-btn"
+            href={`https://www.google.com/maps/search/?api=1&query=${activeNode.latitude},${activeNode.longitude}`}
+            target="_blank"
             rel="noopener noreferrer"
             style={{ textDecoration: 'none' }}
           >
@@ -198,8 +192,8 @@ function App() {
             <ExternalLink size={10} style={{ opacity: 0.7 }} />
           </a>
 
-          <button 
-            className="viewport-action-btn primary" 
+          <button
+            className="viewport-action-btn primary"
             onClick={handleNextNearest}
             disabled={sortedNodes.length <= 1}
           >
