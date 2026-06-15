@@ -5,10 +5,10 @@ import { ErrorState } from './components/ErrorState';
 import { useGeolocation } from './hooks/useGeolocation';
 import { MetadataService } from './services/MetadataService';
 import { sortNodesByDistance } from './gis/haversine';
-import { formatDistanceMiles } from './utils/distanceFormatter';
+import { formatDistance } from './utils/distanceFormatter';
 import { PanoService } from './services/PanoService';
 import { LocationDetailsDrawer } from './components/LocationDetailsDrawer';
-import { Compass, Share2, Map, ChevronRight, ExternalLink, Loader2, Copy, ChevronUp, ChevronDown } from 'lucide-react';
+import { Share2, Map, ChevronRight, ExternalLink, Loader2, Copy, ChevronUp, ChevronDown } from 'lucide-react';
 import type { PanoramaNode } from './types/gis';
 import { ServiceSelectorModal } from './components/ServiceSelectorModal';
 import type { ServiceOption } from './components/ServiceSelectorModal';
@@ -147,7 +147,6 @@ function App() {
 
   // Render Full-Screen Viewport Interface
   const activeNode = activeResult.item.node;
-  const activeDistance = activeResult.item.distanceMeters;
 
   return (
     <div className="viewport-container">
@@ -161,16 +160,7 @@ function App() {
       />
 
       {/* Floating Header */}
-      <header className="viewport-header">
-        <button
-          className="viewport-header-btn"
-          onClick={() => setIsDetailsOpen(true)}
-          aria-label="Compass details"
-        >
-          <Compass size={18} />
-          <span>Compass</span>
-        </button>
-
+      <header className="viewport-header" style={{ justifyContent: 'flex-end' }}>
         <button
           className="viewport-header-btn"
           onClick={handleShare}
@@ -213,10 +203,10 @@ function App() {
               <ChevronDown size={18} />
             </button>
             <span className="viewport-spot-title" style={{ flex: 1 }}>
-              Nearest Spot: <strong>{activeNode.title}</strong>
+              Nearest Spot: <strong>{sortedNodes[0].node.title}</strong>
             </span>
             <span className="viewport-spot-distance">
-              ({formatDistanceMiles(activeDistance)})
+              ({formatDistance(sortedNodes[0].distanceMeters)})
             </span>
           </div>
 

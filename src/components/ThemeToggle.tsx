@@ -26,7 +26,7 @@ export const ThemeToggle: React.FC = () => {
 
   return (
     <button 
-      className="icon-btn" 
+      className="theme-toggle-btn" 
       onClick={toggleTheme}
       aria-label="Toggle theme"
     >

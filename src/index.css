@@ -786,7 +786,7 @@ body {
   bottom: 0;
   left: 0;
   right: 0;
-  background: var(--bg-secondary);
+  background: var(--bg-primary);
   border-top: 1px solid var(--border-color);
   border-radius: 1.5rem 1.5rem 0 0;
   padding: 2rem 1.5rem;
@@ -834,7 +834,7 @@ body {
 }
 
 .drawer-close:hover {
-  background: var(--bg-primary);
+  background: var(--bg-secondary);
   color: var(--text-primary);
 }
 
@@ -1280,5 +1280,64 @@ body {
     font-size: 0.72rem;
     bottom: calc(0.6rem + env(safe-area-inset-bottom, 0px));
     max-width: calc(100% - 1.5rem);
+  }
+}
+
+/* Theme Toggle Button Style */
+.theme-toggle-btn {
+  pointer-events: auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, rgba(255, 143, 61, 0.82) 0%, rgba(234, 88, 12, 0.82) 45%, rgba(154, 52, 18, 0.88) 100%);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(254, 240, 138, 0.35); /* soft gold border */
+  color: #ffffff;
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: 50%;
+  cursor: pointer;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+  transition: all 0.2s ease;
+  z-index: 30;
+}
+
+.theme-toggle-btn svg {
+  width: 20px !important;
+  height: 20px !important;
+}
+
+.theme-toggle-btn:hover {
+  background: linear-gradient(135deg, rgba(255, 143, 61, 0.92) 0%, rgba(234, 88, 12, 0.92) 45%, rgba(154, 52, 18, 0.98) 100%);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+  border-color: rgba(254, 240, 138, 0.55);
+}
+
+.theme-toggle-btn:active {
+  transform: translateY(1px);
+}
+
+/* Desktop Styles */
+@media (min-width: 1024px) {
+  .viewport-header-btn {
+    padding: 0.6rem 1.25rem;
+    font-size: 0.88rem;
+  }
+
+  .viewport-header-btn svg {
+    width: 18px !important;
+    height: 18px !important;
+  }
+
+  .theme-toggle-btn {
+    width: 2.75rem;
+    height: 2.75rem;
+  }
+
+  .theme-toggle-btn svg {
+    width: 24px !important;
+    height: 24px !important;
   }
 }
