@@ -1341,3 +1341,154 @@ body {
     height: 24px !important;
   }
 }
+
+/* Service Locations List Container & Items */
+.service-locations-container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  max-height: 180px;
+  overflow-y: auto;
+  padding-right: 0.25rem;
+  margin-top: 0.25rem;
+  margin-bottom: 0.25rem;
+}
+
+/* Custom scrollbar for service locations container */
+.service-locations-container::-webkit-scrollbar {
+  width: 4px;
+}
+.service-locations-container::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 4px;
+}
+.service-locations-container::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.25);
+  border-radius: 4px;
+}
+
+/* Individual list item */
+.service-location-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 0.75rem;
+  padding: 0.5rem 0.75rem;
+  transition: all 0.2s ease;
+  text-align: left;
+}
+
+.service-location-item:hover {
+  background: rgba(255, 255, 255, 0.16);
+  border-color: rgba(255, 255, 255, 0.25);
+}
+
+.service-location-item.active {
+  background: rgba(254, 240, 138, 0.15) !important; /* soft gold glow */
+  border-color: rgba(254, 240, 138, 0.45) !important;
+}
+
+.service-location-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  flex: 1;
+}
+
+.service-location-name {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: #ffffff;
+}
+
+.service-location-meta {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.72rem;
+  color: #fef08a;
+}
+
+.service-location-active-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  color: #86efac; /* soft green */
+  font-weight: 700;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+}
+
+.service-location-active-dot {
+  width: 6px;
+  height: 6px;
+  background-color: #22c55e;
+  border-radius: 50%;
+  box-shadow: 0 0 8px #22c55e;
+  animation: pulseDot 1.5s infinite;
+}
+
+@keyframes pulseDot {
+  0% { transform: scale(0.9); opacity: 0.6; }
+  50% { transform: scale(1.25); opacity: 1; }
+  100% { transform: scale(0.9); opacity: 0.6; }
+}
+
+.service-location-actions {
+  display: flex;
+  gap: 0.35rem;
+  align-items: center;
+}
+
+.service-location-btn {
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: #ffffff !important;
+  padding: 0.3rem 0.55rem;
+  border-radius: 0.5rem;
+  font-size: 0.72rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  transition: all 0.2s ease;
+  text-decoration: none;
+}
+
+.service-location-btn:hover {
+  background: rgba(255, 255, 255, 0.22);
+}
+
+.service-location-btn.go-btn {
+  background: linear-gradient(135deg, #f59e0b, #d97706);
+  border: 1px solid #fef08a;
+  color: #1c1917 !important;
+}
+
+.service-location-btn.go-btn:hover {
+  background: linear-gradient(135deg, #fbbf24, #f59e0b);
+}
+
+/* Navigation HUD Card */
+.navigation-hud-card {
+  background: rgba(0, 0, 0, 0.22) !important;
+  border: 1px dashed rgba(254, 240, 138, 0.4) !important;
+  border-radius: 0.75rem;
+  padding: 0.85rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-top: 0.25rem;
+  margin-bottom: 0.25rem;
+  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.15);
+}
+
+/* Hide service locations section on mobile devices to save space */
+@media (max-width: 768px) {
+  .service-locations-section {
+    display: none !important;
+  }
+}

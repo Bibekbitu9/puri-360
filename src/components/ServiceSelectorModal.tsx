@@ -22,14 +22,14 @@ export const SERVICE_OPTIONS: ServiceOption[] = [
     className: 'toilets',
   },
   {
-    id: 'aid',
-    title: 'Aid / Emergency',
+    id: 'medical_help_centre',
+    title: 'Medical Help Centre',
     iconName: 'Plus',
     className: 'aid',
   },
   {
-    id: 'police',
-    title: 'Police Help / Lost-and-Found',
+    id: 'fire_centre',
+    title: 'Fire Station Help',
     iconName: 'Shield',
     className: 'police',
   },
