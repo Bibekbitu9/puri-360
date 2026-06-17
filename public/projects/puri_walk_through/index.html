@@ -32,34 +32,13 @@
 			::-webkit-scrollbar-thumb {
 				background-color:  rgba(255,255,255,0.5);
 			}
-
-			/* Orange theme variables matching index.css */
-			:root {
-				--accent-primary: rgba(194, 65, 12, 0.75); /* Terracotta rust-orange */
-				--accent-hover: rgba(154, 52, 18, 0.9);   /* Darker rust-orange */
-			}
-			[data-theme='dark'] {
-				--accent-primary: rgba(234, 88, 12, 0.75); /* Bright orange in dark mode */
-				--accent-hover: rgba(249, 115, 22, 0.9);    /* Deeper orange on hover */
-			}
-
-			/* Style all panoramic buttons to use our theme */
-			.ggskin_rectangle {
-				background-color: var(--accent-primary) !important;
-				border: 1px solid rgba(255, 255, 255, 0.5) !important;
-				transition: background-color 150ms ease, border-color 150ms ease !important;
-			}
-			.ggskin_rectangle:hover {
-				background-color: var(--accent-hover) !important;
-				border-color: rgba(255, 255, 255, 0.9) !important;
-			}
 		</style>
 	</head>
 	<body>
 <!-- - - - - - - 8<- - - - - - cut here - - - - - 8<- - - - - - - -->
-		<script type="text/javascript" src="pano2vr_player.js?ts=61734950">
+		<script type="text/javascript" src="pano2vr_player.js?ts=14371220">
 		</script>
-		<script type="text/javascript" src="skin.js?ts=61734950">
+		<script type="text/javascript" src="skin.js?ts=14371220">
 		</script>
 		<script src="https://www.youtube.com/iframe_api"></script>
 		<script src="https://player.vimeo.com/api/player.js"></script>
@@ -113,12 +92,22 @@
 			pano=new pano2vrPlayer("container");
 			pano.startNode = startNode;
 			pano.startView = startView;
-			pano.setQueryParameter("ts=61734950")
+			pano.setQueryParameter("ts=14371220")
 			// add the skin object
 			skin=new pano2vrSkin(pano);
+			
+			// Notify parent React app on panorama navigation changes
+			pano.addListener('changenode', function() {
+				var nodeId = pano.getCurrentNode();
+				if (nodeId) {
+					var cleanId = nodeId.replace(/[{}]/g, '');
+					window.parent.postMessage({ type: 'changenode', nodeId: cleanId }, '*');
+				}
+			});
+
 			// load the configuration
 			window.addEventListener("load", function() {
-				pano.readConfigUrlAsync("pano.xml?ts=61734950");
+				pano.readConfigUrlAsync("pano.xml?ts=14371220");
 			});
 			if (window.navigator.userAgent.match(/Safari/i)) {
 				// fix for white borders, rotation on iPhone
@@ -142,25 +131,8 @@
 					// hide toolbar on iPad happens with a delay
 					setTimeout(iosHfix,500);
 					setTimeout(iosHfix,1000);
+					setTimeout(iosHfix,2000);
 				});
-			}
-
-			// Synchronize theme with parent window
-			function syncTheme() {
-				try {
-					var parentHtml = window.parent.document.documentElement;
-					var currentTheme = parentHtml.getAttribute('data-theme') || 'light';
-					document.documentElement.setAttribute('data-theme', currentTheme);
-				} catch (e) {
-					console.warn("Could not sync theme with parent window:", e);
-				}
-			}
-			syncTheme();
-			try {
-				var observer = new MutationObserver(syncTheme);
-				observer.observe(window.parent.document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
-			} catch (e) {
-				setInterval(syncTheme, 1000);
 			}
 		</script>
 		<noscript>
