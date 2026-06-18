@@ -8,7 +8,7 @@ import { sortNodesByDistance, findNearestNode, calculateDistance } from './gis/h
 import { formatDistance } from './utils/distanceFormatter';
 import { PanoService } from './services/PanoService';
 import { LocationDetailsDrawer } from './components/LocationDetailsDrawer';
-import { Share2, Map, ChevronRight, ExternalLink, Loader2, Copy, ChevronUp, ChevronDown, ArrowRight, ArrowLeft, ArrowUp } from 'lucide-react';
+import { Map, ChevronRight, ExternalLink, Loader2, ChevronUp, ChevronDown, ArrowRight, ArrowLeft, ArrowUp } from 'lucide-react';
 import type { PanoramaNode } from './types/gis';
 import { ServiceSelectorModal } from './components/ServiceSelectorModal';
 import type { ServiceOption } from './components/ServiceSelectorModal';
@@ -21,7 +21,6 @@ function App() {
     return params.get('node');
   });
   const [isDetailsOpen, setIsDetailsOpen] = useState(false);
-  const [showToast, setShowToast] = useState(false);
   const iframeRef = useRef<HTMLIFrameElement>(null);
 
   const [isServiceModalOpen, setIsServiceModalOpen] = useState(false);
@@ -33,7 +32,11 @@ function App() {
   const handleSelectService = (service: ServiceOption) => {
     setSelectedService(service);
     setIsServiceModalOpen(false);
-    requestLocation();
+    setIsNavCardExpanded(true);
+    if (sortedNodes.length > 0) {
+      setActiveNodeId(sortedNodes[0].node.id);
+      requestLocation();
+    }
   };
 
   // Load panoramas on mount
@@ -60,6 +63,13 @@ function App() {
     return [];
   }, [location.latitude, location.longitude, permissionGranted, panoramas]);
 
+  // Automatically open service modal once location is obtained but no service is selected
+  useEffect(() => {
+    if (permissionGranted && sortedNodes.length > 0 && !selectedService) {
+      setIsServiceModalOpen(true);
+    }
+  }, [permissionGranted, sortedNodes, selectedService]);
+
   // Retrieve service locations for selected category
   const selectedLocations = useMemo(() => {
     if (!selectedService || !serviceMap) return [];
@@ -78,7 +88,7 @@ function App() {
         { latitude: loc.latitude, longitude: loc.longitude },
         panoramas
       );
-      
+
       let distFromUser = Infinity;
       if (permissionGranted && location.latitude !== null && location.longitude !== null) {
         distFromUser = calculateDistance(
@@ -86,7 +96,7 @@ function App() {
           { latitude: loc.latitude, longitude: loc.longitude }
         );
       }
-      
+
       return {
         loc,
         node: nearestNode,
@@ -180,7 +190,7 @@ function App() {
 
     const y = Math.sin(dLon) * Math.cos(lat2Rad);
     const x = Math.cos(lat1Rad) * Math.sin(lat2Rad) -
-              Math.sin(lat1Rad) * Math.cos(lat2Rad) * Math.cos(dLon);
+      Math.sin(lat1Rad) * Math.cos(lat2Rad) * Math.cos(dLon);
 
     const brng = Math.atan2(y, x) * 180 / Math.PI;
     return (brng + 360) % 360;
@@ -219,7 +229,7 @@ function App() {
         }
       }
     }
-  }, [activeNodeId]);
+  }, [activeNodeId, selectedService]);
 
   const handleNextNearest = () => {
     if (!selectedService || serviceNodesSorted.length <= 1 || !targetServiceSpot) return;
@@ -236,28 +246,10 @@ function App() {
     });
   };
 
-  const handleShare = () => {
-    if (!activeResult) return;
-    const shareUrl = `${window.location.origin}${window.location.pathname}?node=${activeResult.item.node.id}`;
 
-    if (navigator.share) {
-      navigator.share({
-        title: `Puri 360° - ${activeResult.item.node.title}`,
-        text: `Explore this 360° panorama: ${activeResult.item.node.title}`,
-        url: shareUrl,
-      }).catch((err) => console.log('Share failed:', err));
-    } else {
-      navigator.clipboard.writeText(shareUrl)
-        .then(() => {
-          setShowToast(true);
-          setTimeout(() => setShowToast(false), 2500);
-        })
-        .catch((err) => console.error('Failed to copy link:', err));
-    }
-  };
 
   // Render Onboarding/Location Permission Page
-  if (!permissionGranted || error || sortedNodes.length === 0) {
+  if (!permissionGranted || error || sortedNodes.length === 0 || !selectedService) {
     return (
       <div className="app-container">
         <div className="header-container">
@@ -286,6 +278,16 @@ function App() {
 
           {!permissionGranted && !error && !loading && (
             <LocationButton onClick={requestLocation} loading={loading} />
+          )}
+
+          {permissionGranted && !selectedService && !error && !loading && (
+            <button
+              className="btn"
+              onClick={() => setIsServiceModalOpen(true)}
+              aria-label="Select Service Category"
+            >
+              🔍 Select Service
+            </button>
           )}
 
           {error && (
@@ -320,17 +322,7 @@ function App() {
         allowFullScreen
       />
 
-      {/* Floating Header */}
-      <header className="viewport-header" style={{ justifyContent: 'flex-end' }}>
-        <button
-          className="viewport-header-btn"
-          onClick={handleShare}
-          aria-label="Share current spot"
-        >
-          <Share2 size={18} />
-          <span>Share</span>
-        </button>
-      </header>
+
 
       {/* Floating Bottom Navigation Card Controls */}
       {!isNavCardExpanded ? (
@@ -393,85 +385,85 @@ function App() {
             )}
           </div>
 
-            <div style={{ display: 'flex', justifyContent: 'flex-start', margin: '-0.25rem 0 0.25rem 0' }}>
-              <button
-                className="active-service-badge"
-                onClick={() => setIsServiceModalOpen(true)}
-                title="Click to select service category"
-              >
-                {selectedService ? (
-                  <>
-                    <span>Category: {selectedService.title}</span>
-                    <span style={{ fontSize: '0.65rem', opacity: 0.65, fontWeight: 400 }}>(Change)</span>
-                  </>
-                ) : (
-                  <>
-                    <span>🔍 Select Service</span>
-                  </>
-                )}
-              </button>
-            </div>
+          <div style={{ display: 'flex', justifyContent: 'flex-start', margin: '-0.25rem 0 0.25rem 0' }}>
+            <button
+              className="active-service-badge"
+              onClick={() => setIsServiceModalOpen(true)}
+              title="Click to select service category"
+            >
+              {selectedService ? (
+                <>
+                  <span>Category: {selectedService.title}</span>
+                  <span style={{ fontSize: '0.65rem', opacity: 0.65, fontWeight: 400 }}>(Change)</span>
+                </>
+              ) : (
+                <>
+                  <span>🔍 Select Service</span>
+                </>
+              )}
+            </button>
+          </div>
 
-            {/* Direction Indicator */}
-            {targetServiceSpot && (
-              <div className="direction-indicator-card" style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem', background: 'rgba(0,0,0,0.25)', padding: '0.85rem', borderRadius: '0.75rem', border: '1px solid rgba(255,255,255,0.15)', marginTop: '0.5rem', marginBottom: '0.5rem' }}>
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                  <span style={{ fontSize: '0.78rem', fontWeight: 700, color: '#fef08a', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
-                    🧭 Direction to {targetServiceSpot.name}
-                  </span>
-                  <button
-                    onClick={() => setTargetServiceSpot(null)}
-                    style={{ background: 'transparent', border: 'none', color: '#ffffff', opacity: 0.6, fontSize: '0.72rem', cursor: 'pointer' }}
+          {/* Direction Indicator */}
+          {targetServiceSpot && (
+            <div className="direction-indicator-card">
+              <div className="direction-indicator-header">
+                <span className="direction-indicator-title">
+                  🧭 Direction to {targetServiceSpot.name}
+                </span>
+                <button
+                  onClick={() => setTargetServiceSpot(null)}
+                  className="direction-indicator-cancel"
+                >
+                  Cancel
+                </button>
+              </div>
+
+              <div className="direction-indicator-body">
+                {/* Compass/Bearing Rotating Arrow - Glowing Green Circle Overlay */}
+                <div className="compass-icon-container">
+                  <div
+                    style={{
+                      transform: `rotate(${bearing}deg)`,
+                      transition: 'transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275)',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      color: '#86efac'
+                    }}
+                    title={`Geographic Bearing: ${Math.round(bearing)}°`}
                   >
-                    Cancel
-                  </button>
+                    <ArrowUp className="compass-arrow-icon" style={{ strokeWidth: 3 }} />
+                  </div>
                 </div>
 
-                <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', justifyContent: 'center' }}>
-                  {/* Compass/Bearing Rotating Arrow - Glowing Green Circle Overlay */}
-                  <div className="compass-icon-container" style={{ position: 'relative', width: '48px', height: '48px', background: 'rgba(34, 197, 94, 0.15)', borderRadius: '50%', border: '2.5px solid #22c55e', display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: '0 0 15px rgba(34, 197, 94, 0.6)' }}>
-                    <div
-                      style={{
-                        transform: `rotate(${bearing}deg)`,
-                        transition: 'transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275)',
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        color: '#86efac'
-                      }}
-                      title={`Geographic Bearing: ${Math.round(bearing)}°`}
-                    >
-                      <ArrowUp size={24} style={{ strokeWidth: 3 }} />
-                    </div>
-                  </div>
-
-                  <div style={{ display: 'flex', flexDirection: 'column', gap: '0.15rem', textAlign: 'left', flex: 1 }}>
-                    <span style={{ fontSize: '0.88rem', fontWeight: 600, color: '#ffffff' }}>
-                      {pathDirection === 'left' && (
-                        <span style={{ display: 'inline-flex', alignItems: 'center', gap: '0.35rem' }}>
-                          <ArrowLeft size={16} style={{ color: '#fbbf24' }} />
-                          Move Left along Grand Road
-                        </span>
-                      )}
-                      {pathDirection === 'right' && (
-                        <span style={{ display: 'inline-flex', alignItems: 'center', gap: '0.35rem' }}>
-                          <ArrowRight size={16} style={{ color: '#fbbf24' }} />
-                          Move Right along Grand Road
-                        </span>
-                      )}
-                      {pathDirection === 'arrived' && (
-                        <span style={{ display: 'inline-flex', alignItems: 'center', gap: '0.35rem', color: '#86efac' }}>
-                          🎉 Arrived at spot!
-                        </span>
-                      )}
-                    </span>
-                    <span style={{ fontSize: '0.72rem', color: 'rgba(255,255,255,0.6)' }}>
-                      GPS Bearing: {Math.round(bearing)}°
-                    </span>
-                  </div>
+                <div className="direction-instruction-container">
+                  <span className="direction-instruction-text">
+                    {pathDirection === 'left' && (
+                      <span style={{ display: 'inline-flex', alignItems: 'center', gap: '0.35rem' }}>
+                        <ArrowLeft className="direction-arrow-small" style={{ color: '#fbbf24' }} />
+                        Move Left along Grand Road
+                      </span>
+                    )}
+                    {pathDirection === 'right' && (
+                      <span style={{ display: 'inline-flex', alignItems: 'center', gap: '0.35rem' }}>
+                        <ArrowRight className="direction-arrow-small" style={{ color: '#fbbf24' }} />
+                        Move Right along Grand Road
+                      </span>
+                    )}
+                    {pathDirection === 'arrived' && (
+                      <span style={{ display: 'inline-flex', alignItems: 'center', gap: '0.35rem', color: '#86efac' }}>
+                        🎉 Arrived at spot!
+                      </span>
+                    )}
+                  </span>
+                  <span className="direction-bearing-text">
+                    GPS Bearing: {Math.round(bearing)}°
+                  </span>
                 </div>
               </div>
-            )}
+            </div>
+          )}
 
 
 
@@ -513,22 +505,13 @@ function App() {
         loading={loading}
       />
 
-      {/* Share Toast Notification */}
-      {showToast && (
-        <div className="toast-msg">
-          <Copy size={16} />
-          <span>Link copied to clipboard!</span>
-        </div>
-      )}
+
 
       {/* Service Selection Modal */}
       <ServiceSelectorModal
         isOpen={isServiceModalOpen}
         onClose={() => setIsServiceModalOpen(false)}
-        onSelectService={(service) => {
-          setSelectedService(service);
-          setIsServiceModalOpen(false);
-        }}
+        onSelectService={handleSelectService}
       />
     </div>
   );
