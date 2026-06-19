@@ -199,7 +199,7 @@ function App() {
   // Calculate current target service spot index
   const currentTargetIndex = useMemo(() => {
     if (!targetServiceSpot || serviceNodesSorted.length === 0) return 0;
-    return serviceNodesSorted.findIndex((item) => item.node.id === targetServiceSpot.nearestNodeId);
+    return serviceNodesSorted.findIndex((item) => item.loc.name === targetServiceSpot.name);
   }, [targetServiceSpot, serviceNodesSorted]);
 
   // Listen for navigation node changes from the iframe tour viewer
@@ -234,7 +234,7 @@ function App() {
   const handleNextNearest = () => {
     if (!selectedService || serviceNodesSorted.length <= 1 || !targetServiceSpot) return;
     const currentIndex = serviceNodesSorted.findIndex(
-      (item) => item.node.id === targetServiceSpot.nearestNodeId
+      (item) => item.loc.name === targetServiceSpot.name
     );
     const nextIndex = (currentIndex + 1) % serviceNodesSorted.length;
     const nextSpot = serviceNodesSorted[nextIndex];
