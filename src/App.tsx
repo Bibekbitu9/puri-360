@@ -11,9 +11,9 @@ import { sortNodesByDistance, findNearestNode, calculateDistance } from './gis/h
 import { formatDistance } from './utils/distanceFormatter';
 import { PanoService } from './services/PanoService';
 import { LocationDetailsDrawer } from './components/LocationDetailsDrawer';
-import { Map, ChevronRight, ExternalLink, Loader2, ChevronUp, ChevronDown } from 'lucide-react';
+import { Map, ChevronRight, Loader2, ChevronUp, ChevronDown } from 'lucide-react';
 import type { PanoramaNode } from './types/gis';
-import { ServiceSelectorModal, SERVICE_OPTIONS } from './components/ServiceSelectorModal';
+import { ServiceSelectorModal } from './components/ServiceSelectorModal';
 import type { ServiceOption } from './components/ServiceSelectorModal';
 import { TopDirectionHUD } from './components/TopDirectionHUD';
 

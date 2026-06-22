@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import type { Variants } from 'framer-motion';
-import { X, Droplet, User, Plus, Shield, Bus, Accessibility } from 'lucide-react';
+import { X } from 'lucide-react';
 
 import { AnimatedWaterDroplet, AnimatedToiletIcon, AnimatedMedicalCross, AnimatedShield, AnimatedBus, AnimatedAccessibility } from './AnimatedServiceIcons';
 

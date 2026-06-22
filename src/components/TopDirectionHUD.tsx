@@ -7,7 +7,7 @@ interface TopDirectionHUDProps {
   targetServiceSpot: { name: string; latitude: number; longitude: number; nearestNodeId: string } | null;
   bearing: number;
   pathDirection: 'left' | 'right' | 'arrived' | null;
-  onCancel: () => void;
+  onCancel?: () => void;
   distance: string;
   serviceIconName?: string;
 }
@@ -16,7 +16,6 @@ export const TopDirectionHUD: React.FC<TopDirectionHUDProps> = ({
   targetServiceSpot,
   bearing,
   pathDirection,
-  onCancel,
   distance,
   serviceIconName,
 }) => {
