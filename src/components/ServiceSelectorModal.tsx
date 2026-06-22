@@ -1,5 +1,9 @@
 import React, { useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import type { Variants } from 'framer-motion';
 import { X, Droplet, User, Plus, Shield, Bus, Accessibility } from 'lucide-react';
+
+import { AnimatedWaterDroplet, AnimatedToiletIcon, AnimatedMedicalCross, AnimatedShield, AnimatedBus, AnimatedAccessibility } from './AnimatedServiceIcons';
 
 export interface ServiceOption {
   id: string;
@@ -55,7 +59,7 @@ interface ServiceSelectorModalProps {
 
 // Temple Shikhara SVG outline
 const TempleShikhara: React.FC = () => (
-  <svg viewBox="0 0 100 120" width="54" height="65" fill="#fef08a" style={{ opacity: 0.8 }} aria-hidden="true">
+  <svg viewBox="0 0 100 120" width="48" height="58" fill="var(--tertiary)" style={{ opacity: 0.6 }} aria-hidden="true">
     {/* Flag / Dhvaja */}
     <path d="M 50 15 L 50 3 L 68 8 Z" />
     {/* Amalaka / Kalasha */}
@@ -71,7 +75,7 @@ const TempleShikhara: React.FC = () => (
 
 // Lotus Flower SVG outline
 const LotusFlower: React.FC = () => (
-  <svg viewBox="0 0 100 80" width="48" height="38" fill="#fef08a" style={{ opacity: 0.85 }} aria-hidden="true">
+  <svg viewBox="0 0 100 80" width="42" height="34" fill="var(--tertiary)" style={{ opacity: 0.6 }} aria-hidden="true">
     {/* Center Petal */}
     <path d="M 50 10 C 40 35, 40 60, 50 75 C 60 60, 60 35, 50 10 Z" />
     {/* Inner Left Petal */}
@@ -86,6 +90,21 @@ const LotusFlower: React.FC = () => (
     <path d="M 35 78 Q 50 82, 65 78 Q 50 74, 35 78 Z" />
   </svg>
 );
+
+const cardVariants: Variants = {
+  hidden: { opacity: 0, y: 20, scale: 0.95 },
+  visible: (i: number) => ({
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    transition: {
+      delay: 0.15 + i * 0.06,
+      type: 'spring' as const,
+      stiffness: 300,
+      damping: 24,
+    },
+  }),
+};
 
 export const ServiceSelectorModal: React.FC<ServiceSelectorModalProps> = ({
   isOpen,
@@ -103,73 +122,120 @@ export const ServiceSelectorModal: React.FC<ServiceSelectorModalProps> = ({
     };
   }, [isOpen]);
 
-  if (!isOpen) return null;
-
-  const getIcon = (iconName: string) => {
-    const iconProps = { size: 28, color: '#ffffff' };
+  const getIcon = (iconName: string, size = 28) => {
+    const iconProps = { size, color: '#ffffff' };
     switch (iconName) {
       case 'Droplet':
-        return <Droplet {...iconProps} />;
+        return <AnimatedWaterDroplet {...iconProps} />;
       case 'User':
-        return <User {...iconProps} />;
+        return <AnimatedToiletIcon {...iconProps} />;
       case 'Plus':
-        return <Plus {...iconProps} strokeWidth={3} />;
+        return <AnimatedMedicalCross {...iconProps} />;
       case 'Shield':
-        return <Shield {...iconProps} />;
+        return <AnimatedShield {...iconProps} />;
       case 'Bus':
-        return <Bus {...iconProps} />;
+        return <AnimatedBus {...iconProps} />;
       case 'Accessibility':
-        return <Accessibility {...iconProps} />;
+        return <AnimatedAccessibility {...iconProps} />;
       default:
         return null;
     }
   };
 
   return (
-    <div className="service-modal-overlay" onClick={onClose}>
-      <div className="service-modal-container" onClick={(e) => e.stopPropagation()}>
-        {/* Close Button */}
-        <button className="service-modal-close" onClick={onClose} aria-label="Close Selector">
-          <X size={18} />
-        </button>
-
-        {/* Decorative Top Shikharas */}
-        <div className="service-modal-decor-top">
-          <TempleShikhara />
-          <TempleShikhara />
-        </div>
-
-        {/* Modal Header */}
-        <div className="service-modal-title-container">
-          <h2 className="service-modal-title">Select Your Service</h2>
-          <div className="service-modal-divider">
-            <span className="divine-symbol" style={{ fontSize: '1.25rem' }}>☸</span>
-          </div>
-          <p className="service-modal-subtitle">Choose a category to explore nearest locations</p>
-        </div>
-
-        {/* Options Grid */}
-        <div className="service-modal-grid">
-          {SERVICE_OPTIONS.map((option) => (
-            <div
-              key={option.id}
-              className="service-card"
-              onClick={() => onSelectService(option)}
+    <AnimatePresence>
+      {isOpen && (
+        <motion.div
+          className="service-modal-overlay"
+          onClick={onClose}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.25 }}
+        >
+          <motion.div
+            className="service-modal-container"
+            onClick={(e) => e.stopPropagation()}
+            initial={{ y: '100%', opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            exit={{ y: '100%', opacity: 0 }}
+            transition={{ type: 'spring', stiffness: 300, damping: 30 }}
+          >
+            {/* Close Button */}
+            <motion.button
+              className="service-modal-close"
+              onClick={onClose}
+              aria-label="Close Selector"
+              whileHover={{ scale: 1.1, rotate: 90 }}
+              whileTap={{ scale: 0.9 }}
             >
-              <div className={`service-icon-circle ${option.className}`}>
-                {getIcon(option.iconName)}
-              </div>
-              <span className="service-card-title">{option.title}</span>
-            </div>
-          ))}
-        </div>
+              <X size={16} />
+            </motion.button>
 
-        {/* Decorative Bottom Lotus Flowers */}
-        <div className="service-modal-decor-bottom">
-          <LotusFlower />
-          <LotusFlower />
-        </div>
-      </div>
-    </div>
+            {/* Decorative Top Shikharas */}
+            <motion.div
+              className="service-modal-decor-top"
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 0.7, y: 0 }}
+              transition={{ delay: 0.2, duration: 0.4 }}
+            >
+              <TempleShikhara />
+              <TempleShikhara />
+            </motion.div>
+
+            {/* Modal Header */}
+            <motion.div
+              className="service-modal-title-container"
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.1, duration: 0.35 }}
+            >
+              <h2 className="service-modal-title">Select Your Service</h2>
+              <div className="service-modal-divider">
+                <span className="divine-symbol" style={{ fontSize: '1.15rem' }}>☸</span>
+              </div>
+              <p className="service-modal-subtitle">Choose a category to explore nearest locations</p>
+            </motion.div>
+
+            {/* Options Grid */}
+            <div className="service-modal-grid">
+              {SERVICE_OPTIONS.map((option, index) => (
+                <motion.div
+                  key={option.id}
+                  className="service-card"
+                  onClick={() => onSelectService(option)}
+                  custom={index}
+                  initial="hidden"
+                  animate="visible"
+                  variants={cardVariants}
+                  whileHover={{ scale: 1.04, y: -3 }}
+                  whileTap={{ scale: 0.97 }}
+                >
+                  <motion.div
+                    className={`service-icon-circle ${option.className}`}
+                    whileHover={{ scale: 1.1 }}
+                    transition={{ type: 'spring', stiffness: 400, damping: 20 }}
+                  >
+                    {getIcon(option.iconName)}
+                  </motion.div>
+                  <span className="service-card-title">{option.title}</span>
+                </motion.div>
+              ))}
+            </div>
+
+            {/* Decorative Bottom Lotus Flowers */}
+            <motion.div
+              className="service-modal-decor-bottom"
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 0.7, y: 0 }}
+              transition={{ delay: 0.5, duration: 0.4 }}
+            >
+              <LotusFlower />
+              <LotusFlower />
+            </motion.div>
+          </motion.div>
+        </motion.div>
+      )}
+    </AnimatePresence>
   );
 };

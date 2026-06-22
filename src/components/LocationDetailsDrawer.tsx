@@ -1,4 +1,5 @@
 import React from 'react';
+import { motion } from 'framer-motion';
 import { X, RefreshCw, Compass, MapPin, Activity, Clock } from 'lucide-react';
 import type { LocationData } from '../types/geolocation';
 
@@ -9,6 +10,15 @@ interface LocationDetailsDrawerProps {
   onRefresh: () => void;
   loading: boolean;
 }
+
+const dataItemVariants = {
+  hidden: { opacity: 0, y: 12 },
+  visible: (i: number) => ({
+    opacity: 1,
+    y: 0,
+    transition: { delay: i * 0.08, duration: 0.3 },
+  }),
+};
 
 export const LocationDetailsDrawer: React.FC<LocationDetailsDrawerProps> = ({
   isOpen,
@@ -29,62 +39,82 @@ export const LocationDetailsDrawer: React.FC<LocationDetailsDrawerProps> = ({
     return new Date(ts).toLocaleTimeString();
   };
 
+  const dataItems = [
+    { icon: <MapPin size={14} />, label: 'Latitude', value: `${formatCoordinate(location.latitude)}°` },
+    { icon: <MapPin size={14} />, label: 'Longitude', value: `${formatCoordinate(location.longitude)}°` },
+    { icon: <Activity size={14} />, label: 'Accuracy', value: location.accuracy ? `${Math.round(location.accuracy)} meters` : 'N/A' },
+    { icon: <Clock size={14} />, label: 'Last Updated', value: formatTimestamp(location.timestamp) },
+  ];
+
   return (
     <>
-      <div className="drawer-overlay" onClick={onClose} />
-      <div className="details-drawer">
+      <motion.div
+        className="drawer-overlay"
+        onClick={onClose}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        transition={{ duration: 0.25 }}
+      />
+      <motion.div
+        className="details-drawer"
+        initial={{ y: '100%' }}
+        animate={{ y: 0 }}
+        exit={{ y: '100%' }}
+        transition={{ type: 'spring', stiffness: 300, damping: 30 }}
+      >
         <div className="drawer-header">
           <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-            <Compass size={20} className={loading ? 'animate-spin' : ''} style={{ color: 'var(--accent-primary)' }} />
+            <motion.div
+              animate={loading ? { rotate: 360 } : {}}
+              transition={loading ? { duration: 1, repeat: Infinity, ease: 'linear' } : {}}
+              style={{ display: 'flex', color: 'var(--primary-container)' }}
+            >
+              <Compass size={20} />
+            </motion.div>
             <h2 className="drawer-title">Compass Details</h2>
           </div>
-          <button className="drawer-close" onClick={onClose} aria-label="Close Details">
+          <motion.button
+            className="drawer-close"
+            onClick={onClose}
+            aria-label="Close Details"
+            whileHover={{ scale: 1.1, rotate: 90 }}
+            whileTap={{ scale: 0.9 }}
+          >
             <X size={20} />
-          </button>
+          </motion.button>
         </div>
 
         <div className="data-grid" style={{ marginBottom: '1.5rem', marginTop: 0 }}>
-          <div className="data-item">
-            <span className="data-label" style={{ display: 'flex', alignItems: 'center', gap: '0.25rem' }}>
-              <MapPin size={14} /> Latitude
-            </span>
-            <span className="data-value">{formatCoordinate(location.latitude)}°</span>
-          </div>
-
-          <div className="data-item">
-            <span className="data-label" style={{ display: 'flex', alignItems: 'center', gap: '0.25rem' }}>
-              <MapPin size={14} /> Longitude
-            </span>
-            <span className="data-value">{formatCoordinate(location.longitude)}°</span>
-          </div>
-
-          <div className="data-item">
-            <span className="data-label" style={{ display: 'flex', alignItems: 'center', gap: '0.25rem' }}>
-              <Activity size={14} /> Accuracy
-            </span>
-            <span className="data-value">
-              {location.accuracy ? `${Math.round(location.accuracy)} meters` : 'N/A'}
-            </span>
-          </div>
-
-          <div className="data-item">
-            <span className="data-label" style={{ display: 'flex', alignItems: 'center', gap: '0.25rem' }}>
-              <Clock size={14} /> Last Updated
-            </span>
-            <span className="data-value">{formatTimestamp(location.timestamp)}</span>
-          </div>
+          {dataItems.map((item, i) => (
+            <motion.div
+              key={item.label}
+              className="data-item"
+              custom={i}
+              initial="hidden"
+              animate="visible"
+              variants={dataItemVariants}
+            >
+              <span className="data-label" style={{ display: 'flex', alignItems: 'center', gap: '0.25rem' }}>
+                {item.icon} {item.label}
+              </span>
+              <span className="data-value">{item.value}</span>
+            </motion.div>
+          ))}
         </div>
 
-        <button 
-          className="btn" 
-          onClick={onRefresh} 
+        <motion.button
+          className="btn"
+          onClick={onRefresh}
           disabled={loading}
           style={{ width: '100%' }}
+          whileHover={{ scale: 1.02 }}
+          whileTap={{ scale: 0.97 }}
         >
           <RefreshCw size={18} className={loading ? 'animate-spin' : ''} />
           <span>{loading ? 'Refreshing GPS...' : 'Refresh GPS Location'}</span>
-        </button>
-      </div>
+        </motion.button>
+      </motion.div>
     </>
   );
 };

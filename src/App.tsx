@@ -1,17 +1,31 @@
 import { useState, useEffect, useMemo, useRef } from 'react';
-import { ThemeToggle } from './components/ThemeToggle';
+import { motion, AnimatePresence } from 'framer-motion';
+import type { Variants } from 'framer-motion';
 import { LocationButton } from './components/LocationButton';
 import { ErrorState } from './components/ErrorState';
+import { AnimatedChakra } from './components/AnimatedChakra';
+import { ParticleBackground } from './components/ParticleBackground';
 import { useGeolocation } from './hooks/useGeolocation';
 import { MetadataService } from './services/MetadataService';
 import { sortNodesByDistance, findNearestNode, calculateDistance } from './gis/haversine';
 import { formatDistance } from './utils/distanceFormatter';
 import { PanoService } from './services/PanoService';
 import { LocationDetailsDrawer } from './components/LocationDetailsDrawer';
-import { Map, ChevronRight, ExternalLink, Loader2, ChevronUp, ChevronDown, ArrowRight, ArrowLeft, ArrowUp } from 'lucide-react';
+import { Map, ChevronRight, ExternalLink, Loader2, ChevronUp, ChevronDown } from 'lucide-react';
 import type { PanoramaNode } from './types/gis';
-import { ServiceSelectorModal } from './components/ServiceSelectorModal';
+import { ServiceSelectorModal, SERVICE_OPTIONS } from './components/ServiceSelectorModal';
 import type { ServiceOption } from './components/ServiceSelectorModal';
+import { TopDirectionHUD } from './components/TopDirectionHUD';
+
+// Stagger animation variants for tagline words
+const taglineWordVariants: Variants = {
+  hidden: { opacity: 0, y: 8 },
+  visible: (i: number) => ({
+    opacity: 1,
+    y: 0,
+    transition: { delay: 0.6 + i * 0.15, duration: 0.4, ease: 'easeOut' as const },
+  }),
+};
 
 function App() {
   const { location, loading, error, permissionGranted, requestLocation } = useGeolocation();
@@ -75,7 +89,6 @@ function App() {
     if (!selectedService || !serviceMap) return [];
     return serviceMap[selectedService.id] || [];
   }, [selectedService, serviceMap]);
-
 
   // Resolve nearest panorama nodes for the selected service locations and sort them by distance from user
   const serviceNodesSorted = useMemo(() => {
@@ -145,7 +158,6 @@ function App() {
       }
     }
   }, [activeNodeId, selectedService, serviceNodesSorted]);
-
 
   // Determine if the destination is to the left or right of the current active node
   const pathDirection = useMemo(() => {
@@ -246,54 +258,135 @@ function App() {
     });
   };
 
-
-
   // Render Onboarding/Location Permission Page
   if (!permissionGranted || error || sortedNodes.length === 0 || !selectedService) {
     return (
       <div className="app-container">
+        {/* Floating golden particles */}
+        <ParticleBackground />
+
         <div className="header-container">
-          <ThemeToggle />
         </div>
 
-        <main className="card">
-          <div className="subtitle">Smart Virtual Guide</div>
-          <h1 className="title">Puri Rath Yatra</h1>
-          <div className="divine-divider">
+        <motion.main
+          className="card"
+          initial={{ opacity: 0, y: 30, scale: 0.95 }}
+          animate={{ opacity: 1, y: 0, scale: 1 }}
+          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+        >
+          {/* Animated Sudarshan Chakra Logo */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.5 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ delay: 0.2, duration: 0.5, type: 'spring' }}
+          >
+            <AnimatedChakra size={72} />
+          </motion.div>
+
+          <motion.div
+            className="subtitle"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.3, duration: 0.4 }}
+          >
+            Smart Virtual Guide
+          </motion.div>
+
+          <motion.h1
+            className="title"
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.4, duration: 0.5 }}
+          >
+            Puri Rath Yatra
+          </motion.h1>
+
+          <motion.div
+            className="divine-divider"
+            initial={{ opacity: 0, scaleX: 0 }}
+            animate={{ opacity: 1, scaleX: 1 }}
+            transition={{ delay: 0.5, duration: 0.5 }}
+          >
             <span className="divine-symbol">☸</span>
-          </div>
+          </motion.div>
+
           <div className="tagline">
-            <span>SCAN</span>
-            <span className="divider-dot">•</span>
-            <span>NAVIGATE</span>
-            <span className="divider-dot">•</span>
-            <span>REACH</span>
+            {['SCAN', '•', 'NAVIGATE', '•', 'REACH'].map((word, i) => (
+              <motion.span
+                key={i}
+                className={word === '•' ? 'divider-dot' : undefined}
+                custom={i}
+                initial="hidden"
+                animate="visible"
+                variants={taglineWordVariants}
+              >
+                {word}
+              </motion.span>
+            ))}
           </div>
-          {loading && !error && (
-            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '1rem', marginBottom: '1.5rem' }}>
-              <Loader2 size={32} className="animate-spin" style={{ color: 'var(--accent-primary)' }} />
-              <p style={{ fontSize: '0.875rem', color: 'var(--text-secondary)' }}>Retrieving your coordinates...</p>
-            </div>
-          )}
 
-          {!permissionGranted && !error && !loading && (
-            <LocationButton onClick={requestLocation} loading={loading} />
-          )}
+          <AnimatePresence mode="wait">
+            {loading && !error && (
+              <motion.div
+                key="loading"
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -10 }}
+                style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '1rem', marginBottom: '1.5rem' }}
+              >
+                <motion.div
+                  animate={{ rotate: 360 }}
+                  transition={{ duration: 1, repeat: Infinity, ease: 'linear' }}
+                >
+                  <Loader2 size={28} style={{ color: 'var(--primary)' }} />
+                </motion.div>
+                <p style={{ fontSize: '0.875rem', color: 'var(--on-surface-variant)' }}>Retrieving your coordinates...</p>
+              </motion.div>
+            )}
 
-          {permissionGranted && !selectedService && !error && !loading && (
-            <button
-              className="btn"
-              onClick={() => setIsServiceModalOpen(true)}
-              aria-label="Select Service Category"
-            >
-              🔍 Select Service
-            </button>
-          )}
+            {!permissionGranted && !error && !loading && (
+              <motion.div
+                key="location-btn"
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -10 }}
+                transition={{ delay: 0.8 }}
+              >
+                <LocationButton onClick={requestLocation} loading={loading} />
+              </motion.div>
+            )}
 
-          {error && (
-            <ErrorState message={error} onRetry={requestLocation} />
-          )}
-        </main>
+            {permissionGranted && !selectedService && !error && !loading && (
+              <motion.div
+                key="service-btn"
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -10 }}
+              >
+                <motion.button
+                  className="btn"
+                  onClick={() => setIsServiceModalOpen(true)}
+                  aria-label="Select Service Category"
+                  whileHover={{ scale: 1.03 }}
+                  whileTap={{ scale: 0.96 }}
+                >
+                  🔍 Select Service
+                </motion.button>
+              </motion.div>
+            )}
+
+            {error && (
+              <motion.div
+                key="error"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+              >
+                <ErrorState message={error} onRetry={requestLocation} />
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </motion.main>
 
         <ServiceSelectorModal
           isOpen={isServiceModalOpen}
@@ -322,179 +415,191 @@ function App() {
         allowFullScreen
       />
 
-
+      {/* Top Floating Direction HUD */}
+      <TopDirectionHUD
+        targetServiceSpot={targetServiceSpot}
+        bearing={bearing}
+        pathDirection={pathDirection}
+        onCancel={() => setTargetServiceSpot(null)}
+        distance={targetServiceSpot ? formatDistance(
+          calculateDistance(
+            { latitude: activeNode.latitude, longitude: activeNode.longitude },
+            { latitude: targetServiceSpot.latitude, longitude: targetServiceSpot.longitude }
+          )
+        ) : ''}
+        serviceIconName={selectedService?.iconName}
+      />
 
       {/* Floating Bottom Navigation Card Controls */}
-      {!isNavCardExpanded ? (
-        <button
-          className="viewport-nav-collapsed-btn"
-          onClick={() => setIsNavCardExpanded(true)}
-          aria-label="Expand navigation panel"
-        >
-          <span>
-            📍 {selectedService && serviceNodesSorted.length > 0
-              ? `${selectedService.title} (${targetServiceSpot ? currentTargetIndex + 1 : 1}/${serviceNodesSorted.length})`
-              : activeNode.title}
-          </span>
-          <ChevronUp size={16} />
-        </button>
-      ) : (
-        <div className="viewport-nav-card">
-          <div className="viewport-spot-info">
-            <button
-              onClick={() => setIsNavCardExpanded(false)}
-              style={{
-                background: 'transparent',
-                border: 'none',
-                color: '#ffffff',
-                cursor: 'pointer',
-                padding: '0.2rem',
-                marginRight: '0.25rem',
-                display: 'inline-flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                opacity: 0.8
-              }}
-              title="Collapse navigation panel"
+      <AnimatePresence mode="wait">
+        {!isNavCardExpanded ? (
+          <motion.div
+            key="collapsed"
+            className="viewport-nav-wrapper collapsed"
+            initial={{ opacity: 0, y: 20, x: "-50%" }}
+            animate={{ opacity: 1, y: 0, x: "-50%" }}
+            exit={{ opacity: 0, y: 20, x: "-50%" }}
+            transition={{ type: 'spring', stiffness: 300, damping: 25 }}
+          >
+            <motion.button
+              onClick={() => setIsNavCardExpanded(true)}
+              aria-label="Expand navigation panel"
+              className="viewport-nav-collapsed-btn"
+              animate={{ y: [0, -4, 0] }}
+              transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
             >
-              <ChevronDown size={18} />
-            </button>
-            {selectedService && serviceNodesSorted.length > 0 ? (
-              <>
-                <span className="viewport-spot-title" style={{ flex: 1 }}>
-                  <strong>{selectedService.title}</strong> ({targetServiceSpot ? currentTargetIndex + 1 : 1} of {serviceNodesSorted.length} available)
-                </span>
-                <span className="viewport-spot-distance">
-                  {targetServiceSpot && `(${formatDistance(
-                    calculateDistance(
-                      { latitude: activeNode.latitude, longitude: activeNode.longitude },
-                      { latitude: targetServiceSpot.latitude, longitude: targetServiceSpot.longitude }
-                    )
-                  )})`}
-                </span>
-              </>
-            ) : (
-              <>
-                <span className="viewport-spot-title" style={{ flex: 1 }}>
-                  Nearest Spot: <strong>{sortedNodes[0].node.title}</strong>
-                </span>
-                <span className="viewport-spot-distance">
-                  ({formatDistance(sortedNodes[0].distanceMeters)})
-                </span>
-              </>
-            )}
-          </div>
-
-          <div style={{ display: 'flex', justifyContent: 'flex-start', margin: '-0.25rem 0 0.25rem 0' }}>
-            <button
-              className="active-service-badge"
-              onClick={() => setIsServiceModalOpen(true)}
-              title="Click to select service category"
+              <span>
+                📍 {selectedService && serviceNodesSorted.length > 0
+                  ? `${targetServiceSpot ? targetServiceSpot.name : selectedService.title} (${targetServiceSpot ? currentTargetIndex + 1 : 1}/${serviceNodesSorted.length})`
+                  : activeNode.title}
+              </span>
+              <ChevronUp size={16} />
+            </motion.button>
+          </motion.div>
+        ) : (
+          <motion.div
+            key="expanded"
+            className="viewport-nav-wrapper"
+            initial={{ opacity: 0, y: 60, x: "-50%" }}
+            animate={{ opacity: 1, y: 0, x: "-50%" }}
+            exit={{ opacity: 0, y: 60, x: "-50%" }}
+            transition={{ type: 'spring', stiffness: 300, damping: 28 }}
+          >
+            <motion.div 
+              className="viewport-nav-card"
+              animate={{ y: [0, -3, 0] }}
+              transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
             >
-              {selectedService ? (
-                <>
-                  <span>Category: {selectedService.title}</span>
-                  <span style={{ fontSize: '0.65rem', opacity: 0.65, fontWeight: 400 }}>(Change)</span>
-                </>
-              ) : (
-                <>
-                  <span>🔍 Select Service</span>
-                </>
-              )}
-            </button>
-          </div>
-
-          {/* Direction Indicator */}
-          {targetServiceSpot && (
-            <div className="direction-indicator-card">
-              <div className="direction-indicator-header">
-                <span className="direction-indicator-title">
-                  🧭 Direction to {targetServiceSpot.name}
-                </span>
-                <button
-                  onClick={() => setTargetServiceSpot(null)}
-                  className="direction-indicator-cancel"
+            <div className="viewport-spot-info" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', paddingBottom: '8px', borderBottom: '1px solid rgba(255, 255, 255, 0.08)' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+                <motion.button
+                  onClick={() => setIsNavCardExpanded(false)}
+                  style={{
+                    background: 'rgba(255, 255, 255, 0.1)',
+                    border: 'none',
+                    borderRadius: '50%',
+                    width: '32px',
+                    height: '32px',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    color: 'var(--on-surface)',
+                    cursor: 'pointer',
+                  }}
+                  title="Collapse navigation panel"
+                  whileHover={{ scale: 1.1, background: 'rgba(255, 255, 255, 0.2)' }}
+                  whileTap={{ scale: 0.9 }}
                 >
-                  Cancel
-                </button>
-              </div>
+                  <ChevronDown size={18} />
+                </motion.button>
 
-              <div className="direction-indicator-body">
-                {/* Compass/Bearing Rotating Arrow - Glowing Green Circle Overlay */}
-                <div className="compass-icon-container">
-                  <div
-                    style={{
-                      transform: `rotate(${bearing}deg)`,
-                      transition: 'transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275)',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      color: '#86efac'
-                    }}
-                    title={`Geographic Bearing: ${Math.round(bearing)}°`}
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
+                  <motion.button
+                    className="active-service-badge"
+                    onClick={() => setIsServiceModalOpen(true)}
+                    title="Click to select service category"
+                    style={{ background: 'transparent', border: 'none', padding: 0, textAlign: 'left', cursor: 'pointer' }}
+                    whileHover={{ opacity: 0.8 }}
                   >
-                    <ArrowUp className="compass-arrow-icon" style={{ strokeWidth: 3 }} />
-                  </div>
-                </div>
-
-                <div className="direction-instruction-container">
-                  <span className="direction-instruction-text">
-                    {pathDirection === 'left' && (
-                      <span style={{ display: 'inline-flex', alignItems: 'center', gap: '0.35rem' }}>
-                        <ArrowLeft className="direction-arrow-small" style={{ color: '#fbbf24' }} />
-                        Move Left along Grand Road
-                      </span>
-                    )}
-                    {pathDirection === 'right' && (
-                      <span style={{ display: 'inline-flex', alignItems: 'center', gap: '0.35rem' }}>
-                        <ArrowRight className="direction-arrow-small" style={{ color: '#fbbf24' }} />
-                        Move Right along Grand Road
-                      </span>
-                    )}
-                    {pathDirection === 'arrived' && (
-                      <span style={{ display: 'inline-flex', alignItems: 'center', gap: '0.35rem', color: '#86efac' }}>
-                        🎉 Arrived at spot!
-                      </span>
-                    )}
-                  </span>
-                  <span className="direction-bearing-text">
-                    GPS Bearing: {Math.round(bearing)}°
-                  </span>
+                    <span style={{ fontSize: '10px', color: 'rgba(218, 226, 253, 0.6)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+                      {selectedService ? 'CATEGORY (CHANGE)' : 'SEARCH CATEGORY'}
+                    </span>
+                  </motion.button>
+                  
+                  {selectedService && serviceNodesSorted.length > 0 ? (
+                    <span className="viewport-spot-title" style={{ fontSize: '16px', fontWeight: 700, display: 'flex', alignItems: 'center', gap: '6px' }}>
+                      {selectedService.iconName === 'Droplet' && <span style={{fontSize: '18px'}}>💧</span>}
+                      {selectedService.iconName === 'User' && <span style={{fontSize: '18px'}}>🚻</span>}
+                      {selectedService.iconName === 'Plus' && <span style={{fontSize: '18px'}}>🏥</span>}
+                      {selectedService.iconName === 'Shield' && <span style={{fontSize: '18px'}}>🛡️</span>}
+                      {selectedService.iconName === 'Bus' && <span style={{fontSize: '18px'}}>🚌</span>}
+                      {selectedService.iconName === 'Accessibility' && <span style={{fontSize: '18px'}}>♿</span>}
+                      <strong>{targetServiceSpot ? targetServiceSpot.name : selectedService.title}</strong>
+                      <span style={{ fontSize: '12px', color: 'var(--tertiary)', fontWeight: 600 }}>({targetServiceSpot ? currentTargetIndex + 1 : 1}/{serviceNodesSorted.length})</span>
+                    </span>
+                  ) : (
+                    <span className="viewport-spot-title" style={{ fontSize: '16px', fontWeight: 700 }}>
+                      <strong>{sortedNodes[0].node.title}</strong>
+                    </span>
+                  )}
                 </div>
               </div>
+
+              {/* Distance Badge matching Top HUD - Hidden if Top HUD is active to prevent duplication */}
+              {!targetServiceSpot && (
+                <div style={{
+                  background: 'linear-gradient(135deg, rgba(255, 122, 0, 0.15), rgba(229, 57, 53, 0.1))',
+                  border: '1px solid rgba(255, 122, 0, 0.3)',
+                  borderRadius: 'var(--radius-md)',
+                  padding: '8px 12px',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  minWidth: '64px',
+                  boxShadow: '0 4px 12px rgba(255, 122, 0, 0.1)',
+                  flexShrink: 0
+                }}>
+                  <span style={{ 
+                    fontSize: '18px', 
+                    fontWeight: 800, 
+                    color: 'var(--primary)',
+                    lineHeight: 1,
+                    whiteSpace: 'nowrap'
+                  }}>
+                    {formatDistance(sortedNodes[0].distanceMeters).replace(/[^0-9.]/g, '')}
+                  </span>
+                  <span style={{ 
+                    fontSize: '9px', 
+                    fontWeight: 700, 
+                    color: 'var(--tertiary)', 
+                    textTransform: 'uppercase',
+                    letterSpacing: '0.05em',
+                    marginTop: '2px'
+                  }}>
+                    {formatDistance(sortedNodes[0].distanceMeters).replace(/[0-9.\s]/g, '') || 'M'}
+                  </span>
+                </div>
+              )}
             </div>
-          )}
+            <div className="viewport-actions-row" style={{ paddingTop: '8px' }}>
+              <motion.button
+                className="viewport-action-btn"
+                onClick={() => setIsDetailsOpen(true)}
+                whileHover={{ scale: 1.03 }}
+                whileTap={{ scale: 0.96 }}
+              >
+                <span>Details</span>
+              </motion.button>
 
+              <motion.a
+                className="viewport-action-btn"
+                href={`https://www.google.com/maps/search/?api=1&query=${activeNode.latitude},${activeNode.longitude}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{ textDecoration: 'none' }}
+                whileHover={{ scale: 1.03 }}
+                whileTap={{ scale: 0.96 }}
+              >
+                <Map size={14} />
+                <span>Map</span>
+              </motion.a>
 
-
-          <div className="viewport-actions-row">
-            <button className="viewport-action-btn" onClick={() => setIsDetailsOpen(true)}>
-              <span>View Details</span>
-            </button>
-
-            <a
-              className="viewport-action-btn"
-              href={`https://www.google.com/maps/search/?api=1&query=${activeNode.latitude},${activeNode.longitude}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              style={{ textDecoration: 'none' }}
-            >
-              <Map size={14} />
-              <span>See on Map</span>
-              <ExternalLink size={10} style={{ opacity: 0.7 }} />
-            </a>
-
-            <button
-              className="viewport-action-btn primary"
-              onClick={handleNextNearest}
-              disabled={!selectedService || serviceNodesSorted.length <= 1}
-            >
-              <span>Next Nearest</span>
-              <ChevronRight size={14} />
-            </button>
-          </div>
-        </div>
-      )}
+              <motion.button
+                className="viewport-action-btn primary"
+                onClick={handleNextNearest}
+                disabled={!selectedService || serviceNodesSorted.length <= 1}
+                whileHover={{ scale: 1.03 }}
+                whileTap={{ scale: 0.96 }}
+              >
+                <span>Next Location</span>
+                <ChevronRight size={14} />
+              </motion.button>
+            </div>
+          </motion.div>
+        </motion.div>
+        )}
+      </AnimatePresence>
 
       {/* Location Details Slide-out Drawer */}
       <LocationDetailsDrawer
@@ -504,8 +609,6 @@ function App() {
         onRefresh={requestLocation}
         loading={loading}
       />
-
-
 
       {/* Service Selection Modal */}
       <ServiceSelectorModal
