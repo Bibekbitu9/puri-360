@@ -42,11 +42,12 @@ function App() {
   const [isNavCardExpanded, setIsNavCardExpanded] = useState(false);
   const [serviceMap, setServiceMap] = useState<Record<string, { name: string; latitude: number; longitude: number }[]>>({});
   const [targetServiceSpot, setTargetServiceSpot] = useState<{ name: string; latitude: number; longitude: number; nearestNodeId: string } | null>(null);
+  const [walkingDistance, setWalkingDistance] = useState<number | null>(null);
 
   const handleSelectService = (service: ServiceOption) => {
     setSelectedService(service);
     setIsServiceModalOpen(false);
-    setIsNavCardExpanded(true);
+    setIsNavCardExpanded(false);
     if (sortedNodes.length > 0) {
       setActiveNodeId(sortedNodes[0].node.id);
       requestLocation();
@@ -158,6 +159,49 @@ function App() {
       }
     }
   }, [activeNodeId, selectedService, serviceNodesSorted]);
+
+  // Fetch realistic walking distance from OSRM foot routing API
+  useEffect(() => {
+    if (!activeNodeId || !targetServiceSpot || panoramas.length === 0) {
+      setWalkingDistance(null);
+      return;
+    }
+    const activeNode = panoramas.find((p) => p.id === activeNodeId);
+    if (!activeNode) {
+      setWalkingDistance(null);
+      return;
+    }
+
+    let isSubscribed = true;
+    const startLat = activeNode.latitude;
+    const startLon = activeNode.longitude;
+    const endLat = targetServiceSpot.latitude;
+    const endLon = targetServiceSpot.longitude;
+
+    const url = `https://router.project-osrm.org/route/v1/foot/${startLon},${startLat};${endLon},${endLat}?overview=false`;
+
+    fetch(url)
+      .then((res) => res.json())
+      .then((data) => {
+        if (isSubscribed) {
+          if (data.code === 'Ok' && data.routes && data.routes[0]) {
+            setWalkingDistance(data.routes[0].distance);
+          } else {
+            setWalkingDistance(null);
+          }
+        }
+      })
+      .catch((err) => {
+        console.error('OSRM API fetch failed, falling back to Haversine:', err);
+        if (isSubscribed) {
+          setWalkingDistance(null);
+        }
+      });
+
+    return () => {
+      isSubscribed = false;
+    };
+  }, [activeNodeId, targetServiceSpot, panoramas]);
 
   // Determine if the destination is to the left or right of the current active node
   const pathDirection = useMemo(() => {
@@ -421,12 +465,18 @@ function App() {
         bearing={bearing}
         pathDirection={pathDirection}
         onCancel={() => setTargetServiceSpot(null)}
-        distance={targetServiceSpot ? formatDistance(
-          calculateDistance(
-            { latitude: activeNode.latitude, longitude: activeNode.longitude },
-            { latitude: targetServiceSpot.latitude, longitude: targetServiceSpot.longitude }
-          )
-        ) : ''}
+        distance={
+          targetServiceSpot
+            ? walkingDistance !== null
+              ? formatDistance(walkingDistance)
+              : `~${formatDistance(
+                  calculateDistance(
+                    { latitude: activeNode.latitude, longitude: activeNode.longitude },
+                    { latitude: targetServiceSpot.latitude, longitude: targetServiceSpot.longitude }
+                  )
+                )}`
+            : ''
+        }
         serviceIconName={selectedService?.iconName}
       />
 
