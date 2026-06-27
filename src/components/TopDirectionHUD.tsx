@@ -1,7 +1,7 @@
 import React from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ArrowUp, ArrowLeft, ArrowRight, Navigation } from 'lucide-react';
-import { AnimatedWaterDroplet, AnimatedToiletIcon, AnimatedMedicalCross, AnimatedShield, AnimatedBus, AnimatedAccessibility } from './AnimatedServiceIcons';
+import { AnimatedWaterDroplet, AnimatedToiletIcon, AnimatedMedicalCross, AnimatedShield, AnimatedBus, AnimatedParking } from './AnimatedServiceIcons';
 
 interface TopDirectionHUDProps {
   targetServiceSpot: { name: string; latitude: number; longitude: number; nearestNodeId: string } | null;
@@ -28,7 +28,7 @@ export const TopDirectionHUD: React.FC<TopDirectionHUDProps> = ({
       case 'Plus': return <AnimatedMedicalCross {...iconProps} />;
       case 'Shield': return <AnimatedShield {...iconProps} />;
       case 'Bus': return <AnimatedBus {...iconProps} />;
-      case 'Accessibility': return <AnimatedAccessibility {...iconProps} />;
+      case 'Parking': return <AnimatedParking {...iconProps} />;
       default: return <Navigation size={14} color="var(--tertiary)" />;
     }
   };

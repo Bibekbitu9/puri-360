@@ -142,3 +142,22 @@ export const AnimatedAccessibility: React.FC<IconProps> = ({ size = 24, color = 
     <path d="M13.76 17.5a5 5 0 0 0-6.88-6" />
   </motion.svg>
 );
+
+export const AnimatedParking: React.FC<IconProps> = ({ size = 24, color = '#ffffff', className }) => (
+  <motion.svg
+    width={size}
+    height={size}
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke={color}
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    className={className}
+    animate={{ scale: [1, 1.08, 1] }}
+    transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
+  >
+    <rect x="3" y="3" width="18" height="18" rx="2" strokeWidth="2" />
+    <path d="M9 17V7h4a3 3 0 0 1 0 6H9" strokeWidth="2" />
+  </motion.svg>
+);

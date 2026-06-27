@@ -41,11 +41,12 @@ function App() {
   const [selectedService, setSelectedService] = useState<ServiceOption | null>(null);
   const [isNavCardExpanded, setIsNavCardExpanded] = useState(false);
   const [serviceMap, setServiceMap] = useState<Record<string, { name: string; latitude: number; longitude: number }[]>>({});
-  const [targetServiceSpot, setTargetServiceSpot] = useState<{ name: string; latitude: number; longitude: number; nearestNodeId: string } | null>(null);
+  const [targetServiceSpotOverrideName, setTargetServiceSpotOverrideName] = useState<string | null>(null);
   const [walkingDistance, setWalkingDistance] = useState<number | null>(null);
 
   const handleSelectService = (service: ServiceOption) => {
     setSelectedService(service);
+    setTargetServiceSpotOverrideName(null);
     setIsServiceModalOpen(false);
     setIsNavCardExpanded(false);
     if (sortedNodes.length > 0) {
@@ -61,13 +62,14 @@ function App() {
 
   // Load service locations on mount
   useEffect(() => {
-    fetch('/projects/puri_walk_through/lat_long_map.json')
+    fetch('/projects/puritest_01/lat_long_map.json')
       .then((res) => res.json())
       .then((data) => setServiceMap(data))
       .catch((err) => console.error('Failed to load service coordinates:', err));
   }, []);
 
   // Sort panoramas by distance based on user location
+  // eslint-disable-next-line react-hooks/preserve-manual-memoization
   const sortedNodes = useMemo(() => {
     if (permissionGranted && location.latitude !== null && location.longitude !== null && panoramas.length > 0) {
       return sortNodesByDistance(
@@ -81,7 +83,10 @@ function App() {
   // Automatically open service modal once location is obtained but no service is selected
   useEffect(() => {
     if (permissionGranted && sortedNodes.length > 0 && !selectedService) {
-      setIsServiceModalOpen(true);
+      const timer = setTimeout(() => {
+        setIsServiceModalOpen(true);
+      }, 0);
+      return () => clearTimeout(timer);
     }
   }, [permissionGranted, sortedNodes, selectedService]);
 
@@ -123,85 +128,90 @@ function App() {
       .sort((a, b) => a.distanceMeters - b.distanceMeters) as { loc: typeof selectedLocations[0]; node: PanoramaNode; distanceMeters: number }[];
   }, [selectedService, selectedLocations, panoramas, location, permissionGranted, serviceMap]);
 
+  // Derive target service spot from active node / selection
+  const targetServiceSpot = useMemo(() => {
+    if (!selectedService || serviceNodesSorted.length === 0) return null;
+    if (targetServiceSpotOverrideName) {
+      const match = serviceNodesSorted.find((item) => item.loc.name === targetServiceSpotOverrideName);
+      if (match) {
+        return {
+          name: match.loc.name,
+          latitude: match.loc.latitude,
+          longitude: match.loc.longitude,
+          nearestNodeId: match.node.id,
+        };
+      }
+    }
+    // Fallback: If activeNodeId matches any spot, target that spot
+    const matchingSpot = serviceNodesSorted.find((item) => item.node.id === activeNodeId);
+    if (matchingSpot) {
+      return {
+        name: matchingSpot.loc.name,
+        latitude: matchingSpot.loc.latitude,
+        longitude: matchingSpot.loc.longitude,
+        nearestNodeId: matchingSpot.node.id,
+      };
+    }
+    // Otherwise, default to the closest spot
+    const closest = serviceNodesSorted[0];
+    return {
+      name: closest.loc.name,
+      latitude: closest.loc.latitude,
+      longitude: closest.loc.longitude,
+      nearestNodeId: closest.node.id,
+    };
+  }, [selectedService, serviceNodesSorted, targetServiceSpotOverrideName, activeNodeId]);
+
   // Initialize active node to closest node when sortedNodes are computed
   useEffect(() => {
     if (!activeNodeId && sortedNodes.length > 0) {
-      setActiveNodeId(sortedNodes[0].node.id);
+      const timer = setTimeout(() => {
+        setActiveNodeId(sortedNodes[0].node.id);
+      }, 0);
+      return () => clearTimeout(timer);
     }
   }, [sortedNodes, activeNodeId]);
 
-  // Set targeted service spot when the selected service category changes (without teleporting)
-  useEffect(() => {
-    if (selectedService && serviceNodesSorted.length > 0) {
-      const closest = serviceNodesSorted[0];
-      setTargetServiceSpot({
-        name: closest.loc.name,
-        latitude: closest.loc.latitude,
-        longitude: closest.loc.longitude,
-        nearestNodeId: closest.node.id
-      });
-    } else {
-      setTargetServiceSpot(null);
-    }
-  }, [selectedService, serviceNodesSorted]);
-
-  // Sync target service spot with the active node if the user cycles through service locations
-  useEffect(() => {
-    if (selectedService && serviceNodesSorted.length > 0) {
-      const matchingSpot = serviceNodesSorted.find((item) => item.node.id === activeNodeId);
-      if (matchingSpot) {
-        setTargetServiceSpot({
-          name: matchingSpot.loc.name,
-          latitude: matchingSpot.loc.latitude,
-          longitude: matchingSpot.loc.longitude,
-          nearestNodeId: matchingSpot.node.id
-        });
-      }
-    }
-  }, [activeNodeId, selectedService, serviceNodesSorted]);
-
   // Fetch realistic walking distance from OSRM foot routing API
   useEffect(() => {
-    if (!activeNodeId || !targetServiceSpot || panoramas.length === 0) {
-      setWalkingDistance(null);
-      return;
-    }
-    const activeNode = panoramas.find((p) => p.id === activeNodeId);
-    if (!activeNode) {
-      setWalkingDistance(null);
-      return;
-    }
-
     let isSubscribed = true;
-    const startLat = activeNode.latitude;
-    const startLon = activeNode.longitude;
-    const endLat = targetServiceSpot.latitude;
-    const endLon = targetServiceSpot.longitude;
+    const activeNode = panoramas.find((p) => p.id === activeNodeId);
+    if (activeNode && targetServiceSpot) {
+      const startLat = activeNode.latitude;
+      const startLon = activeNode.longitude;
+      const endLat = targetServiceSpot.latitude;
+      const endLon = targetServiceSpot.longitude;
+      const url = `https://router.project-osrm.org/route/v1/foot/${startLon},${startLat};${endLon},${endLat}?overview=false`;
 
-    const url = `https://router.project-osrm.org/route/v1/foot/${startLon},${startLat};${endLon},${endLat}?overview=false`;
-
-    fetch(url)
-      .then((res) => res.json())
-      .then((data) => {
-        if (isSubscribed) {
-          if (data.code === 'Ok' && data.routes && data.routes[0]) {
-            setWalkingDistance(data.routes[0].distance);
-          } else {
+      fetch(url)
+        .then((res) => res.json())
+        .then((data) => {
+          if (isSubscribed) {
+            if (data.code === 'Ok' && data.routes && data.routes[0]) {
+              setWalkingDistance(data.routes[0].distance);
+            } else {
+              setWalkingDistance(null);
+            }
+          }
+        })
+        .catch((err) => {
+          console.error('OSRM API fetch failed, falling back to Haversine:', err);
+          if (isSubscribed) {
             setWalkingDistance(null);
           }
-        }
-      })
-      .catch((err) => {
-        console.error('OSRM API fetch failed, falling back to Haversine:', err);
-        if (isSubscribed) {
-          setWalkingDistance(null);
-        }
-      });
+        });
+    } else {
+      const timer = setTimeout(() => {
+        setWalkingDistance(null);
+      }, 0);
+      return () => clearTimeout(timer);
+    }
 
     return () => {
       isSubscribed = false;
     };
   }, [activeNodeId, targetServiceSpot, panoramas]);
+
 
   // Determine if the destination is to the left or right of the current active node
   const pathDirection = useMemo(() => {
@@ -279,7 +289,7 @@ function App() {
         if (!currentUrl.endsWith(`#${activeNodeId}`)) {
           iframeRef.current.src = targetUrl;
         }
-      } catch (e) {
+      } catch {
         if (iframeRef.current.src !== targetUrl) {
           iframeRef.current.src = targetUrl;
         }
@@ -294,12 +304,7 @@ function App() {
     );
     const nextIndex = (currentIndex + 1) % serviceNodesSorted.length;
     const nextSpot = serviceNodesSorted[nextIndex];
-    setTargetServiceSpot({
-      name: nextSpot.loc.name,
-      latitude: nextSpot.loc.latitude,
-      longitude: nextSpot.loc.longitude,
-      nearestNodeId: nextSpot.node.id
-    });
+    setTargetServiceSpotOverrideName(nextSpot.loc.name);
   };
 
   // Render Onboarding/Location Permission Page
@@ -464,7 +469,7 @@ function App() {
         targetServiceSpot={targetServiceSpot}
         bearing={bearing}
         pathDirection={pathDirection}
-        onCancel={() => setTargetServiceSpot(null)}
+        onCancel={() => setSelectedService(null)}
         distance={
           targetServiceSpot
             ? walkingDistance !== null
@@ -563,7 +568,7 @@ function App() {
                       {selectedService.iconName === 'Plus' && <span style={{fontSize: '18px'}}>🏥</span>}
                       {selectedService.iconName === 'Shield' && <span style={{fontSize: '18px'}}>🛡️</span>}
                       {selectedService.iconName === 'Bus' && <span style={{fontSize: '18px'}}>🚌</span>}
-                      {selectedService.iconName === 'Accessibility' && <span style={{fontSize: '18px'}}>♿</span>}
+                      {selectedService.iconName === 'Parking' && <span style={{fontSize: '18px'}}>🅿️</span>}
                       <strong>{targetServiceSpot ? targetServiceSpot.name : selectedService.title}</strong>
                       <span style={{ fontSize: '12px', color: 'var(--tertiary)', fontWeight: 600 }}>({targetServiceSpot ? currentTargetIndex + 1 : 1}/{serviceNodesSorted.length})</span>
                     </span>

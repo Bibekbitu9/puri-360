@@ -3,16 +3,16 @@ import { motion, AnimatePresence } from 'framer-motion';
 import type { Variants } from 'framer-motion';
 import { X } from 'lucide-react';
 
-import { AnimatedWaterDroplet, AnimatedToiletIcon, AnimatedMedicalCross, AnimatedShield, AnimatedBus, AnimatedAccessibility } from './AnimatedServiceIcons';
+import { AnimatedWaterDroplet, AnimatedToiletIcon, AnimatedMedicalCross, AnimatedShield, AnimatedBus, AnimatedParking } from './AnimatedServiceIcons';
 
 export interface ServiceOption {
   id: string;
   title: string;
-  iconName: 'Droplet' | 'User' | 'Plus' | 'Shield' | 'Bus' | 'Accessibility';
+  iconName: 'Droplet' | 'User' | 'Plus' | 'Shield' | 'Bus' | 'Parking';
   className: string;
 }
 
-export const SERVICE_OPTIONS: ServiceOption[] = [
+const SERVICE_OPTIONS: ServiceOption[] = [
   {
     id: 'drinking_water',
     title: 'Drinking Water',
@@ -21,33 +21,33 @@ export const SERVICE_OPTIONS: ServiceOption[] = [
   },
   {
     id: 'toilets',
-    title: 'Toilets / Rest Zones',
+    title: 'Toilets',
     iconName: 'User',
     className: 'toilets',
   },
   {
     id: 'medical_help_centre',
-    title: 'Medical Help Centre',
+    title: 'Medical Help',
     iconName: 'Plus',
     className: 'aid',
   },
   {
-    id: 'fire_centre',
-    title: 'Fire Station Help',
+    id: 'police_centre',
+    title: 'Police',
     iconName: 'Shield',
     className: 'police',
   },
   {
-    id: 'connectivity',
-    title: 'Connectivity',
-    iconName: 'Bus',
-    className: 'connectivity',
+    id: 'parking',
+    title: 'Parking',
+    iconName: 'Parking',
+    className: 'parking',
   },
   {
-    id: 'elderly',
-    title: 'Elderly & Special Assistance',
-    iconName: 'Accessibility',
-    className: 'elderly',
+    id: 'transport',
+    title: 'Transport',
+    iconName: 'Bus',
+    className: 'transport',
   },
 ];
 
@@ -135,8 +135,8 @@ export const ServiceSelectorModal: React.FC<ServiceSelectorModalProps> = ({
         return <AnimatedShield {...iconProps} />;
       case 'Bus':
         return <AnimatedBus {...iconProps} />;
-      case 'Accessibility':
-        return <AnimatedAccessibility {...iconProps} />;
+      case 'Parking':
+        return <AnimatedParking {...iconProps} />;
       default:
         return null;
     }

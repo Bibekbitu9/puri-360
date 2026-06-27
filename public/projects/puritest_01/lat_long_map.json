@@ -1,0 +1,79 @@
+{
+  "drinking_water": [
+    {
+      "name": "Drinking Water (Spot 1)",
+      "latitude": 19.799884,
+      "longitude": 85.826197
+    },
+    {
+      "name": "Drinking Water (Spot 2)",
+      "latitude": 19.800908,
+      "longitude": 85.825798
+    },
+    {
+      "name": "Drinking Water (Spot 3)",
+      "latitude": 19.805043,
+      "longitude": 85.819807
+    }
+  ],
+  "toilets": [
+    {
+      "name": "Toilet (Spot 1)",
+      "latitude": 19.799884,
+      "longitude": 85.826197
+    },
+    {
+      "name": "Toilet (Spot 2)",
+      "latitude": 19.801447,
+      "longitude": 85.825584
+    },
+    {
+      "name": "Toilet (Spot 3)",
+      "latitude": 19.806900,
+      "longitude": 85.821331
+    }
+  ],
+  "medical_help_centre": [
+    {
+      "name": "Medical Help Centre",
+      "latitude": 19.804832,
+      "longitude": 85.819704
+    }
+  ],
+  "police_centre": [
+    {
+      "name": "Police Station (Spot 1)",
+      "latitude": 19.801447,
+      "longitude": 85.825584
+    },
+    {
+      "name": "Police Booth (Spot 2)",
+      "latitude": 19.805511,
+      "longitude": 85.820140
+    }
+  ],
+  "parking": [
+    {
+      "name": "Parking Area (Spot 1)",
+      "latitude": 19.812634,
+      "longitude": 85.828962
+    },
+    {
+      "name": "Parking Area (Spot 2)",
+      "latitude": 19.813824,
+      "longitude": 85.832502
+    }
+  ],
+  "transport": [
+    {
+      "name": "Bus Stand (Spot 1)",
+      "latitude": 19.811890,
+      "longitude": 85.829853
+    },
+    {
+      "name": "Rickshaw Stand (Spot 2)",
+      "latitude": 19.803183,
+      "longitude": 85.843513
+    }
+  ]
+}
