@@ -1,7 +1,6 @@
 import React from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ArrowUp, ArrowLeft, ArrowRight, Navigation } from 'lucide-react';
-import { AnimatedWaterDroplet, AnimatedToiletIcon, AnimatedMedicalCross, AnimatedShield, AnimatedBus, AnimatedParking } from './AnimatedServiceIcons';
+import { CornerUpLeft, CornerUpRight } from 'lucide-react';
 
 interface TopDirectionHUDProps {
   targetServiceSpot: { name: string; latitude: number; longitude: number; nearestNodeId: string } | null;
@@ -10,26 +9,47 @@ interface TopDirectionHUDProps {
   onCancel?: () => void;
   distance: string;
   serviceIconName?: string;
+  roadName: string;
 }
+
+// Utility to check if geocoded name is a clean street name rather than a raw camera file name or node id
+const isCleanRoadName = (name: string): boolean => {
+  if (!name) return false;
+  const lower = name.toLowerCase();
+  return !(
+    lower.includes('dcim') ||
+    lower.includes('camera') ||
+    lower.includes('img_') ||
+    lower.includes('.ins') ||
+    lower.includes('.jpg') ||
+    lower.includes('.png') ||
+    lower.includes('node')
+  );
+};
 
 export const TopDirectionHUD: React.FC<TopDirectionHUDProps> = ({
   targetServiceSpot,
-  bearing,
   pathDirection,
   distance,
-  serviceIconName,
+  roadName,
 }) => {
-  const getServiceIcon = () => {
-    if (!serviceIconName) return <Navigation size={14} color="var(--tertiary)" />;
-    const iconProps = { size: 14, color: 'var(--tertiary)' };
-    switch (serviceIconName) {
-      case 'Droplet': return <AnimatedWaterDroplet {...iconProps} />;
-      case 'User': return <AnimatedToiletIcon {...iconProps} />;
-      case 'Plus': return <AnimatedMedicalCross {...iconProps} />;
-      case 'Shield': return <AnimatedShield {...iconProps} />;
-      case 'Bus': return <AnimatedBus {...iconProps} />;
-      case 'Parking': return <AnimatedParking {...iconProps} />;
-      default: return <Navigation size={14} color="var(--tertiary)" />;
+  const targetName = targetServiceSpot
+    ? targetServiceSpot.name.replace(/\s*\(Spot\s+\d+\)/i, '').trim()
+    : 'destination';
+
+  const hasCleanRoad = isCleanRoadName(roadName);
+
+  const getInstructionText = () => {
+    if (pathDirection === 'arrived') {
+      return 'Arrived at destination!';
+    }
+    
+    const direction = pathDirection === 'left' ? 'left' : 'right';
+    
+    if (hasCleanRoad) {
+      return `Move ${direction} on ${roadName} for ${distance}`;
+    } else {
+      return `Move ${direction} on the road for ${distance} to reach nearest ${targetName}`;
     }
   };
 
@@ -42,86 +62,82 @@ export const TopDirectionHUD: React.FC<TopDirectionHUDProps> = ({
           animate={{ opacity: 1, y: 0, x: "-50%" }}
           exit={{ opacity: 0, y: -50, x: "-50%" }}
           transition={{ type: 'spring', stiffness: 300, damping: 25 }}
+          style={{
+            position: 'absolute',
+            top: '12px',
+            left: '50%',
+            transform: 'translateX(-50%)',
+            zIndex: 30,
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            width: '360px',
+            maxWidth: '92vw',
+            pointerEvents: 'none'
+          }}
         >
+          {/* HUD Capsule Box containing all information inside it */}
           <motion.div
             className="direction-indicator-card top-floating"
-            style={{ padding: '16px', position: 'relative' }}
-            animate={{ y: [0, -4, 0] }}
-            transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
+            style={{ 
+              padding: '8px 12px', 
+              position: 'relative', 
+              width: '100%',
+              borderRadius: '24px',
+              pointerEvents: 'auto',
+              boxShadow: '0 8px 20px rgba(0, 0, 0, 0.45)',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center'
+            }}
           >
-            <div style={{ display: 'flex', alignItems: 'center', gap: '14px' }}>
-              {/* Left: Compass / Arrow */}
-              <div 
-                className="compass-icon-container" 
-                style={{ 
-                  width: '52px', 
-                  height: '52px', 
-                  flexShrink: 0,
-                  background: 'rgba(16, 185, 129, 0.15)',
-                  borderColor: 'rgba(16, 185, 129, 0.5)',
-                  boxShadow: '0 0 20px rgba(16, 185, 129, 0.2)'
-                }}
-              >
-                <motion.div
-                  animate={{ rotate: bearing }}
-                  transition={{ type: 'spring', stiffness: 100, damping: 15 }}
-                  style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#6ee7b7' }}
-                  title={`Geographic Bearing: ${Math.round(bearing)}°`}
-                >
-                  <ArrowUp style={{ width: '28px', height: '28px', strokeWidth: 3 }} />
-                </motion.div>
-              </div>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '10px', width: '100%' }}>
 
-              {/* Middle: Instructions & Target */}
-              <div style={{ display: 'flex', flexDirection: 'column', flex: 1, gap: '4px' }}>
-                <span style={{ 
-                  fontSize: '16px', 
-                  fontWeight: 700, 
-                  color: '#ffffff',
-                  lineHeight: 1.2,
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: '6px'
-                }}>
-                  {pathDirection === 'left' && <ArrowLeft size={16} color="var(--tertiary)" />}
-                  {pathDirection === 'right' && <ArrowRight size={16} color="var(--tertiary)" />}
-                  {pathDirection === 'left' ? 'Move Left' : pathDirection === 'right' ? 'Move Right' : 'Arrived!'}
-                </span>
-                
+
+              {/* Middle: Turn arrow + Yellow instruction text */}
+              <div style={{ 
+                display: 'flex', 
+                alignItems: 'center', 
+                gap: '6px', 
+                flex: 1, 
+                minWidth: 0,
+                justifyContent: 'center'
+              }}>
+                {pathDirection === 'left' && (
+                  <motion.div animate={{ x: [2, -4, 2] }} transition={{ repeat: Infinity, duration: 1.2, ease: "easeInOut" }} style={{ display: 'inline-flex', flexShrink: 0 }}>
+                    <CornerUpLeft size={20} color="#facc15" style={{ strokeWidth: 3.5 }} />
+                  </motion.div>
+                )}
+                {pathDirection === 'right' && (
+                  <motion.div animate={{ x: [-2, 4, -2] }} transition={{ repeat: Infinity, duration: 1.2, ease: "easeInOut" }} style={{ display: 'inline-flex', flexShrink: 0 }}>
+                    <CornerUpRight size={20} color="#facc15" style={{ strokeWidth: 3.5 }} />
+                  </motion.div>
+                )}
                 <span style={{ 
                   fontSize: '12px', 
-                  color: 'var(--on-surface-variant)',
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: '4px',
+                  fontWeight: 800, 
+                  color: '#facc15', 
+                  lineHeight: 1.2,
+                  whiteSpace: 'normal',
+                  textAlign: 'center',
                   overflow: 'hidden'
                 }}>
-                  Towards <strong style={{ color: 'var(--on-surface)', display: 'inline-flex', alignItems: 'center', gap: '4px' }}>
-                    {getServiceIcon()} {targetServiceSpot.name}
-                  </strong>
-                </span>
-                
-                <span style={{ fontSize: '10px', color: 'rgba(218, 226, 253, 0.4)' }}>
-                  GPS: {Math.round(bearing)}° on Grand Road
+                  {getInstructionText()}
                 </span>
               </div>
 
-              {/* Right: Distance Badge (Wrapped securely) */}
+              {/* Vertical divider line */}
+              <div style={{ width: '1px', height: '18px', background: 'rgba(255, 255, 255, 0.15)', flexShrink: 0 }} />
+
+              {/* Right: Distance badge */}
               <div style={{
-                background: 'linear-gradient(135deg, rgba(255, 122, 0, 0.15), rgba(229, 57, 53, 0.1))',
-                border: '1px solid rgba(255, 122, 0, 0.3)',
-                borderRadius: 'var(--radius-md)',
-                padding: '8px 12px',
                 display: 'flex',
-                flexDirection: 'column',
-                alignItems: 'center',
-                justifyContent: 'center',
-                minWidth: '64px',
-                boxShadow: '0 4px 12px rgba(255, 122, 0, 0.1)',
+                alignItems: 'baseline',
+                gap: '3px',
                 flexShrink: 0
               }}>
                 <span style={{ 
-                  fontSize: '20px', 
+                  fontSize: '16px', 
                   fontWeight: 800, 
                   color: 'var(--primary)',
                   lineHeight: 1,
@@ -130,12 +146,11 @@ export const TopDirectionHUD: React.FC<TopDirectionHUDProps> = ({
                   {distance.replace(/[^0-9.]/g, '')}
                 </span>
                 <span style={{ 
-                  fontSize: '10px', 
-                  fontWeight: 700, 
+                  fontSize: '9px', 
+                  fontWeight: 800, 
                   color: 'var(--tertiary)', 
                   textTransform: 'uppercase',
-                  letterSpacing: '0.05em',
-                  marginTop: '2px'
+                  letterSpacing: '0.05em'
                 }}>
                   {distance.replace(/[0-9.\s]/g, '') || 'M'}
                 </span>

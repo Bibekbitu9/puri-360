@@ -43,6 +43,45 @@ function App() {
   const [serviceMap, setServiceMap] = useState<Record<string, { name: string; latitude: number; longitude: number }[]>>({});
   const [targetServiceSpotOverrideName, setTargetServiceSpotOverrideName] = useState<string | null>(null);
   const [walkingDistance, setWalkingDistance] = useState<number | null>(null);
+  const [roadName, setRoadName] = useState<string>('Grand Road');
+
+  // Fetch dynamic road name from OpenStreetMap Nominatim reverse geocoding API
+  useEffect(() => {
+    if (activeNodeId && panoramas.length > 0) {
+      const activeNode = panoramas.find((p) => p.id === activeNodeId);
+      if (activeNode) {
+        const lat = activeNode.latitude;
+        const lon = activeNode.longitude;
+        const nodeFallback = activeNode.title.replace(/\s+Spot\s+\d+/i, '').replace(/\s+\d+/g, '').trim() || 'Grand Road';
+
+        const url = `https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lon}&zoom=18&addressdetails=1`;
+        
+        let isSubscribed = true;
+        fetch(url, {
+          headers: {
+            'User-Agent': 'Puri360VirtualGuide/1.0'
+          }
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            if (isSubscribed && data && data.address) {
+              const fetchedRoad = data.address.road || data.address.suburb || data.address.neighbourhood || nodeFallback;
+              setRoadName(fetchedRoad);
+            }
+          })
+          .catch((err) => {
+            console.warn('Reverse geocoding failed, falling back to node title:', err);
+            if (isSubscribed) {
+              setRoadName(nodeFallback);
+            }
+          });
+
+        return () => {
+          isSubscribed = false;
+        };
+      }
+    }
+  }, [activeNodeId, panoramas]);
 
   const handleSelectService = (service: ServiceOption) => {
     setSelectedService(service);
@@ -213,21 +252,30 @@ function App() {
   }, [activeNodeId, targetServiceSpot, panoramas]);
 
 
-  // Determine if the destination is to the left or right of the current active node
+  // Determine if the destination is to the left or right of the current active node based on longitude (East-West road layout)
   const pathDirection = useMemo(() => {
     if (!targetServiceSpot || panoramas.length === 0 || !activeNodeId) {
       return null;
     }
-    const startIndex = panoramas.findIndex((p) => p.id === activeNodeId);
-    const endIndex = panoramas.findIndex((p) => p.id === targetServiceSpot.nearestNodeId);
-    if (startIndex === -1 || endIndex === -1) {
+    const activeNode = panoramas.find((p) => p.id === activeNodeId);
+    const targetNode = panoramas.find((p) => p.id === targetServiceSpot.nearestNodeId);
+    
+    if (!activeNode || !targetNode) {
       return null;
     }
-    if (startIndex < endIndex) {
+
+    if (activeNode.id === targetNode.id) {
+      return 'arrived';
+    }
+
+    // East-West axis: higher longitude is to the East (Gundicha Temple / Right)
+    // lower longitude is to the West (Jagannath Temple / Left)
+    if (activeNode.longitude < targetNode.longitude) {
       return 'right';
-    } else if (startIndex > endIndex) {
+    } else if (activeNode.longitude > targetNode.longitude) {
       return 'left';
     }
+    
     return 'arrived';
   }, [activeNodeId, targetServiceSpot, panoramas]);
 
@@ -483,6 +531,7 @@ function App() {
             : ''
         }
         serviceIconName={selectedService?.iconName}
+        roadName={roadName}
       />
 
       {/* Floating Bottom Navigation Card Controls */}
