@@ -43,9 +43,9 @@ export const TopDirectionHUD: React.FC<TopDirectionHUDProps> = ({
     if (pathDirection === 'arrived') {
       return 'Arrived at destination!';
     }
-    
+
     const direction = pathDirection === 'left' ? 'left' : 'right';
-    
+
     if (hasCleanRoad) {
       return `Move ${direction} on ${roadName} for ${distance}`;
     } else {
@@ -71,17 +71,15 @@ export const TopDirectionHUD: React.FC<TopDirectionHUDProps> = ({
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
-            width: '360px',
-            maxWidth: '92vw',
             pointerEvents: 'none'
           }}
         >
           {/* HUD Capsule Box containing all information inside it */}
           <motion.div
             className="direction-indicator-card top-floating"
-            style={{ 
-              padding: '8px 12px', 
-              position: 'relative', 
+            style={{
+              padding: '8px 12px',
+              position: 'relative',
               width: '100%',
               borderRadius: '24px',
               pointerEvents: 'auto',
@@ -95,11 +93,11 @@ export const TopDirectionHUD: React.FC<TopDirectionHUDProps> = ({
 
 
               {/* Middle: Turn arrow + dark instruction text */}
-              <div style={{ 
-                display: 'flex', 
-                alignItems: 'center', 
-                gap: '6px', 
-                flex: 1, 
+              <div style={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: '6px',
+                flex: 1,
                 minWidth: 0,
                 justifyContent: 'center'
               }}>
@@ -113,10 +111,10 @@ export const TopDirectionHUD: React.FC<TopDirectionHUDProps> = ({
                     <CornerUpRight size={20} color="#0b1326" style={{ strokeWidth: 3.5 }} />
                   </motion.div>
                 )}
-                <span style={{ 
-                  fontSize: '12px', 
-                  fontWeight: 800, 
-                  color: '#0b1326', 
+                <span style={{
+                  fontSize: '12px',
+                  fontWeight: 800,
+                  color: '#0b1326',
                   lineHeight: 1.2,
                   whiteSpace: 'normal',
                   textAlign: 'center',
@@ -136,19 +134,19 @@ export const TopDirectionHUD: React.FC<TopDirectionHUDProps> = ({
                 gap: '3px',
                 flexShrink: 0
               }}>
-                <span style={{ 
-                  fontSize: '16px', 
-                  fontWeight: 800, 
+                <span style={{
+                  fontSize: '16px',
+                  fontWeight: 800,
                   color: '#0b1326',
                   lineHeight: 1,
                   whiteSpace: 'nowrap'
                 }}>
                   {distance.replace(/[^0-9.]/g, '')}
                 </span>
-                <span style={{ 
-                  fontSize: '9px', 
-                  fontWeight: 800, 
-                  color: '#4c1a00', 
+                <span style={{
+                  fontSize: '9px',
+                  fontWeight: 800,
+                  color: '#4c1a00',
                   textTransform: 'uppercase',
                   letterSpacing: '0.05em'
                 }}>

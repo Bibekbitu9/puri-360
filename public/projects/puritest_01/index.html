@@ -68,11 +68,11 @@
 		</script>
 		<script type="text/javascript" src="skin.js?ts=26810351">
 		</script>
-		<link rel="stylesheet" href="3rdparty/leaflet/leaflet.css"/>
+		<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
 		<script src="https://www.youtube.com/iframe_api"></script>
 		<script src="https://player.vimeo.com/api/player.js"></script>
 		<script src="3rdparty/lottie/lottie.min.js"></script>
-		<script src="3rdparty/leaflet/leaflet.js"></script>
+		<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 		<div id="container" style="width:100%;height:100%;overflow:hidden;">
 		<br>Loading...<br><br>
 		</div>
@@ -125,6 +125,21 @@
 			pano.setQueryParameter("ts=26810351")
 			// add the skin object
 			skin=new pano2vrSkin(pano);
+			
+			// Enable Pano2VR map viewer
+			pano.setVariableValue('opt_maps', true);
+			pano.setVariableValue('vis_map', true);
+			pano.setVariableValue('vis_phone_map', true);
+			
+			// Notify parent React app on panorama navigation changes
+			pano.addListener('changenode', function() {
+				var nodeId = pano.getCurrentNode();
+				if (nodeId) {
+					var cleanId = nodeId.replace(/[{}]/g, '');
+					window.parent.postMessage({ type: 'changenode', nodeId: cleanId }, '*');
+				}
+			});
+
 			// load the configuration
 			window.addEventListener("load", function() {
 				pano.readConfigUrlAsync("pano.xml?ts=26810351");

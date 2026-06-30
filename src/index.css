@@ -955,9 +955,13 @@ body {
   top: calc(var(--space-md) + env(safe-area-inset-top, 0px));
   left: 50%;
   transform: translateX(-50%);
-  width: calc(100% - 2 * var(--container-margin));
-  max-width: 480px;
+  width: 100%;
+  max-width: 300px;
   z-index: 40;
+
+  @media screen and (max-width: 480px) {
+    max-width: 220px;
+  }
 }
 
 .direction-indicator-card.top-floating {
