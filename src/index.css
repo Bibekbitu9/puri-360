@@ -1179,22 +1179,53 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  background: var(--glass-surface);
-  border: 1px solid var(--glass-border);
+  background: rgba(11, 19, 38, 0.72) !important;
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
   border-radius: var(--radius-xl);
-  padding: 16px 8px;
+  padding: 24px 12px;
   cursor: pointer;
   transition: all 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   text-align: center;
   user-select: none;
-  min-height: var(--touch-target);
+  min-height: 120px;
 }
 
-.service-card:hover {
-  background: rgba(255, 255, 255, 0.14);
-  transform: translateY(-3px);
-  border-color: rgba(255, 122, 0, 0.4);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+/* Service-specific card glows on hover matching the reference image */
+.service-card.water:hover {
+  background: rgba(15, 23, 42, 0.85) !important;
+  border-color: rgba(59, 130, 246, 0.6) !important;
+  box-shadow: 0 8px 30px rgba(59, 130, 246, 0.25) !important;
+  transform: translateY(-4px);
+}
+.service-card.toilets:hover {
+  background: rgba(15, 23, 42, 0.85) !important;
+  border-color: rgba(16, 185, 129, 0.6) !important;
+  box-shadow: 0 8px 30px rgba(16, 185, 129, 0.25) !important;
+  transform: translateY(-4px);
+}
+.service-card.aid:hover {
+  background: rgba(15, 23, 42, 0.85) !important;
+  border-color: rgba(250, 189, 0, 0.6) !important;
+  box-shadow: 0 8px 30px rgba(250, 189, 0, 0.25) !important;
+  transform: translateY(-4px);
+}
+.service-card.police:hover {
+  background: rgba(15, 23, 42, 0.85) !important;
+  border-color: rgba(239, 68, 68, 0.6) !important;
+  box-shadow: 0 8px 30px rgba(239, 68, 68, 0.25) !important;
+  transform: translateY(-4px);
+}
+.service-card.parking:hover {
+  background: rgba(15, 23, 42, 0.85) !important;
+  border-color: rgba(249, 115, 22, 0.6) !important;
+  box-shadow: 0 8px 30px rgba(249, 115, 22, 0.25) !important;
+  transform: translateY(-4px);
+}
+.service-card.transport:hover {
+  background: rgba(15, 23, 42, 0.85) !important;
+  border-color: rgba(167, 139, 250, 0.6) !important;
+  box-shadow: 0 8px 30px rgba(167, 139, 250, 0.25) !important;
+  transform: translateY(-4px);
 }
 
 .service-card:active {
@@ -1202,53 +1233,54 @@ body {
 }
 
 .service-icon-circle {
-  width: 52px;
-  height: 52px;
-  border-radius: 50%;
+  width: 76px;
+  height: 76px;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 8px;
-  box-shadow:
-    0 4px 12px rgba(0, 0, 0, 0.3),
-    inset 0 2px 4px rgba(255, 255, 255, 0.15);
+  margin-bottom: 12px;
   transition: transform 0.3s ease;
-  border: 2px solid transparent;
 }
 
 .service-card:hover .service-icon-circle {
-  transform: scale(1.08);
+  transform: scale(1.15);
 }
 
 /* Service-specific icon circle colors */
-.service-icon-circle.water {
-  background: linear-gradient(135deg, #0284c7, #0369a1);
-  border-color: rgba(186, 230, 253, 0.3);
-}
-
-.service-icon-circle.toilets {
-  background: linear-gradient(135deg, #16a34a, #15803d);
-  border-color: rgba(187, 247, 208, 0.3);
-}
-
-.service-icon-circle.aid {
-  background: linear-gradient(135deg, #eab308, #ca8a04);
-  border-color: rgba(254, 240, 138, 0.3);
-}
-
-.service-icon-circle.police {
-  background: linear-gradient(135deg, #dc2626, #b91c1c);
-  border-color: rgba(254, 202, 202, 0.3);
-}
-
-.service-icon-circle.parking {
-  background: linear-gradient(135deg, #f97316, #ea580c);
-  border-color: rgba(254, 215, 170, 0.3);
-}
-
+.service-icon-circle.water,
+.service-icon-circle.toilets,
+.service-icon-circle.aid,
+.service-icon-circle.police,
+.service-icon-circle.parking,
 .service-icon-circle.transport {
-  background: linear-gradient(135deg, #8b5cf6, #7c3aed);
-  border-color: rgba(192, 132, 252, 0.3);
+  background: transparent;
+  border: none;
+}
+
+/* Base styles for SVG path shapes that fill on hover */
+.svg-fill-target {
+  fill: rgba(255, 255, 255, 0);
+  transition: fill 0.35s ease;
+}
+
+/* Specific category fill colors on card hover */
+.service-card.water:hover .svg-fill-target {
+  fill: rgba(59, 130, 246, 0.22);
+}
+.service-card.toilets:hover .svg-fill-target {
+  fill: rgba(16, 185, 129, 0.22);
+}
+.service-card.aid:hover .svg-fill-target {
+  fill: rgba(250, 189, 0, 0.22);
+}
+.service-card.police:hover .svg-fill-target {
+  fill: rgba(239, 68, 68, 0.22);
+}
+.service-card.parking:hover .svg-fill-target {
+  fill: rgba(249, 115, 22, 0.22);
+}
+.service-card.transport:hover .svg-fill-target {
+  fill: rgba(167, 139, 250, 0.22);
 }
 
 .service-card-title {

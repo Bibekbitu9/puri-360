@@ -123,20 +123,19 @@ export const ServiceSelectorModal: React.FC<ServiceSelectorModalProps> = ({
   }, [isOpen]);
 
   const getIcon = (iconName: string, size = 28) => {
-    const iconProps = { size, color: '#ffffff' };
     switch (iconName) {
       case 'Droplet':
-        return <AnimatedWaterDroplet {...iconProps} />;
+        return <AnimatedWaterDroplet size={size} color="#3b82f6" />; // Blue
       case 'User':
-        return <AnimatedToiletIcon {...iconProps} />;
+        return <AnimatedToiletIcon size={size} color="#10b981" />; // Green
       case 'Plus':
-        return <AnimatedMedicalCross {...iconProps} />;
+        return <AnimatedMedicalCross size={size} color="#facc15" />; // Yellow
       case 'Shield':
-        return <AnimatedShield {...iconProps} />;
-      case 'Bus':
-        return <AnimatedBus {...iconProps} />;
+        return <AnimatedShield size={size} color="#ef4444" />; // Red
       case 'Parking':
-        return <AnimatedParking {...iconProps} />;
+        return <AnimatedParking size={size} color="#f97316" />; // Orange
+      case 'Bus':
+        return <AnimatedBus size={size} color="#a78bfa" />; // Purple
       default:
         return null;
     }
@@ -216,7 +215,7 @@ export const ServiceSelectorModal: React.FC<ServiceSelectorModalProps> = ({
                     whileHover={{ scale: 1.1 }}
                     transition={{ type: 'spring', stiffness: 400, damping: 20 }}
                   >
-                    {getIcon(option.iconName)}
+                    {getIcon(option.iconName, 60)}
                   </motion.div>
                   <span className="service-card-title">{option.title}</span>
                 </motion.div>
