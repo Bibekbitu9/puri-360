@@ -13403,7 +13403,19 @@ alert("The current view has been copied.");
 				}
 			});
 			me._map.ggClearMapMarkers();
-			var ids=player.getNodeIds();
+			var ids = [];
+			var currentNode = player.getCurrentNode();
+			if (currentNode) {
+				var cleanCurrent = currentNode.replace(/[{}]/g, '');
+				ids.push(cleanCurrent);
+			}
+			var targetNode = window.targetNodeId || window.parent.targetNodeId;
+			if (targetNode) {
+				var cleanTarget = targetNode.replace(/[{}]/g, '');
+				if (ids.indexOf(cleanTarget) === -1) {
+					ids.push(cleanTarget);
+				}
+			}
 			me._map.ggFilteredIds = [];
 			if (me._map.ggFilter != '') {
 				var filter = me._map.ggFilter.split(',');
@@ -13958,7 +13970,19 @@ alert("The current view has been copied.");
 				}
 			});
 			me._map_el_phone.ggClearMapMarkers();
-			var ids=player.getNodeIds();
+			var ids = [];
+			var currentNode = player.getCurrentNode();
+			if (currentNode) {
+				var cleanCurrent = currentNode.replace(/[{}]/g, '');
+				ids.push(cleanCurrent);
+			}
+			var targetNode = window.targetNodeId || window.parent.targetNodeId;
+			if (targetNode) {
+				var cleanTarget = targetNode.replace(/[{}]/g, '');
+				if (ids.indexOf(cleanTarget) === -1) {
+					ids.push(cleanTarget);
+				}
+			}
 			me._map_el_phone.ggFilteredIds = [];
 			if (me._map_el_phone.ggFilter != '') {
 				var filter = me._map_el_phone.ggFilter.split(',');

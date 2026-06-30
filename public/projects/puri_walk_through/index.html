@@ -140,6 +140,19 @@
 				}
 			});
 
+			// Listen for target node changes to update the Leaflet map dynamically
+			window.addEventListener("message", function(event) {
+				if (event.data && event.data.type === 'setTargetNode') {
+					window.targetNodeId = event.data.nodeId;
+					if (skin && skin._map && skin._map.ggInitMapMarkers) {
+						skin._map.ggInitMapMarkers(false);
+					}
+					if (skin && skin._map_el_phone && skin._map_el_phone.ggInitMapMarkers) {
+						skin._map_el_phone.ggInitMapMarkers(false);
+					}
+				}
+			});
+
 			// load the configuration
 			window.addEventListener("load", function() {
 				pano.readConfigUrlAsync("pano.xml?ts=14371220");

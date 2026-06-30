@@ -373,6 +373,22 @@ function App() {
     }
   }, [activeNodeId, selectedService]);
 
+  // Synchronize target destination node to the tour iframe dynamically
+  useEffect(() => {
+    const sendTarget = () => {
+      if (iframeRef.current && iframeRef.current.contentWindow) {
+        const targetNodeId = targetServiceSpot?.nearestNodeId || null;
+        iframeRef.current.contentWindow.postMessage({
+          type: 'setTargetNode',
+          nodeId: targetNodeId
+        }, '*');
+      }
+    };
+    sendTarget();
+    const timer = setTimeout(sendTarget, 500);
+    return () => clearTimeout(timer);
+  }, [targetServiceSpot, activeNodeId]);
+
   const handleNextNearest = () => {
     if (!selectedService || serviceNodesSorted.length <= 1 || !targetServiceSpot) return;
     const currentIndex = serviceNodesSorted.findIndex(
