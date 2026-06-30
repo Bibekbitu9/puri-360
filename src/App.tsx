@@ -27,6 +27,34 @@ const taglineWordVariants: Variants = {
   }),
 };
 
+// Ringing Bell animation component
+const RingingBell = () => (
+  <motion.svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="18"
+    height="18"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    style={{ transformOrigin: 'top center', display: 'inline-block' }}
+    animate={{
+      rotate: [0, -15, 12, -10, 8, -4, 0],
+    }}
+    transition={{
+      duration: 1.5,
+      repeat: Infinity,
+      repeatDelay: 0.2,
+      ease: 'easeInOut',
+    }}
+  >
+    <path d="M10.268 21a2 2 0 0 0 3.464 0"></path>
+    <path d="M3.262 15.326A1 1 0 0 0 4 17h16a1 1 0 0 0 .74-1.673C19.41 13.956 18 12.499 18 8A6 6 0 0 0 6 8c0 4.499-1.411 5.956-2.738 7.326"></path>
+  </motion.svg>
+);
+
 function App() {
   const { location, loading, error, permissionGranted, requestLocation } = useGeolocation();
   const [panoramas, setPanoramas] = useState<PanoramaNode[]>([]);
@@ -467,7 +495,9 @@ function App() {
                   whileHover={{ scale: 1.03 }}
                   whileTap={{ scale: 0.96 }}
                 >
-                  🔍 Select Service
+                  <RingingBell />
+                  <span>Select Service</span>
+                  <RingingBell />
                 </motion.button>
               </motion.div>
             )}

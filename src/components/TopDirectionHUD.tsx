@@ -94,7 +94,7 @@ export const TopDirectionHUD: React.FC<TopDirectionHUDProps> = ({
             <div style={{ display: 'flex', alignItems: 'center', gap: '10px', width: '100%' }}>
 
 
-              {/* Middle: Turn arrow + Yellow instruction text */}
+              {/* Middle: Turn arrow + dark instruction text */}
               <div style={{ 
                 display: 'flex', 
                 alignItems: 'center', 
@@ -105,18 +105,18 @@ export const TopDirectionHUD: React.FC<TopDirectionHUDProps> = ({
               }}>
                 {pathDirection === 'left' && (
                   <motion.div animate={{ x: [2, -4, 2] }} transition={{ repeat: Infinity, duration: 1.2, ease: "easeInOut" }} style={{ display: 'inline-flex', flexShrink: 0 }}>
-                    <CornerUpLeft size={20} color="#facc15" style={{ strokeWidth: 3.5 }} />
+                    <CornerUpLeft size={20} color="#0b1326" style={{ strokeWidth: 3.5 }} />
                   </motion.div>
                 )}
                 {pathDirection === 'right' && (
                   <motion.div animate={{ x: [-2, 4, -2] }} transition={{ repeat: Infinity, duration: 1.2, ease: "easeInOut" }} style={{ display: 'inline-flex', flexShrink: 0 }}>
-                    <CornerUpRight size={20} color="#facc15" style={{ strokeWidth: 3.5 }} />
+                    <CornerUpRight size={20} color="#0b1326" style={{ strokeWidth: 3.5 }} />
                   </motion.div>
                 )}
                 <span style={{ 
                   fontSize: '12px', 
                   fontWeight: 800, 
-                  color: '#facc15', 
+                  color: '#0b1326', 
                   lineHeight: 1.2,
                   whiteSpace: 'normal',
                   textAlign: 'center',
@@ -127,7 +127,7 @@ export const TopDirectionHUD: React.FC<TopDirectionHUDProps> = ({
               </div>
 
               {/* Vertical divider line */}
-              <div style={{ width: '1px', height: '18px', background: 'rgba(255, 255, 255, 0.15)', flexShrink: 0 }} />
+              <div style={{ width: '1px', height: '18px', background: 'rgba(11, 19, 38, 0.2)', flexShrink: 0 }} />
 
               {/* Right: Distance badge */}
               <div style={{
@@ -139,7 +139,7 @@ export const TopDirectionHUD: React.FC<TopDirectionHUDProps> = ({
                 <span style={{ 
                   fontSize: '16px', 
                   fontWeight: 800, 
-                  color: 'var(--primary)',
+                  color: '#0b1326',
                   lineHeight: 1,
                   whiteSpace: 'nowrap'
                 }}>
@@ -148,7 +148,7 @@ export const TopDirectionHUD: React.FC<TopDirectionHUDProps> = ({
                 <span style={{ 
                   fontSize: '9px', 
                   fontWeight: 800, 
-                  color: 'var(--tertiary)', 
+                  color: '#4c1a00', 
                   textTransform: 'uppercase',
                   letterSpacing: '0.05em'
                 }}>
