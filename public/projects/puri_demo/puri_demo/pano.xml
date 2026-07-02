@@ -17,7 +17,7 @@
     <hotspots height="20" wordwrap="1" smoothmovement="0" width="180">
       <label borderradius="1" backgroundalpha="1" textcolor="0x000000" wordwrap="1" background="1" textalpha="1" height="20" borderalpha="1" backgroundcolor="0xffffff" enabled="1" bordercolor="0x000000" width="180" border="1"/>
       <polystyle handcursor="1" backgroundalpha="0.25098" borderalpha="1" backgroundcolor="0x0000ff" bordercolor="0x0000ff" mode="0"/>
-      <hotspot skinid="ht_node" pan="-4.67" title="" distance="45.6611" url="{node2}" customimagewidth="720" target="-6.4/-3.0/100.0" description="" use3D="1" tilt="-2.83" customimageheight="960" fov="9" distance3D="4574.23" customimage="media/Comp 1_8.gif" id="Point01"/>
+      <hotspot skinid="ht_node" pan="-4.67" title="" distance="45.6611" url="{node2}" customimagewidth="720" target="-6.4/-3.0/100.0" description="" use3D="1" tilt="-2.83" customimageheight="960" fov="9" distance3D="4574.23" customimage="media/touch.gif" id="Point01"/>
     </hotspots>
     <media>
       <image popbackmode="0" pan="-2.710" handcursor="0" clickmode="0" roty="0.000" popoutscaling="100" hidepinned="0" rotx="14.000" tilt="11.770" rotz="0.000" stretch="1.000" fov="26.000" height="1016" id="Element02" width="1413">
@@ -54,8 +54,8 @@
     <hotspots height="20" wordwrap="1" smoothmovement="0" width="180">
       <label borderradius="1" backgroundalpha="1" textcolor="0x000000" wordwrap="1" background="1" textalpha="1" height="20" borderalpha="1" backgroundcolor="0xffffff" enabled="1" bordercolor="0x000000" width="180" border="1"/>
       <polystyle handcursor="1" backgroundalpha="0.25098" borderalpha="1" backgroundcolor="0x0000ff" bordercolor="0x0000ff" mode="0"/>
-      <hotspot skinid="ht_node" pan="-151.02" title="" distance="45.6611" url="{node1}" customimagewidth="720" target="-151.3/-5.2/100.0" description="" use3D="1" tilt="-1.74" customimageheight="960" fov="10" distance3D="4114.82" customimage="media/Comp 1_8.gif" id="Point01"/>
-      <hotspot skinid="ht_node" pan="-4.08" title="" distance="52.4733" url="{node3}" customimagewidth="720" target="7.8/-3.5/100.0" description="" use3D="1" tilt="-2.64" customimageheight="960" fov="10" distance3D="4114.82" customimage="media/Comp 1_8.gif" id="Point02"/>
+      <hotspot skinid="ht_node" pan="-151.02" title="" distance="45.6611" url="{node1}" customimagewidth="720" target="-151.3/-5.2/100.0" description="" use3D="1" tilt="-1.74" customimageheight="960" fov="10" distance3D="4114.82" customimage="media/touch.gif" id="Point01"/>
+      <hotspot skinid="ht_node" pan="-4.08" title="" distance="52.4733" url="{node3}" customimagewidth="720" target="7.8/-3.5/100.0" description="" use3D="1" tilt="-2.64" customimageheight="960" fov="10" distance3D="4114.82" customimage="media/touch.gif" id="Point02"/>
     </hotspots>
     <media>
       <image popbackmode="0" pan="-5.180" handcursor="0" clickmode="0" roty="0.000" popoutscaling="100" hidepinned="0" rotx="4.000" tilt="13.730" rotz="0.000" stretch="1.000" fov="26.000" height="1016" id="Element02" width="1413">
@@ -92,8 +92,8 @@
     <hotspots height="20" wordwrap="1" smoothmovement="0" width="180">
       <label borderradius="1" backgroundalpha="1" textcolor="0x000000" wordwrap="1" background="1" textalpha="1" height="20" borderalpha="1" backgroundcolor="0xffffff" enabled="1" bordercolor="0x000000" width="180" border="1"/>
       <polystyle handcursor="1" backgroundalpha="0.25098" borderalpha="1" backgroundcolor="0x0000ff" bordercolor="0x0000ff" mode="0"/>
-      <hotspot skinid="ht_node" pan="-165.76" title="" distance="52.4733" url="{node2}" customimagewidth="720" target="-151.8/-2.9/100.0" description="" use3D="1" tilt="-1.7" customimageheight="960" fov="10" distance3D="4114.82" customimage="media/Comp 1_8.gif" id="Point01"/>
-      <hotspot skinid="ht_node" pan="-353.67" title="" distance="55.432" url="{node4}" customimagewidth="720" target="7.8/-5.0/100.0" description="" use3D="1" tilt="-2.48" customimageheight="960" fov="10" distance3D="4114.82" customimage="media/Comp 1_8.gif" id="Point02"/>
+      <hotspot skinid="ht_node" pan="-165.76" title="" distance="52.4733" url="{node2}" customimagewidth="720" target="-151.8/-2.9/100.0" description="" use3D="1" tilt="-1.7" customimageheight="960" fov="10" distance3D="4114.82" customimage="media/touch.gif" id="Point01"/>
+      <hotspot skinid="ht_node" pan="-353.67" title="" distance="55.432" url="{node4}" customimagewidth="720" target="7.8/-5.0/100.0" description="" use3D="1" tilt="-2.48" customimageheight="960" fov="10" distance3D="4114.82" customimage="media/touch.gif" id="Point02"/>
     </hotspots>
     <media>
       <image popbackmode="0" pan="-165.910" handcursor="0" clickmode="0" roty="0.000" popoutscaling="100" hidepinned="0" rotx="0.000" tilt="15.060" rotz="0.000" stretch="1.000" fov="26.000" height="1016" id="Element02" width="1752">
@@ -133,8 +133,8 @@
     <hotspots height="20" wordwrap="1" smoothmovement="0" width="180">
       <label borderradius="1" backgroundalpha="1" textcolor="0x000000" wordwrap="1" background="1" textalpha="1" height="20" borderalpha="1" backgroundcolor="0xffffff" enabled="1" bordercolor="0x000000" width="180" border="1"/>
       <polystyle handcursor="1" backgroundalpha="0.25098" borderalpha="1" backgroundcolor="0x0000ff" bordercolor="0x0000ff" mode="0"/>
-      <hotspot skinid="ht_node" pan="-170.21" title="" distance="55.432" url="{node3}" customimagewidth="720" target="-164.9/-1.8/100.0" description="" use3D="1" tilt="0.01" customimageheight="960" fov="10" distance3D="4114.82" customimage="media/Comp 1_8.gif" id="Point01"/>
-      <hotspot skinid="ht_node" pan="-350.75" title="" distance="41.4227" url="{node5}" customimagewidth="720" target="13.6/-7.0/100.0" description="" use3D="1" tilt="-3.84" customimageheight="960" fov="10" distance3D="4114.82" customimage="media/Comp 1_8.gif" id="Point02"/>
+      <hotspot skinid="ht_node" pan="-170.21" title="" distance="55.432" url="{node3}" customimagewidth="720" target="-164.9/-1.8/100.0" description="" use3D="1" tilt="0.01" customimageheight="960" fov="10" distance3D="4114.82" customimage="media/touch.gif" id="Point01"/>
+      <hotspot skinid="ht_node" pan="-350.75" title="" distance="41.4227" url="{node5}" customimagewidth="720" target="13.6/-7.0/100.0" description="" use3D="1" tilt="-3.84" customimageheight="960" fov="10" distance3D="4114.82" customimage="media/touch.gif" id="Point02"/>
     </hotspots>
     <media>
       <image popbackmode="0" pan="-170.220" handcursor="0" clickmode="0" roty="0.000" popoutscaling="100" hidepinned="0" rotx="0.000" tilt="18.330" rotz="0.000" stretch="1.000" fov="26.000" height="1016" id="Element02" width="1752">
@@ -171,7 +171,7 @@
     <hotspots height="20" wordwrap="1" smoothmovement="0" width="180">
       <label borderradius="1" backgroundalpha="1" textcolor="0x000000" wordwrap="1" background="1" textalpha="1" height="20" borderalpha="1" backgroundcolor="0xffffff" enabled="1" bordercolor="0x000000" width="180" border="1"/>
       <polystyle handcursor="1" backgroundalpha="0.25098" borderalpha="1" backgroundcolor="0x0000ff" bordercolor="0x0000ff" mode="0"/>
-      <hotspot skinid="ht_node" pan="-165.99" title="" distance="41.4227" url="{node4}" customimagewidth="720" target="-170.0/0.3/100.0" description="" use3D="1" tilt="1.5" customimageheight="960" fov="10" distance3D="4114.82" customimage="media/Comp 1_8.gif" id="Point01"/>
+      <hotspot skinid="ht_node" pan="-165.99" title="" distance="41.4227" url="{node4}" customimagewidth="720" target="-170.0/0.3/100.0" description="" use3D="1" tilt="1.5" customimageheight="960" fov="10" distance3D="4114.82" customimage="media/touch.gif" id="Point01"/>
       <hotspot skinid="ht_node" pan="-332.24" title="" distance="41.6903" url="{node6}" target="12.2/-2.9/100.0" description="" tilt="-6.48" id="Point02"/>
     </hotspots>
     <media>
