@@ -129,7 +129,7 @@ function App() {
 
   // Load service locations on mount
   useEffect(() => {
-    fetch('/projects/puritest_01/lat_long_map.json')
+    fetch('/projects/puri_demo/puri_demo/lat_long_map.json')
       .then((res) => res.json())
       .then((data) => setServiceMap(data))
       .catch((err) => console.error('Failed to load service coordinates:', err));

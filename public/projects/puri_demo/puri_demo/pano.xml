@@ -1,0 +1,709 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tour apprev="21036" start="node1" appversion="7.1.12" hassounds="0">
+  <panorama id="node1">
+    <input levelbias="0.400" overlap="1" leveltileurl="tiles/node1/cf_%c/l_%l/c_%x/tile_%y.jpg" levelingroll="0" levelbiashidpi="1.000" leveltilesize="510" height="1500" levelingpitch="0" width="1500">
+      <level predecode="0" height="1500" preload="0" width="1500"/>
+      <level predecode="0" height="750" preload="0" width="750"/>
+      <level predecode="1" height="375" preload="1" width="375"/>
+      <preview strip="1" color="0x808080"/>
+    </input>
+    <view fovmode="2" pannorth="0">
+      <start tilt="0" pan="0" fov="100" projection="4"/>
+      <flyin tilt="-90" pan="0" fov="170" projection="9"/>
+      <min tilt="-90" pan="0" fovpixel="2"/>
+      <max tilt="90" pan="360" fov="140" fovstereographic="330" fovfisheye="360" scaletofit="1"/>
+    </view>
+    <userdata tags="SC_PART_005" nodeid="node1" title="" altitude="20.81" customnodeid="" comment="" longitude="85.788882" description="" datetime="6/21/2026 10:02 AM" info="" author="" latitude="19.784463" source="" heading="0" copyright=""/>
+    <hotspots height="20" wordwrap="1" smoothmovement="0" width="180">
+      <label borderradius="1" backgroundalpha="1" textcolor="0x000000" wordwrap="1" background="1" textalpha="1" height="20" borderalpha="1" backgroundcolor="0xffffff" enabled="1" bordercolor="0x000000" width="180" border="1"/>
+      <polystyle handcursor="1" backgroundalpha="0.25098" borderalpha="1" backgroundcolor="0x0000ff" bordercolor="0x0000ff" mode="0"/>
+      <hotspot skinid="ht_node" pan="-4.67" title="" distance="45.6611" url="{node2}" customimagewidth="720" target="-6.4/-3.0/100.0" description="" use3D="1" tilt="-2.83" customimageheight="960" fov="9" distance3D="4574.23" customimage="media/Comp 1_8.gif" id="Point01"/>
+    </hotspots>
+    <media>
+      <image popbackmode="0" pan="-2.710" handcursor="0" clickmode="0" roty="0.000" popoutscaling="100" hidepinned="0" rotx="14.000" tilt="11.770" rotz="0.000" stretch="1.000" fov="26.000" height="1016" id="Element02" width="1413">
+        <source url="media/towards_bhubaneswar-1.png"/>
+      </image>
+      <image popbackmode="0" pan="-151.470" handcursor="0" clickmode="0" roty="0.000" popoutscaling="100" hidepinned="0" rotx="6.000" tilt="10.950" rotz="0.000" stretch="1.000" fov="26.000" height="1016" id="Element04" width="1752">
+        <source url="media/towards_marine_ drive_rd.png"/>
+      </image>
+      <image popbackmode="0" pan="-0.806" handcursor="0" clickmode="0" roty="0.505" popoutscaling="100" hidepinned="0" rotx="68.584" tilt="-13.904" rotz="-1.134" stretch="1.998" fov="14.271" height="1920" id="Element01" width="1080">
+        <source url="media/Path.gif"/>
+      </image>
+      <image popbackmode="0" pan="-152.646" handcursor="0" clickmode="0" roty="-0.356" popoutscaling="100" hidepinned="0" rotx="72.386" tilt="-12.850" rotz="2.543" stretch="2.000" fov="16.271" height="1920" id="Element03" width="1080">
+        <source url="media/Path.gif"/>
+      </image>
+    </media>
+    <transition zoomin="0" delay="none" zoomspeed="2" zoomout="0" blendcolor="0x000000" type="crossdissolve" zoomafterinfov="140" softedge="0" zoomfov="40" enabled="1" zoomoutpause="1" blendtime="1" zoomafteroutfov="40"/>
+    <animation animsequence="Animation01" clipsrandom="0" useinautorotation="0" syncanimationwithvideo="0"/>
+    <control lockedkeyboard="0" invertcontrol="1" contextfullscreen="1" contextvr="1" simulatemass="1" dblclickfullscreen="0" lockedkeyboardzoom="0" rubberband="0" sensitivity="8" speedwheel="1" lockedmouse="0" lockedwheel="0" zoomcentercursor="1" invertwheel="0" hideabout="0" contextprojections="0"/>
+  </panorama>
+  <panorama id="node2">
+    <input levelbias="0.400" overlap="1" leveltileurl="tiles/node2/cf_%c/l_%l/c_%x/tile_%y.jpg" levelingroll="0" levelbiashidpi="1.000" leveltilesize="510" height="1500" levelingpitch="0" width="1500">
+      <level predecode="0" height="1500" preload="0" width="1500"/>
+      <level predecode="0" height="750" preload="0" width="750"/>
+      <level predecode="1" height="375" preload="1" width="375"/>
+      <preview strip="1" color="0x808080"/>
+    </input>
+    <view fovmode="2" pannorth="0">
+      <start tilt="0" pan="0" fov="100" projection="4"/>
+      <flyin tilt="-90" pan="0" fov="170" projection="9"/>
+      <min tilt="-90" pan="0" fovpixel="2"/>
+      <max tilt="90" pan="360" fov="140" fovstereographic="330" fovfisheye="360" scaletofit="1"/>
+    </view>
+    <userdata tags="SC_PART_005" nodeid="node2" title="" altitude="20.81" customnodeid="" comment="" longitude="85.788680" description="" datetime="6/21/2026 10:03 AM" info="" author="" latitude="19.784827" source="" heading="0" copyright=""/>
+    <hotspots height="20" wordwrap="1" smoothmovement="0" width="180">
+      <label borderradius="1" backgroundalpha="1" textcolor="0x000000" wordwrap="1" background="1" textalpha="1" height="20" borderalpha="1" backgroundcolor="0xffffff" enabled="1" bordercolor="0x000000" width="180" border="1"/>
+      <polystyle handcursor="1" backgroundalpha="0.25098" borderalpha="1" backgroundcolor="0x0000ff" bordercolor="0x0000ff" mode="0"/>
+      <hotspot skinid="ht_node" pan="-151.02" title="" distance="45.6611" url="{node1}" customimagewidth="720" target="-151.3/-5.2/100.0" description="" use3D="1" tilt="-1.74" customimageheight="960" fov="10" distance3D="4114.82" customimage="media/Comp 1_8.gif" id="Point01"/>
+      <hotspot skinid="ht_node" pan="-4.08" title="" distance="52.4733" url="{node3}" customimagewidth="720" target="7.8/-3.5/100.0" description="" use3D="1" tilt="-2.64" customimageheight="960" fov="10" distance3D="4114.82" customimage="media/Comp 1_8.gif" id="Point02"/>
+    </hotspots>
+    <media>
+      <image popbackmode="0" pan="-5.180" handcursor="0" clickmode="0" roty="0.000" popoutscaling="100" hidepinned="0" rotx="4.000" tilt="13.730" rotz="0.000" stretch="1.000" fov="26.000" height="1016" id="Element02" width="1413">
+        <source url="media/towards_bhubaneswar-1.png"/>
+      </image>
+      <image popbackmode="0" pan="-152.040" handcursor="0" clickmode="0" roty="0.000" popoutscaling="100" hidepinned="0" rotx="0.000" tilt="12.300" rotz="0.000" stretch="1.000" fov="26.000" height="1016" id="Element04" width="1752">
+        <source url="media/towards_marine_ drive_rd.png"/>
+      </image>
+      <image popbackmode="0" pan="-3.327" handcursor="0" clickmode="0" roty="0.915" popoutscaling="100" hidepinned="0" rotx="67.867" tilt="-13.450" rotz="0.269" stretch="2.000" fov="13.515" height="1920" id="Element01" width="1080">
+        <source url="media/Path.gif"/>
+      </image>
+      <image popbackmode="0" pan="-151.708" handcursor="0" clickmode="0" roty="3.257" popoutscaling="100" hidepinned="0" rotx="71.928" tilt="-14.003" rotz="-0.319" stretch="1.830" fov="16.976" height="1920" id="Element03" width="1080">
+        <source url="media/Path.gif"/>
+      </image>
+    </media>
+    <transition zoomin="0" delay="none" zoomspeed="2" zoomout="0" blendcolor="0x000000" type="crossdissolve" zoomafterinfov="140" softedge="0" zoomfov="40" enabled="1" zoomoutpause="1" blendtime="1" zoomafteroutfov="40"/>
+    <animation animsequence="Animation01" clipsrandom="0" useinautorotation="0" syncanimationwithvideo="0"/>
+    <control lockedkeyboard="0" invertcontrol="1" contextfullscreen="1" contextvr="1" simulatemass="1" dblclickfullscreen="0" lockedkeyboardzoom="0" rubberband="0" sensitivity="8" speedwheel="1" lockedmouse="0" lockedwheel="0" zoomcentercursor="1" invertwheel="0" hideabout="0" contextprojections="0"/>
+  </panorama>
+  <panorama id="node3">
+    <input levelbias="0.400" overlap="1" leveltileurl="tiles/node3/cf_%c/l_%l/c_%x/tile_%y.jpg" levelingroll="0" levelbiashidpi="1.000" leveltilesize="510" height="1500" levelingpitch="0" width="1500">
+      <level predecode="0" height="1500" preload="0" width="1500"/>
+      <level predecode="0" height="750" preload="0" width="750"/>
+      <level predecode="1" height="375" preload="1" width="375"/>
+      <preview strip="1" color="0x808080"/>
+    </input>
+    <view fovmode="2" pannorth="-3.39814">
+      <start tilt="0" pan="0" fov="100" projection="4"/>
+      <flyin tilt="-90" pan="0" fov="170" projection="9"/>
+      <min tilt="-90" pan="0" fovpixel="2"/>
+      <max tilt="90" pan="360" fov="140" fovstereographic="330" fovfisheye="360" scaletofit="1"/>
+    </view>
+    <userdata tags="SC_PART_005" nodeid="node3" title="" altitude="20.81" customnodeid="" comment="" longitude="85.788635" description="" datetime="6/21/2026 10:03 AM" info="" author="" latitude="19.785297" source="" heading="-3.39814" copyright=""/>
+    <hotspots height="20" wordwrap="1" smoothmovement="0" width="180">
+      <label borderradius="1" backgroundalpha="1" textcolor="0x000000" wordwrap="1" background="1" textalpha="1" height="20" borderalpha="1" backgroundcolor="0xffffff" enabled="1" bordercolor="0x000000" width="180" border="1"/>
+      <polystyle handcursor="1" backgroundalpha="0.25098" borderalpha="1" backgroundcolor="0x0000ff" bordercolor="0x0000ff" mode="0"/>
+      <hotspot skinid="ht_node" pan="-165.76" title="" distance="52.4733" url="{node2}" customimagewidth="720" target="-151.8/-2.9/100.0" description="" use3D="1" tilt="-1.7" customimageheight="960" fov="10" distance3D="4114.82" customimage="media/Comp 1_8.gif" id="Point01"/>
+      <hotspot skinid="ht_node" pan="-353.67" title="" distance="55.432" url="{node4}" customimagewidth="720" target="7.8/-5.0/100.0" description="" use3D="1" tilt="-2.48" customimageheight="960" fov="10" distance3D="4114.82" customimage="media/Comp 1_8.gif" id="Point02"/>
+    </hotspots>
+    <media>
+      <image popbackmode="0" pan="-165.910" handcursor="0" clickmode="0" roty="0.000" popoutscaling="100" hidepinned="0" rotx="0.000" tilt="15.060" rotz="0.000" stretch="1.000" fov="26.000" height="1016" id="Element02" width="1752">
+        <source url="media/towards_marine_ drive_rd.png"/>
+      </image>
+      <image popbackmode="0" pan="-353.870" handcursor="0" clickmode="0" roty="0.000" popoutscaling="100" hidepinned="0" rotx="0.000" tilt="11.360" rotz="0.000" stretch="1.000" fov="26.000" height="1016" id="Element04" width="1413">
+        <source url="media/towards_bhubaneswar-1.png"/>
+      </image>
+      <image popbackmode="0" pan="-353.590" handcursor="0" clickmode="0" roty="0.505" popoutscaling="100" hidepinned="0" rotx="68.584" tilt="-12.440" rotz="-1.134" stretch="1.998" fov="14.271" height="1920" id="Element03" width="1080">
+        <source url="media/Path.gif"/>
+      </image>
+      <image popbackmode="0" pan="-165.224" handcursor="0" clickmode="0" roty="2.639" popoutscaling="100" hidepinned="0" rotx="72.427" tilt="-12.963" rotz="-0.433" stretch="1.935" fov="16.410" height="1920" id="Element01" width="1080">
+        <source url="media/Path.gif"/>
+      </image>
+      <image popbackmode="0" pan="-78.440" handcursor="0" clickmode="0" roty="0.000" popoutscaling="100" hidepinned="0" rotx="0.000" tilt="3.890" rotz="0.000" stretch="1.000" fov="26.000" height="560" id="Element05" width="960">
+        <source url="media/Toilet.gif"/>
+      </image>
+    </media>
+    <transition zoomin="0" delay="none" zoomspeed="2" zoomout="0" blendcolor="0x000000" type="crossdissolve" zoomafterinfov="140" softedge="0" zoomfov="40" enabled="1" zoomoutpause="1" blendtime="1" zoomafteroutfov="40"/>
+    <animation animsequence="Animation01" clipsrandom="0" useinautorotation="0" syncanimationwithvideo="0"/>
+    <control lockedkeyboard="0" invertcontrol="1" contextfullscreen="1" contextvr="1" simulatemass="1" dblclickfullscreen="0" lockedkeyboardzoom="0" rubberband="0" sensitivity="8" speedwheel="1" lockedmouse="0" lockedwheel="0" zoomcentercursor="1" invertwheel="0" hideabout="0" contextprojections="0"/>
+  </panorama>
+  <panorama id="node4">
+    <input levelbias="0.400" overlap="1" leveltileurl="tiles/node4/cf_%c/l_%l/c_%x/tile_%y.jpg" levelingroll="0" levelbiashidpi="1.000" leveltilesize="510" height="1500" levelingpitch="0" width="1500">
+      <level predecode="0" height="1500" preload="0" width="1500"/>
+      <level predecode="0" height="750" preload="0" width="750"/>
+      <level predecode="1" height="375" preload="1" width="375"/>
+      <preview strip="1" color="0x808080"/>
+    </input>
+    <view fovmode="2" pannorth="2.60402">
+      <start tilt="0" pan="0" fov="100" projection="4"/>
+      <flyin tilt="-90" pan="0" fov="170" projection="9"/>
+      <min tilt="-90" pan="0" fovpixel="2"/>
+      <max tilt="90" pan="360" fov="140" fovstereographic="330" fovfisheye="360" scaletofit="1"/>
+    </view>
+    <userdata tags="SC_PART_005" nodeid="node4" title="" altitude="19.84" customnodeid="" comment="" longitude="85.788611" description="" datetime="6/21/2026 10:03 AM" info="" author="" latitude="19.785795" source="" heading="2.60402" copyright=""/>
+    <hotspots height="20" wordwrap="1" smoothmovement="0" width="180">
+      <label borderradius="1" backgroundalpha="1" textcolor="0x000000" wordwrap="1" background="1" textalpha="1" height="20" borderalpha="1" backgroundcolor="0xffffff" enabled="1" bordercolor="0x000000" width="180" border="1"/>
+      <polystyle handcursor="1" backgroundalpha="0.25098" borderalpha="1" backgroundcolor="0x0000ff" bordercolor="0x0000ff" mode="0"/>
+      <hotspot skinid="ht_node" pan="-170.21" title="" distance="55.432" url="{node3}" customimagewidth="720" target="-164.9/-1.8/100.0" description="" use3D="1" tilt="0.01" customimageheight="960" fov="10" distance3D="4114.82" customimage="media/Comp 1_8.gif" id="Point01"/>
+      <hotspot skinid="ht_node" pan="-350.75" title="" distance="41.4227" url="{node5}" customimagewidth="720" target="13.6/-7.0/100.0" description="" use3D="1" tilt="-3.84" customimageheight="960" fov="10" distance3D="4114.82" customimage="media/Comp 1_8.gif" id="Point02"/>
+    </hotspots>
+    <media>
+      <image popbackmode="0" pan="-170.220" handcursor="0" clickmode="0" roty="0.000" popoutscaling="100" hidepinned="0" rotx="0.000" tilt="18.330" rotz="0.000" stretch="1.000" fov="26.000" height="1016" id="Element02" width="1752">
+        <source url="media/towards_marine_ drive_rd.png"/>
+      </image>
+      <image popbackmode="0" pan="-350.880" handcursor="0" clickmode="0" roty="0.000" popoutscaling="100" hidepinned="0" rotx="0.000" tilt="11.970" rotz="0.000" stretch="1.000" fov="26.000" height="1016" id="Element04" width="1413">
+        <source url="media/towards_bhubaneswar-1.png"/>
+      </image>
+      <image popbackmode="0" pan="-351.440" handcursor="0" clickmode="0" roty="0.505" popoutscaling="100" hidepinned="0" rotx="68.584" tilt="-14.920" rotz="-1.134" stretch="1.998" fov="14.271" height="1920" id="Element03" width="1080">
+        <source url="media/Path.gif"/>
+      </image>
+      <image popbackmode="0" pan="-170.461" handcursor="0" clickmode="0" roty="1.862" popoutscaling="100" hidepinned="0" rotx="72.551" tilt="-12.185" rotz="-2.992" stretch="2.000" fov="16.073" height="1920" id="Element01" width="1080">
+        <source url="media/Path.gif"/>
+      </image>
+    </media>
+    <transition zoomin="0" delay="none" zoomspeed="2" zoomout="0" blendcolor="0x000000" type="crossdissolve" zoomafterinfov="140" softedge="0" zoomfov="40" enabled="1" zoomoutpause="1" blendtime="1" zoomafteroutfov="40"/>
+    <animation animsequence="Animation01" clipsrandom="0" useinautorotation="0" syncanimationwithvideo="0"/>
+    <control lockedkeyboard="0" invertcontrol="1" contextfullscreen="1" contextvr="1" simulatemass="1" dblclickfullscreen="0" lockedkeyboardzoom="0" rubberband="0" sensitivity="8" speedwheel="1" lockedmouse="0" lockedwheel="0" zoomcentercursor="1" invertwheel="0" hideabout="0" contextprojections="0"/>
+  </panorama>
+  <panorama id="node5">
+    <input levelbias="0.400" overlap="1" leveltileurl="tiles/node5/cf_%c/l_%l/c_%x/tile_%y.jpg" levelingroll="0" levelbiashidpi="1.000" leveltilesize="510" height="1500" levelingpitch="0" width="1500">
+      <level predecode="0" height="1500" preload="0" width="1500"/>
+      <level predecode="0" height="750" preload="0" width="750"/>
+      <level predecode="1" height="375" preload="1" width="375"/>
+      <preview strip="1" color="0x808080"/>
+    </input>
+    <view fovmode="2" pannorth="0">
+      <start tilt="0" pan="0" fov="100" projection="4"/>
+      <flyin tilt="-90" pan="0" fov="170" projection="9"/>
+      <min tilt="-90" pan="0" fovpixel="2"/>
+      <max tilt="90" pan="360" fov="140" fovstereographic="330" fovfisheye="360" scaletofit="1"/>
+    </view>
+    <userdata tags="SC_PART_005" nodeid="node5" title="" altitude="19.84" customnodeid="" comment="" longitude="85.788565" description="" datetime="6/21/2026 10:03 AM" info="" author="" latitude="19.786165" source="" heading="0" copyright=""/>
+    <hotspots height="20" wordwrap="1" smoothmovement="0" width="180">
+      <label borderradius="1" backgroundalpha="1" textcolor="0x000000" wordwrap="1" background="1" textalpha="1" height="20" borderalpha="1" backgroundcolor="0xffffff" enabled="1" bordercolor="0x000000" width="180" border="1"/>
+      <polystyle handcursor="1" backgroundalpha="0.25098" borderalpha="1" backgroundcolor="0x0000ff" bordercolor="0x0000ff" mode="0"/>
+      <hotspot skinid="ht_node" pan="-165.99" title="" distance="41.4227" url="{node4}" customimagewidth="720" target="-170.0/0.3/100.0" description="" use3D="1" tilt="1.5" customimageheight="960" fov="10" distance3D="4114.82" customimage="media/Comp 1_8.gif" id="Point01"/>
+      <hotspot skinid="ht_node" pan="-332.24" title="" distance="41.6903" url="{node6}" target="12.2/-2.9/100.0" description="" tilt="-6.48" id="Point02"/>
+    </hotspots>
+    <media>
+      <image popbackmode="0" pan="-165.790" handcursor="0" clickmode="0" roty="0.000" popoutscaling="100" hidepinned="0" rotx="0.000" tilt="14.420" rotz="0.000" stretch="1.000" fov="26.000" height="1016" id="Element02" width="1752">
+        <source url="media/towards_marine_ drive_rd.png"/>
+      </image>
+      <image popbackmode="0" pan="-346.280" handcursor="0" clickmode="0" roty="0.000" popoutscaling="100" hidepinned="0" rotx="0.000" tilt="11.090" rotz="0.000" stretch="1.000" fov="26.000" height="1016" id="Element04" width="1413">
+        <source url="media/towards_bhubaneswar-1.png"/>
+      </image>
+      <image popbackmode="0" pan="-344.720" handcursor="0" clickmode="0" roty="0.510" popoutscaling="100" hidepinned="0" rotx="68.580" tilt="-21.300" rotz="-1.130" stretch="1.998" fov="11.270" height="1920" id="Element03" width="1080">
+        <source url="media/Path.gif"/>
+      </image>
+      <image popbackmode="0" pan="-164.945" handcursor="0" clickmode="0" roty="1.025" popoutscaling="100" hidepinned="0" rotx="72.445" tilt="-11.862" rotz="-1.396" stretch="2.000" fov="16.038" height="1920" id="Element01" width="1080">
+        <source url="media/Path.gif"/>
+      </image>
+      <image popbackmode="0" pan="-341.400" handcursor="0" clickmode="0" roty="0.000" popoutscaling="100" hidepinned="0" rotx="72.000" tilt="-8.060" rotz="0.000" stretch="1.000" fov="10.000" height="1920" id="Element05" width="1080">
+        <source url="media/Path_Turn.gif"/>
+      </image>
+    </media>
+    <transition zoomin="0" delay="none" zoomspeed="2" zoomout="0" blendcolor="0x000000" type="crossdissolve" zoomafterinfov="140" softedge="0" zoomfov="40" enabled="1" zoomoutpause="1" blendtime="1" zoomafteroutfov="40"/>
+    <animation animsequence="Animation01" clipsrandom="0" useinautorotation="0" syncanimationwithvideo="0"/>
+    <control lockedkeyboard="0" invertcontrol="1" contextfullscreen="1" contextvr="1" simulatemass="1" dblclickfullscreen="0" lockedkeyboardzoom="0" rubberband="0" sensitivity="8" speedwheel="1" lockedmouse="0" lockedwheel="0" zoomcentercursor="1" invertwheel="0" hideabout="0" contextprojections="0"/>
+  </panorama>
+  <panorama id="node6">
+    <input levelbias="0.400" overlap="1" leveltileurl="tiles/node6/cf_%c/l_%l/c_%x/tile_%y.jpg" levelingroll="0" levelbiashidpi="1.000" leveltilesize="510" height="1500" levelingpitch="0" width="1500">
+      <level predecode="0" height="1500" preload="0" width="1500"/>
+      <level predecode="0" height="750" preload="0" width="750"/>
+      <level predecode="1" height="375" preload="1" width="375"/>
+      <preview strip="1" color="0x808080"/>
+    </input>
+    <view fovmode="2" pannorth="-91.0598">
+      <start tilt="0" pan="0" fov="100" projection="4"/>
+      <flyin tilt="-90" pan="0" fov="170" projection="9"/>
+      <min tilt="-90" pan="0" fovpixel="2"/>
+      <max tilt="90" pan="360" fov="140" fovstereographic="330" fovfisheye="360" scaletofit="1"/>
+    </view>
+    <userdata tags="SC_PART_005" nodeid="node6" title="" altitude="20.32" customnodeid="" comment="" longitude="85.788168" description="" datetime="6/21/2026 10:03 AM" info="" author="" latitude="19.786197" source="" heading="-91.0598" copyright=""/>
+    <hotspots height="20" wordwrap="1" smoothmovement="0" width="180">
+      <label borderradius="1" backgroundalpha="1" textcolor="0x000000" wordwrap="1" background="1" textalpha="1" height="20" borderalpha="1" backgroundcolor="0xffffff" enabled="1" bordercolor="0x000000" width="180" border="1"/>
+      <polystyle handcursor="1" backgroundalpha="0.25098" borderalpha="1" backgroundcolor="0x0000ff" bordercolor="0x0000ff" mode="0"/>
+      <hotspot skinid="ht_node" pan="-177.65" title="" distance="41.6903" url="{node5}" target="-164.8/0.7/100.0" description="" tilt="-3.09" id="Point01"/>
+      <hotspot skinid="ht_node" pan="-344.4" title="" distance="40.9529" url="{node7}" target="16.7/-4.1/100.0" description="" tilt="-2.58" id="Point02"/>
+    </hotspots>
+    <media>
+      <image popbackmode="0" pan="-347.430" handcursor="0" clickmode="0" roty="0.000" popoutscaling="100" hidepinned="0" rotx="0.000" tilt="15.050" rotz="0.000" stretch="1.000" fov="26.000" height="1016" id="Element02" width="1413">
+        <source url="media/towards_bhubaneswar-1.png"/>
+      </image>
+      <image popbackmode="0" pan="-168.330" handcursor="0" clickmode="0" roty="0.000" popoutscaling="100" hidepinned="0" rotx="0.000" tilt="14.460" rotz="0.000" stretch="1.000" fov="26.000" height="1016" id="Element04" width="1752">
+        <source url="media/towards_marine_ drive_rd.png"/>
+      </image>
+      <image popbackmode="0" pan="13.454" handcursor="0" clickmode="0" roty="-1.293" popoutscaling="100" hidepinned="0" rotx="71.159" tilt="-13.956" rotz="1.258" stretch="1.988" fov="14.998" height="1920" id="Element01" width="1080">
+        <source url="media/Path.gif"/>
+      </image>
+      <image popbackmode="0" pan="-168.550" handcursor="0" clickmode="0" roty="1.025" popoutscaling="100" hidepinned="0" rotx="72.445" tilt="-13.060" rotz="-1.396" stretch="2.000" fov="16.038" height="1920" id="Element03" width="1080">
+        <source url="media/Path.gif"/>
+      </image>
+    </media>
+    <transition zoomin="0" delay="none" zoomspeed="2" zoomout="0" blendcolor="0x000000" type="crossdissolve" zoomafterinfov="140" softedge="0" zoomfov="40" enabled="1" zoomoutpause="1" blendtime="1" zoomafteroutfov="40"/>
+    <animation animsequence="Animation01" clipsrandom="0" useinautorotation="0" syncanimationwithvideo="0"/>
+    <control lockedkeyboard="0" invertcontrol="1" contextfullscreen="1" contextvr="1" simulatemass="1" dblclickfullscreen="0" lockedkeyboardzoom="0" rubberband="0" sensitivity="8" speedwheel="1" lockedmouse="0" lockedwheel="0" zoomcentercursor="1" invertwheel="0" hideabout="0" contextprojections="0"/>
+  </panorama>
+  <panorama id="node7">
+    <input levelbias="0.400" overlap="1" leveltileurl="tiles/node7/cf_%c/l_%l/c_%x/tile_%y.jpg" levelingroll="0" levelbiashidpi="1.000" leveltilesize="510" height="1500" levelingpitch="0" width="1500">
+      <level predecode="0" height="1500" preload="0" width="1500"/>
+      <level predecode="0" height="750" preload="0" width="750"/>
+      <level predecode="1" height="375" preload="1" width="375"/>
+      <preview strip="1" color="0x808080"/>
+    </input>
+    <view fovmode="2" pannorth="-84.3335">
+      <start tilt="0" pan="0" fov="100" projection="4"/>
+      <flyin tilt="-90" pan="0" fov="170" projection="9"/>
+      <min tilt="-90" pan="0" fovpixel="2"/>
+      <max tilt="90" pan="360" fov="140" fovstereographic="330" fovfisheye="360" scaletofit="1"/>
+    </view>
+    <userdata tags="SC_PART_005" nodeid="node7" title="" altitude="20.81" customnodeid="" comment="" longitude="85.787791" description="" datetime="6/21/2026 10:04 AM" info="" author="" latitude="19.786098" source="" heading="-84.3335" copyright=""/>
+    <hotspots height="20" wordwrap="1" smoothmovement="0" width="180">
+      <label borderradius="1" backgroundalpha="1" textcolor="0x000000" wordwrap="1" background="1" textalpha="1" height="20" borderalpha="1" backgroundcolor="0xffffff" enabled="1" bordercolor="0x000000" width="180" border="1"/>
+      <polystyle handcursor="1" backgroundalpha="0.25098" borderalpha="1" backgroundcolor="0x0000ff" bordercolor="0x0000ff" mode="0"/>
+      <hotspot skinid="ht_node" pan="-158.97" title="" distance="40.9529" url="{node6}" target="-166.1/-4.3/100.0" description="" tilt="-4.29" id="Point01"/>
+      <hotspot skinid="ht_node" pan="-342.24" title="" distance="36.1083" url="{node8}" target="10.6/-6.0/100.0" description="" tilt="-3.45" id="Point02"/>
+    </hotspots>
+    <media>
+      <image popbackmode="0" pan="-158.950" handcursor="0" clickmode="0" roty="0.000" popoutscaling="100" hidepinned="0" rotx="0.000" tilt="13.140" rotz="0.000" stretch="1.000" fov="26.000" height="1016" id="Element02" width="1752">
+        <source url="media/towards_marine_ drive_rd.png"/>
+      </image>
+      <image popbackmode="0" pan="-343.060" handcursor="0" clickmode="0" roty="0.000" popoutscaling="100" hidepinned="0" rotx="0.000" tilt="14.220" rotz="0.000" stretch="1.000" fov="26.000" height="1016" id="Element04" width="1413">
+        <source url="media/towards_bhubaneswar-1.png"/>
+      </image>
+      <image popbackmode="0" pan="18.109" handcursor="0" clickmode="0" roty="-0.056" popoutscaling="100" hidepinned="0" rotx="70.466" tilt="-12.796" rotz="-2.430" stretch="2.000" fov="15.046" height="1920" id="Element03" width="1080">
+        <source url="media/Path.gif"/>
+      </image>
+      <image popbackmode="0" pan="-158.870" handcursor="0" clickmode="0" roty="0.416" popoutscaling="100" hidepinned="0" rotx="72.480" tilt="-13.405" rotz="-0.332" stretch="1.998" fov="15.981" height="1920" id="Element01" width="1080">
+        <source url="media/Path.gif"/>
+      </image>
+      <image popbackmode="0" pan="-297.820" handcursor="0" clickmode="0" roty="0.000" popoutscaling="100" hidepinned="0" rotx="0.000" tilt="4.730" rotz="0.000" stretch="1.000" fov="26.000" height="560" id="Element05" width="960">
+        <source url="media/Toilet.gif"/>
+      </image>
+    </media>
+    <transition zoomin="0" delay="none" zoomspeed="2" zoomout="0" blendcolor="0x000000" type="crossdissolve" zoomafterinfov="140" softedge="0" zoomfov="40" enabled="1" zoomoutpause="1" blendtime="1" zoomafteroutfov="40"/>
+    <animation animsequence="Animation01" clipsrandom="0" useinautorotation="0" syncanimationwithvideo="0"/>
+    <control lockedkeyboard="0" invertcontrol="1" contextfullscreen="1" contextvr="1" simulatemass="1" dblclickfullscreen="0" lockedkeyboardzoom="0" rubberband="0" sensitivity="8" speedwheel="1" lockedmouse="0" lockedwheel="0" zoomcentercursor="1" invertwheel="0" hideabout="0" contextprojections="0"/>
+  </panorama>
+  <panorama id="node8">
+    <input levelbias="0.400" overlap="1" leveltileurl="tiles/node8/cf_%c/l_%l/c_%x/tile_%y.jpg" levelingroll="0" levelbiashidpi="1.000" leveltilesize="510" height="1500" levelingpitch="0" width="1500">
+      <level predecode="0" height="1500" preload="0" width="1500"/>
+      <level predecode="0" height="750" preload="0" width="750"/>
+      <level predecode="1" height="375" preload="1" width="375"/>
+      <preview strip="1" color="0x808080"/>
+    </input>
+    <view fovmode="2" pannorth="-68.1548">
+      <start tilt="0" pan="0" fov="100" projection="4"/>
+      <flyin tilt="-90" pan="0" fov="170" projection="9"/>
+      <min tilt="-90" pan="0" fovpixel="2"/>
+      <max tilt="90" pan="360" fov="140" fovstereographic="330" fovfisheye="360" scaletofit="1"/>
+    </view>
+    <userdata tags="SC_PART_005" nodeid="node8" title="" altitude="20.81" customnodeid="" comment="" longitude="85.787456" description="" datetime="6/21/2026 10:04 AM" info="" author="" latitude="19.786020" source="" heading="-68.1548" copyright=""/>
+    <hotspots height="20" wordwrap="1" smoothmovement="0" width="180">
+      <label borderradius="1" backgroundalpha="1" textcolor="0x000000" wordwrap="1" background="1" textalpha="1" height="20" borderalpha="1" backgroundcolor="0xffffff" enabled="1" bordercolor="0x000000" width="180" border="1"/>
+      <polystyle handcursor="1" backgroundalpha="0.25098" borderalpha="1" backgroundcolor="0x0000ff" bordercolor="0x0000ff" mode="0"/>
+      <hotspot skinid="ht_node" pan="-152.58" title="" distance="36.1083" url="{node7}" target="-158.5/-2.5/100.0" description="" tilt="-2.73" id="Point01"/>
+      <hotspot skinid="ht_node" pan="-341.98" title="" distance="25.7847" url="{node9}" target="4.7/-6.8/100.0" description="" tilt="-6.01" id="Point02"/>
+    </hotspots>
+    <media>
+      <image popbackmode="0" pan="-152.650" handcursor="0" clickmode="0" roty="0.000" popoutscaling="100" hidepinned="0" rotx="0.000" tilt="15.360" rotz="0.000" stretch="1.000" fov="26.000" height="1016" id="Element02" width="1752">
+        <source url="media/towards_marine_ drive_rd.png"/>
+      </image>
+      <image popbackmode="0" pan="-342.190" handcursor="0" clickmode="0" roty="0.000" popoutscaling="100" hidepinned="0" rotx="0.000" tilt="11.770" rotz="0.000" stretch="1.000" fov="26.000" height="1016" id="Element04" width="1413">
+        <source url="media/towards_bhubaneswar-1.png"/>
+      </image>
+      <image popbackmode="0" pan="-342.300" handcursor="0" clickmode="0" roty="0.707" popoutscaling="100" hidepinned="0" rotx="71.159" tilt="-15.200" rotz="1.258" stretch="1.988" fov="14.998" height="1920" id="Element03" width="1080">
+        <source url="media/Path.gif"/>
+      </image>
+      <image popbackmode="0" pan="-151.580" handcursor="0" clickmode="0" roty="0.205" popoutscaling="100" hidepinned="0" rotx="72.165" tilt="-14.333" rotz="-0.094" stretch="2.000" fov="15.829" height="1920" id="Element01" width="1080">
+        <source url="media/Path.gif"/>
+      </image>
+    </media>
+    <transition zoomin="0" delay="none" zoomspeed="2" zoomout="0" blendcolor="0x000000" type="crossdissolve" zoomafterinfov="140" softedge="0" zoomfov="40" enabled="1" zoomoutpause="1" blendtime="1" zoomafteroutfov="40"/>
+    <animation animsequence="Animation01" clipsrandom="0" useinautorotation="0" syncanimationwithvideo="0"/>
+    <control lockedkeyboard="0" invertcontrol="1" contextfullscreen="1" contextvr="1" simulatemass="1" dblclickfullscreen="0" lockedkeyboardzoom="0" rubberband="0" sensitivity="8" speedwheel="1" lockedmouse="0" lockedwheel="0" zoomcentercursor="1" invertwheel="0" hideabout="0" contextprojections="0"/>
+  </panorama>
+  <panorama id="node9">
+    <input levelbias="0.400" overlap="1" leveltileurl="tiles/node9/cf_%c/l_%l/c_%x/tile_%y.jpg" levelingroll="0" levelbiashidpi="1.000" leveltilesize="510" height="1500" levelingpitch="0" width="1500">
+      <level predecode="0" height="1500" preload="0" width="1500"/>
+      <level predecode="0" height="750" preload="0" width="750"/>
+      <level predecode="1" height="375" preload="1" width="375"/>
+      <preview strip="1" color="0x808080"/>
+    </input>
+    <view fovmode="2" pannorth="-59.8718">
+      <start tilt="0" pan="0" fov="100" projection="4"/>
+      <flyin tilt="-90" pan="0" fov="170" projection="9"/>
+      <min tilt="-90" pan="0" fovpixel="2"/>
+      <max tilt="90" pan="360" fov="140" fovstereographic="330" fovfisheye="360" scaletofit="1"/>
+    </view>
+    <userdata tags="SC_PART_005" nodeid="node9" title="" altitude="19.84" customnodeid="" comment="" longitude="85.787211" description="" datetime="6/21/2026 10:04 AM" info="" author="" latitude="19.785995" source="" heading="-59.8718" copyright=""/>
+    <hotspots height="20" wordwrap="1" smoothmovement="0" width="180">
+      <label borderradius="1" backgroundalpha="1" textcolor="0x000000" wordwrap="1" background="1" textalpha="1" height="20" borderalpha="1" backgroundcolor="0xffffff" enabled="1" bordercolor="0x000000" width="180" border="1"/>
+      <polystyle handcursor="1" backgroundalpha="0.25098" borderalpha="1" backgroundcolor="0x0000ff" bordercolor="0x0000ff" mode="0"/>
+      <hotspot skinid="ht_node" pan="-150.29" title="" distance="25.7847" url="{node8}" target="-156.5/-1.0/100.0" description="" tilt="-1.86" id="Point01"/>
+      <hotspot skinid="ht_node" pan="-323.56" title="" distance="21.9051" url="{node10}" target="65.1/-10.9/100.0" description="" tilt="-5.52" id="Point02"/>
+      <hotspot skinid="ht_node" pan="-33.9" title="" distance="37.1686" url="{node13}" target="77.7/-10.9/100.0" description="" tilt="-5.23" id="Point03"/>
+    </hotspots>
+    <media>
+      <image popbackmode="0" pan="-324.980" handcursor="0" clickmode="0" roty="0.000" popoutscaling="100" hidepinned="0" rotx="0.000" tilt="10.580" rotz="0.000" stretch="1.000" fov="26.000" height="1016" id="Element02" width="1752">
+        <source url="media/towards_taj_hotel_parking.png"/>
+      </image>
+      <image popbackmode="0" pan="-151.120" handcursor="0" clickmode="0" roty="0.000" popoutscaling="100" hidepinned="0" rotx="0.000" tilt="14.890" rotz="0.000" stretch="1.000" fov="26.000" height="1016" id="Element04" width="1752">
+        <source url="media/towards_marine_ drive_rd.png"/>
+      </image>
+      <image popbackmode="0" pan="-32.580" handcursor="0" clickmode="0" roty="-19.000" popoutscaling="100" hidepinned="0" rotx="0.000" tilt="7.800" rotz="0.000" stretch="1.000" fov="26.000" height="1016" id="Element06" width="1413">
+        <source url="media/towards_bhubaneswar-1.png"/>
+      </image>
+      <image popbackmode="0" pan="35.521" handcursor="0" clickmode="0" roty="-3.471" popoutscaling="100" hidepinned="0" rotx="75.260" tilt="-17.226" rotz="8.272" stretch="2.000" fov="12.726" height="1920" id="Element01" width="1080">
+        <source url="media/Path.gif"/>
+      </image>
+      <image popbackmode="0" pan="-152.250" handcursor="0" clickmode="0" roty="0.205" popoutscaling="100" hidepinned="0" rotx="72.165" tilt="-13.560" rotz="-0.094" stretch="2.000" fov="15.829" height="1920" id="Element03" width="1080">
+        <source url="media/Path.gif"/>
+      </image>
+      <image popbackmode="0" pan="-31.956" handcursor="0" clickmode="0" roty="4.618" popoutscaling="100" hidepinned="0" rotx="70.967" tilt="-14.476" rotz="-1.773" stretch="2.000" fov="12.565" height="1920" id="Element05" width="1080">
+        <source url="media/Path.gif"/>
+      </image>
+    </media>
+    <transition zoomin="0" delay="none" zoomspeed="2" zoomout="0" blendcolor="0x000000" type="crossdissolve" zoomafterinfov="140" softedge="0" zoomfov="40" enabled="1" zoomoutpause="1" blendtime="1" zoomafteroutfov="40"/>
+    <animation animsequence="Animation01" clipsrandom="0" useinautorotation="0" syncanimationwithvideo="0"/>
+    <control lockedkeyboard="0" invertcontrol="1" contextfullscreen="1" contextvr="1" simulatemass="1" dblclickfullscreen="0" lockedkeyboardzoom="0" rubberband="0" sensitivity="8" speedwheel="1" lockedmouse="0" lockedwheel="0" zoomcentercursor="1" invertwheel="0" hideabout="0" contextprojections="0"/>
+  </panorama>
+  <panorama id="node10">
+    <input levelbias="0.400" overlap="1" leveltileurl="tiles/node10/cf_%c/l_%l/c_%x/tile_%y.jpg" levelingroll="0" levelbiashidpi="1.000" leveltilesize="510" height="1500" levelingpitch="0" width="1500">
+      <level predecode="0" height="1500" preload="0" width="1500"/>
+      <level predecode="0" height="750" preload="0" width="750"/>
+      <level predecode="1" height="375" preload="1" width="375"/>
+      <preview strip="1" color="0x808080"/>
+    </input>
+    <view fovmode="2" pannorth="-179.172">
+      <start tilt="0" pan="0" fov="100" projection="4"/>
+      <flyin tilt="-90" pan="0" fov="170" projection="9"/>
+      <min tilt="-90" pan="0" fovpixel="2"/>
+      <max tilt="90" pan="360" fov="140" fovstereographic="330" fovfisheye="360" scaletofit="1"/>
+    </view>
+    <userdata tags="SC_PART_005" nodeid="node10" title="" altitude="17.92" customnodeid="" comment="" longitude="85.787030" description="" datetime="6/21/2026 10:04 AM" info="" author="" latitude="19.785896" source="" heading="-179.172" copyright=""/>
+    <hotspots height="20" wordwrap="1" smoothmovement="0" width="180">
+      <label borderradius="1" backgroundalpha="1" textcolor="0x000000" wordwrap="1" background="1" textalpha="1" height="20" borderalpha="1" backgroundcolor="0xffffff" enabled="1" bordercolor="0x000000" width="180" border="1"/>
+      <polystyle handcursor="1" backgroundalpha="0.25098" borderalpha="1" backgroundcolor="0x0000ff" bordercolor="0x0000ff" mode="0"/>
+      <hotspot skinid="ht_node" pan="-175.39" title="" distance="21.9051" url="{node9}" target="-157.3/-4.0/100.0" description="" tilt="-0.28" id="Point01"/>
+      <hotspot skinid="ht_node" pan="-286.66" title="" distance="3.98535" url="{node11}" target="-134.5/-1.3/100.0" description="" tilt="-4.91" id="Point02"/>
+    </hotspots>
+    <media>
+      <image popbackmode="0" pan="-290.670" handcursor="0" clickmode="0" roty="0.000" popoutscaling="100" hidepinned="0" rotx="0.000" tilt="12.580" rotz="0.000" stretch="1.000" fov="26.000" height="1016" id="Element02" width="1752">
+        <source url="media/towards_taj_hotel_parking.png"/>
+      </image>
+      <image popbackmode="0" pan="-175.520" handcursor="0" clickmode="0" roty="0.000" popoutscaling="100" hidepinned="0" rotx="0.000" tilt="17.060" rotz="0.000" stretch="1.000" fov="26.000" height="1016" id="Element04" width="1752">
+        <source url="media/towards_marine_ drive_rd.png"/>
+      </image>
+      <image popbackmode="0" pan="63.163" handcursor="0" clickmode="0" roty="-15.907" popoutscaling="100" hidepinned="0" rotx="69.824" tilt="-21.687" rotz="-4.953" stretch="1.999" fov="14.976" height="1920" id="Element01" width="1080">
+        <source url="media/Path.gif"/>
+      </image>
+      <image popbackmode="0" pan="-170.390" handcursor="0" clickmode="0" roty="5.234" popoutscaling="100" hidepinned="0" rotx="70.826" tilt="-12.764" rotz="4.247" stretch="1.959" fov="15.368" height="1920" id="Element03" width="1080">
+        <source url="media/Path.gif"/>
+      </image>
+    </media>
+    <transition zoomin="0" delay="none" zoomspeed="2" zoomout="0" blendcolor="0x000000" type="crossdissolve" zoomafterinfov="140" softedge="0" zoomfov="40" enabled="1" zoomoutpause="1" blendtime="1" zoomafteroutfov="40"/>
+    <animation animsequence="Animation01" clipsrandom="0" useinautorotation="0" syncanimationwithvideo="0"/>
+    <control lockedkeyboard="0" invertcontrol="1" contextfullscreen="1" contextvr="1" simulatemass="1" dblclickfullscreen="0" lockedkeyboardzoom="0" rubberband="0" sensitivity="8" speedwheel="1" lockedmouse="0" lockedwheel="0" zoomcentercursor="1" invertwheel="0" hideabout="0" contextprojections="0"/>
+  </panorama>
+  <panorama id="node11">
+    <input levelbias="0.400" overlap="1" leveltileurl="tiles/node11/cf_%c/l_%l/c_%x/tile_%y.jpg" levelingroll="0" levelbiashidpi="1.000" leveltilesize="510" height="1500" levelingpitch="0" width="1500">
+      <level predecode="0" height="1500" preload="0" width="1500"/>
+      <level predecode="0" height="750" preload="0" width="750"/>
+      <level predecode="1" height="375" preload="1" width="375"/>
+      <preview strip="1" color="0x808080"/>
+    </input>
+    <view fovmode="2" pannorth="40.2143">
+      <start tilt="0" pan="0" fov="100" projection="4"/>
+      <flyin tilt="-90" pan="0" fov="170" projection="9"/>
+      <min tilt="-90" pan="0" fovpixel="2"/>
+      <max tilt="90" pan="360" fov="140" fovstereographic="330" fovfisheye="360" scaletofit="1"/>
+    </view>
+    <userdata tags="SC_PART_005" nodeid="node11" title="" altitude="17.92" customnodeid="" comment="" longitude="85.78705430" description="" datetime="6/21/2026 10:04 AM" info="" author="" latitude="19.78586840" source="" heading="40.2143" copyright=""/>
+    <hotspots height="20" wordwrap="1" smoothmovement="0" width="180">
+      <label borderradius="1" backgroundalpha="1" textcolor="0x000000" wordwrap="1" background="1" textalpha="1" height="20" borderalpha="1" backgroundcolor="0xffffff" enabled="1" bordercolor="0x000000" width="180" border="1"/>
+      <polystyle handcursor="1" backgroundalpha="0.25098" borderalpha="1" backgroundcolor="0x0000ff" bordercolor="0x0000ff" mode="0"/>
+      <hotspot skinid="ht_node" pan="-301.06" title="" distance="3.98535" url="{node10}" target="-174.8/-0.3/100.0" description="" tilt="-18.9" id="Point01"/>
+    </hotspots>
+    <media>
+      <image popbackmode="0" pan="-127.210" handcursor="0" clickmode="0" roty="0.000" popoutscaling="100" hidepinned="0" rotx="0.000" tilt="5.770" rotz="0.000" stretch="1.000" fov="26.000" height="560" id="Element01" width="960">
+        <source url="media/Parking-1.gif"/>
+      </image>
+    </media>
+    <transition zoomin="0" delay="none" zoomspeed="2" zoomout="0" blendcolor="0x000000" type="crossdissolve" zoomafterinfov="140" softedge="0" zoomfov="40" enabled="1" zoomoutpause="1" blendtime="1" zoomafteroutfov="40"/>
+    <animation animsequence="Animation01" clipsrandom="0" useinautorotation="0" syncanimationwithvideo="0"/>
+    <control lockedkeyboard="0" invertcontrol="1" contextfullscreen="1" contextvr="1" simulatemass="1" dblclickfullscreen="0" lockedkeyboardzoom="0" rubberband="0" sensitivity="8" speedwheel="1" lockedmouse="0" lockedwheel="0" zoomcentercursor="1" invertwheel="0" hideabout="0" contextprojections="0"/>
+  </panorama>
+  <panorama id="node13">
+    <input levelbias="0.400" overlap="1" leveltileurl="tiles/node13/cf_%c/l_%l/c_%x/tile_%y.jpg" levelingroll="0" levelbiashidpi="1.000" leveltilesize="510" height="1500" levelingpitch="0" width="1500">
+      <level predecode="0" height="1500" preload="0" width="1500"/>
+      <level predecode="0" height="750" preload="0" width="750"/>
+      <level predecode="1" height="375" preload="1" width="375"/>
+      <preview strip="1" color="0x808080"/>
+    </input>
+    <view fovmode="2" pannorth="0">
+      <start tilt="0" pan="0" fov="100" projection="4"/>
+      <flyin tilt="-90" pan="0" fov="170" projection="9"/>
+      <min tilt="-90" pan="0" fovpixel="2"/>
+      <max tilt="90" pan="360" fov="140" fovstereographic="330" fovfisheye="360" scaletofit="1"/>
+    </view>
+    <userdata tags="SC_PART_005" nodeid="node13" title="" altitude="20.32" customnodeid="" comment="" longitude="85.787048" description="" datetime="6/21/2026 10:05 AM" info="" author="" latitude="19.786292" source="" heading="0" copyright=""/>
+    <hotspots height="20" wordwrap="1" smoothmovement="0" width="180">
+      <label borderradius="1" backgroundalpha="1" textcolor="0x000000" wordwrap="1" background="1" textalpha="1" height="20" borderalpha="1" backgroundcolor="0xffffff" enabled="1" bordercolor="0x000000" width="180" border="1"/>
+      <polystyle handcursor="1" backgroundalpha="0.25098" borderalpha="1" backgroundcolor="0x0000ff" bordercolor="0x0000ff" mode="0"/>
+      <hotspot skinid="ht_node" pan="-149.7" title="" distance="37.1686" url="{node9}" target="-155.1/-3.1/100.0" description="" tilt="-1.27" id="Point01"/>
+      <hotspot skinid="ht_node" pan="-254.59" title="" distance="33.7793" url="{node14}" target="17.6/-3.7/100.0" description="" tilt="-2.26" id="Point02"/>
+    </hotspots>
+    <media>
+      <image popbackmode="0" pan="-253.540" handcursor="0" clickmode="0" roty="0.000" popoutscaling="100" hidepinned="0" rotx="0.000" tilt="12.600" rotz="0.000" stretch="1.000" fov="26.000" height="1016" id="Element03" width="1752">
+        <source url="media/towards_sterling_parking.png"/>
+      </image>
+      <image popbackmode="0" pan="-149.620" handcursor="0" clickmode="0" roty="0.000" popoutscaling="100" hidepinned="0" rotx="0.000" tilt="14.460" rotz="0.000" stretch="1.000" fov="26.000" height="1016" id="Element04" width="1752">
+        <source url="media/towards_marine_ drive_rd.png"/>
+      </image>
+      <image popbackmode="0" pan="-41.600" handcursor="0" clickmode="0" roty="0.000" popoutscaling="100" hidepinned="0" rotx="0.000" tilt="0.220" rotz="0.000" stretch="1.000" fov="19.000" height="560" id="Element05" width="960">
+        <source url="media/Parking-1.gif"/>
+      </image>
+      <image popbackmode="0" pan="-306.150" handcursor="0" clickmode="0" roty="0.000" popoutscaling="100" hidepinned="0" rotx="0.000" tilt="0.700" rotz="0.000" stretch="1.000" fov="22.000" height="560" id="Element06" width="960">
+        <source url="media/Parking-1.gif"/>
+      </image>
+      <image popbackmode="0" pan="89.338" handcursor="0" clickmode="0" roty="-25.539" popoutscaling="100" hidepinned="0" rotx="66.699" tilt="-15.152" rotz="-9.885" stretch="2.000" fov="14.653" height="1920" id="Element02" width="1080">
+        <source url="media/Path.gif"/>
+      </image>
+      <image popbackmode="0" pan="-149.050" handcursor="0" clickmode="0" roty="0.205" popoutscaling="100" hidepinned="0" rotx="72.165" tilt="-13.160" rotz="-0.094" stretch="2.000" fov="15.829" height="1920" id="Element01" width="1080">
+        <source url="media/Path.gif"/>
+      </image>
+    </media>
+    <transition zoomin="0" delay="none" zoomspeed="2" zoomout="0" blendcolor="0x000000" type="crossdissolve" zoomafterinfov="140" softedge="0" zoomfov="40" enabled="1" zoomoutpause="1" blendtime="1" zoomafteroutfov="40"/>
+    <animation animsequence="Animation01" clipsrandom="0" useinautorotation="0" syncanimationwithvideo="0"/>
+    <control lockedkeyboard="0" invertcontrol="1" contextfullscreen="1" contextvr="1" simulatemass="1" dblclickfullscreen="0" lockedkeyboardzoom="0" rubberband="0" sensitivity="8" speedwheel="1" lockedmouse="0" lockedwheel="0" zoomcentercursor="1" invertwheel="0" hideabout="0" contextprojections="0"/>
+  </panorama>
+  <panorama id="node14">
+    <input levelbias="0.400" overlap="1" leveltileurl="tiles/node14/cf_%c/l_%l/c_%x/tile_%y.jpg" levelingroll="0" levelbiashidpi="1.000" leveltilesize="510" height="1500" levelingpitch="0" width="1500">
+      <level predecode="0" height="1500" preload="0" width="1500"/>
+      <level predecode="0" height="750" preload="0" width="750"/>
+      <level predecode="1" height="375" preload="1" width="375"/>
+      <preview strip="1" color="0x808080"/>
+    </input>
+    <view fovmode="2" pannorth="-93.0541">
+      <start tilt="0" pan="0" fov="100" projection="4"/>
+      <flyin tilt="-90" pan="0" fov="170" projection="9"/>
+      <min tilt="-90" pan="0" fovpixel="2"/>
+      <max tilt="90" pan="360" fov="140" fovstereographic="330" fovfisheye="360" scaletofit="1"/>
+    </view>
+    <userdata tags="SC_PART_005" nodeid="node14" title="" altitude="20.32" customnodeid="" comment="" longitude="85.786741" description="" datetime="6/21/2026 10:05 AM" info="" author="" latitude="19.786198" source="" heading="-93.0541" copyright=""/>
+    <hotspots height="20" wordwrap="1" smoothmovement="0" width="180">
+      <label borderradius="1" backgroundalpha="1" textcolor="0x000000" wordwrap="1" background="1" textalpha="1" height="20" borderalpha="1" backgroundcolor="0xffffff" enabled="1" bordercolor="0x000000" width="180" border="1"/>
+      <polystyle handcursor="1" backgroundalpha="0.25098" borderalpha="1" backgroundcolor="0x0000ff" bordercolor="0x0000ff" mode="0"/>
+      <hotspot skinid="ht_node" pan="-165.45" title="" distance="33.7793" url="{node13}" target="-149.3/-2.4/100.0" description="" tilt="-2.81" id="Point01"/>
+      <hotspot skinid="ht_node" pan="-341" title="" distance="34.0476" url="{node15}" target="15.0/-1.5/100.0" description="" tilt="-2.13" id="Point02"/>
+    </hotspots>
+    <media>
+      <image popbackmode="0" pan="-342.150" handcursor="0" clickmode="0" roty="0.000" popoutscaling="100" hidepinned="0" rotx="0.000" tilt="12.340" rotz="0.000" stretch="1.000" fov="26.000" height="1016" id="Element02" width="1752">
+        <source url="media/towards_sterling_parking.png"/>
+      </image>
+      <image popbackmode="0" pan="-164.050" handcursor="0" clickmode="0" roty="-19.000" popoutscaling="100" hidepinned="0" rotx="0.000" tilt="11.430" rotz="0.000" stretch="1.000" fov="26.000" height="1016" id="Element04" width="1413">
+        <source url="media/towards_bhubaneswar-1.png"/>
+      </image>
+      <image popbackmode="0" pan="-39.940" handcursor="0" clickmode="0" roty="0.000" popoutscaling="100" hidepinned="0" rotx="0.000" tilt="-2.770" rotz="0.000" stretch="1.000" fov="22.000" height="560" id="Element05" width="960">
+        <source url="media/Parking-1.gif"/>
+      </image>
+      <image popbackmode="0" pan="-164.150" handcursor="0" clickmode="0" roty="0.205" popoutscaling="100" hidepinned="0" rotx="72.165" tilt="-16.340" rotz="-0.094" stretch="2.000" fov="15.829" height="1920" id="Element03" width="1080">
+        <source url="media/Path.gif"/>
+      </image>
+      <image popbackmode="0" pan="19.647" handcursor="0" clickmode="0" roty="2.527" popoutscaling="100" hidepinned="0" rotx="69.563" tilt="-14.038" rotz="0.591" stretch="1.947" fov="15.105" height="1920" id="Element01" width="1080">
+        <source url="media/Path.gif"/>
+      </image>
+    </media>
+    <transition zoomin="0" delay="none" zoomspeed="2" zoomout="0" blendcolor="0x000000" type="crossdissolve" zoomafterinfov="140" softedge="0" zoomfov="40" enabled="1" zoomoutpause="1" blendtime="1" zoomafteroutfov="40"/>
+    <animation animsequence="Animation01" clipsrandom="0" useinautorotation="0" syncanimationwithvideo="0"/>
+    <control lockedkeyboard="0" invertcontrol="1" contextfullscreen="1" contextvr="1" simulatemass="1" dblclickfullscreen="0" lockedkeyboardzoom="0" rubberband="0" sensitivity="8" speedwheel="1" lockedmouse="0" lockedwheel="0" zoomcentercursor="1" invertwheel="0" hideabout="0" contextprojections="0"/>
+  </panorama>
+  <panorama id="node15">
+    <input levelbias="0.400" overlap="1" leveltileurl="tiles/node15/cf_%c/l_%l/c_%x/tile_%y.jpg" levelingroll="0" levelbiashidpi="1.000" leveltilesize="510" height="1500" levelingpitch="0" width="1500">
+      <level predecode="0" height="1500" preload="0" width="1500"/>
+      <level predecode="0" height="750" preload="0" width="750"/>
+      <level predecode="1" height="375" preload="1" width="375"/>
+      <preview strip="1" color="0x808080"/>
+    </input>
+    <view fovmode="2" pannorth="-90.748">
+      <start tilt="0" pan="0" fov="100" projection="4"/>
+      <flyin tilt="-90" pan="0" fov="170" projection="9"/>
+      <min tilt="-90" pan="0" fovpixel="2"/>
+      <max tilt="90" pan="360" fov="140" fovstereographic="330" fovfisheye="360" scaletofit="1"/>
+    </view>
+    <userdata tags="SC_PART_005" nodeid="node15" title="" altitude="20.81" customnodeid="" comment="" longitude="85.786443" description="" datetime="6/21/2026 10:05 AM" info="" author="" latitude="19.786075" source="" heading="-90.748" copyright=""/>
+    <hotspots height="20" wordwrap="1" smoothmovement="0" width="180">
+      <label borderradius="1" backgroundalpha="1" textcolor="0x000000" wordwrap="1" background="1" textalpha="1" height="20" borderalpha="1" backgroundcolor="0xffffff" enabled="1" bordercolor="0x000000" width="180" border="1"/>
+      <polystyle handcursor="1" backgroundalpha="0.25098" borderalpha="1" backgroundcolor="0x0000ff" bordercolor="0x0000ff" mode="0"/>
+      <hotspot skinid="ht_node" pan="-165.98" title="" distance="34.0476" url="{node14}" target="-164.4/-5.7/100.0" description="" tilt="-3.82" id="Point01"/>
+      <hotspot skinid="ht_node" pan="-345.21" title="" distance="47.77" url="{node16}" target="28.9/-2.0/100.0" description="" tilt="-1.71" id="Point02"/>
+    </hotspots>
+    <media>
+      <image popbackmode="0" pan="-61.510" handcursor="0" clickmode="0" roty="0.000" popoutscaling="100" hidepinned="0" rotx="0.000" tilt="-3.190" rotz="0.000" stretch="1.000" fov="22.000" height="560" id="Element01" width="960">
+        <source url="media/Parking-1.gif"/>
+      </image>
+      <image popbackmode="0" pan="-345.120" handcursor="0" clickmode="0" roty="0.000" popoutscaling="100" hidepinned="0" rotx="0.000" tilt="13.270" rotz="0.000" stretch="1.000" fov="26.000" height="1016" id="Element03" width="1752">
+        <source url="media/towards_sterling_parking.png"/>
+      </image>
+      <image popbackmode="0" pan="-167.030" handcursor="0" clickmode="0" roty="-19.000" popoutscaling="100" hidepinned="0" rotx="0.000" tilt="12.250" rotz="0.000" stretch="1.000" fov="26.000" height="1016" id="Element04" width="1413">
+        <source url="media/towards_bhubaneswar-1.png"/>
+      </image>
+      <image popbackmode="0" pan="-165.980" handcursor="0" clickmode="0" roty="2.205" popoutscaling="100" hidepinned="0" rotx="72.165" tilt="-15.130" rotz="-0.094" stretch="2.000" fov="15.829" height="1920" id="Element05" width="1080">
+        <source url="media/Path.gif"/>
+      </image>
+      <image popbackmode="0" pan="16.080" handcursor="0" clickmode="0" roty="1.265" popoutscaling="100" hidepinned="0" rotx="71.303" tilt="-12.775" rotz="1.035" stretch="1.956" fov="14.924" height="1920" id="Element02" width="1080">
+        <source url="media/Path.gif"/>
+      </image>
+    </media>
+    <transition zoomin="0" delay="none" zoomspeed="2" zoomout="0" blendcolor="0x000000" type="crossdissolve" zoomafterinfov="140" softedge="0" zoomfov="40" enabled="1" zoomoutpause="1" blendtime="1" zoomafteroutfov="40"/>
+    <animation animsequence="Animation01" clipsrandom="0" useinautorotation="0" syncanimationwithvideo="0"/>
+    <control lockedkeyboard="0" invertcontrol="1" contextfullscreen="1" contextvr="1" simulatemass="1" dblclickfullscreen="0" lockedkeyboardzoom="0" rubberband="0" sensitivity="8" speedwheel="1" lockedmouse="0" lockedwheel="0" zoomcentercursor="1" invertwheel="0" hideabout="0" contextprojections="0"/>
+  </panorama>
+  <panorama id="node16">
+    <input levelbias="0.400" overlap="1" leveltileurl="tiles/node16/cf_%c/l_%l/c_%x/tile_%y.jpg" levelingroll="0" levelbiashidpi="1.000" leveltilesize="510" height="1500" levelingpitch="0" width="1500">
+      <level predecode="0" height="1500" preload="0" width="1500"/>
+      <level predecode="0" height="750" preload="0" width="750"/>
+      <level predecode="1" height="375" preload="1" width="375"/>
+      <preview strip="1" color="0x808080"/>
+    </input>
+    <view fovmode="2" pannorth="-80.4053">
+      <start tilt="0" pan="0" fov="100" projection="4"/>
+      <flyin tilt="-90" pan="0" fov="170" projection="9"/>
+      <min tilt="-90" pan="0" fovpixel="2"/>
+      <max tilt="90" pan="360" fov="140" fovstereographic="330" fovfisheye="360" scaletofit="1"/>
+    </view>
+    <userdata tags="SC_PART_005" nodeid="node16" title="" altitude="20.32" customnodeid="" comment="" longitude="85.786014" description="" datetime="6/21/2026 10:05 AM" info="" author="" latitude="19.785928" source="" heading="-80.4053" copyright=""/>
+    <hotspots height="20" wordwrap="1" smoothmovement="0" width="180">
+      <label borderradius="1" backgroundalpha="1" textcolor="0x000000" wordwrap="1" background="1" textalpha="1" height="20" borderalpha="1" backgroundcolor="0xffffff" enabled="1" bordercolor="0x000000" width="180" border="1"/>
+      <polystyle handcursor="1" backgroundalpha="0.25098" borderalpha="1" backgroundcolor="0x0000ff" bordercolor="0x0000ff" mode="0"/>
+      <hotspot skinid="ht_node" pan="-153.98" title="" distance="47.77" url="{node15}" target="-168.5/-3.3/100.0" description="" tilt="-2.91" id="Point01"/>
+      <hotspot skinid="ht_node" pan="-330.83" title="" distance="40.766" url="{node17}" target="33.9/-2.4/100.0" description="" tilt="-2.83" id="Point02"/>
+    </hotspots>
+    <media>
+      <image popbackmode="0" pan="-73.170" handcursor="0" clickmode="0" roty="0.000" popoutscaling="100" hidepinned="0" rotx="0.000" tilt="-6.150" rotz="0.000" stretch="1.000" fov="22.000" height="560" id="Element01" width="960">
+        <source url="media/Parking-1.gif"/>
+      </image>
+      <image popbackmode="0" pan="-154.230" handcursor="0" clickmode="0" roty="-19.000" popoutscaling="100" hidepinned="0" rotx="0.000" tilt="9.060" rotz="0.000" stretch="1.000" fov="26.000" height="1016" id="Element03" width="1413">
+        <source url="media/towards_bhubaneswar-1.png"/>
+      </image>
+      <image popbackmode="0" pan="-331.220" handcursor="0" clickmode="0" roty="0.000" popoutscaling="100" hidepinned="0" rotx="0.000" tilt="12.210" rotz="0.000" stretch="1.000" fov="26.000" height="1016" id="Element05" width="1752">
+        <source url="media/towards_sterling_parking.png"/>
+      </image>
+      <image popbackmode="0" pan="-154.700" handcursor="0" clickmode="0" roty="0.205" popoutscaling="100" hidepinned="0" rotx="72.165" tilt="-12.300" rotz="-0.094" stretch="2.000" fov="15.829" height="1920" id="Element02" width="1080">
+        <source url="media/Path.gif"/>
+      </image>
+      <image popbackmode="0" pan="-330.350" handcursor="0" clickmode="0" roty="1.265" popoutscaling="100" hidepinned="0" rotx="71.303" tilt="-14.200" rotz="1.035" stretch="1.956" fov="14.924" height="1920" id="Element04" width="1080">
+        <source url="media/Path.gif"/>
+      </image>
+    </media>
+    <transition zoomin="0" delay="none" zoomspeed="2" zoomout="0" blendcolor="0x000000" type="crossdissolve" zoomafterinfov="140" softedge="0" zoomfov="40" enabled="1" zoomoutpause="1" blendtime="1" zoomafteroutfov="40"/>
+    <animation animsequence="Animation01" clipsrandom="0" useinautorotation="0" syncanimationwithvideo="0"/>
+    <control lockedkeyboard="0" invertcontrol="1" contextfullscreen="1" contextvr="1" simulatemass="1" dblclickfullscreen="0" lockedkeyboardzoom="0" rubberband="0" sensitivity="8" speedwheel="1" lockedmouse="0" lockedwheel="0" zoomcentercursor="1" invertwheel="0" hideabout="0" contextprojections="0"/>
+  </panorama>
+  <panorama id="node17">
+    <input levelbias="0.400" overlap="1" leveltileurl="tiles/node17/cf_%c/l_%l/c_%x/tile_%y.jpg" levelingroll="0" levelbiashidpi="1.000" leveltilesize="510" height="1500" levelingpitch="0" width="1500">
+      <level predecode="0" height="1500" preload="0" width="1500"/>
+      <level predecode="0" height="750" preload="0" width="750"/>
+      <level predecode="1" height="375" preload="1" width="375"/>
+      <preview strip="1" color="0x808080"/>
+    </input>
+    <view fovmode="2" pannorth="-75.3544">
+      <start tilt="0" pan="0" fov="100" projection="4"/>
+      <flyin tilt="-90" pan="0" fov="170" projection="9"/>
+      <min tilt="-90" pan="0" fovpixel="2"/>
+      <max tilt="90" pan="360" fov="140" fovstereographic="330" fovfisheye="360" scaletofit="1"/>
+    </view>
+    <userdata tags="SC_PART_005" nodeid="node17" title="" altitude="20.32" customnodeid="" comment="" longitude="85.785642" description="" datetime="6/21/2026 10:05 AM" info="" author="" latitude="19.785819" source="" heading="-75.3544" copyright=""/>
+    <hotspots height="20" wordwrap="1" smoothmovement="0" width="180">
+      <label borderradius="1" backgroundalpha="1" textcolor="0x000000" wordwrap="1" background="1" textalpha="1" height="20" borderalpha="1" backgroundcolor="0xffffff" enabled="1" bordercolor="0x000000" width="180" border="1"/>
+      <polystyle handcursor="1" backgroundalpha="0.25098" borderalpha="1" backgroundcolor="0x0000ff" bordercolor="0x0000ff" mode="0"/>
+      <hotspot skinid="ht_node" pan="-148.81" title="" distance="40.766" url="{node16}" target="-154.7/-1.3/100.0" description="" tilt="-2.67" id="Point01"/>
+      <hotspot skinid="ht_node" pan="-323.95" title="" distance="39.6164" url="{node18}" target="28.1/-4.7/100.0" description="" tilt="-3.98" id="Point02"/>
+    </hotspots>
+    <media>
+      <image popbackmode="0" pan="-324.630" handcursor="0" clickmode="0" roty="0.000" popoutscaling="100" hidepinned="0" rotx="0.000" tilt="10.210" rotz="0.000" stretch="1.000" fov="26.000" height="1016" id="Element02" width="1752">
+        <source url="media/towards_sterling_parking.png"/>
+      </image>
+      <image popbackmode="0" pan="-149.710" handcursor="0" clickmode="0" roty="-19.000" popoutscaling="100" hidepinned="0" rotx="0.000" tilt="9.600" rotz="0.000" stretch="1.000" fov="26.000" height="1016" id="Element04" width="1413">
+        <source url="media/towards_bhubaneswar-1.png"/>
+      </image>
+      <image popbackmode="0" pan="-148.600" handcursor="0" clickmode="0" roty="0.205" popoutscaling="100" hidepinned="0" rotx="72.165" tilt="-12.300" rotz="-0.094" stretch="2.000" fov="15.829" height="1920" id="Element03" width="1080">
+        <source url="media/Path.gif"/>
+      </image>
+      <image popbackmode="0" pan="-323.970" handcursor="0" clickmode="0" roty="1.265" popoutscaling="100" hidepinned="0" rotx="71.303" tilt="-14.110" rotz="1.035" stretch="1.956" fov="14.924" height="1920" id="Element01" width="1080">
+        <source url="media/Path.gif"/>
+      </image>
+    </media>
+    <transition zoomin="0" delay="none" zoomspeed="2" zoomout="0" blendcolor="0x000000" type="crossdissolve" zoomafterinfov="140" softedge="0" zoomfov="40" enabled="1" zoomoutpause="1" blendtime="1" zoomafteroutfov="40"/>
+    <animation animsequence="Animation01" clipsrandom="0" useinautorotation="0" syncanimationwithvideo="0"/>
+    <control lockedkeyboard="0" invertcontrol="1" contextfullscreen="1" contextvr="1" simulatemass="1" dblclickfullscreen="0" lockedkeyboardzoom="0" rubberband="0" sensitivity="8" speedwheel="1" lockedmouse="0" lockedwheel="0" zoomcentercursor="1" invertwheel="0" hideabout="0" contextprojections="0"/>
+  </panorama>
+  <panorama id="node18">
+    <input levelbias="0.400" overlap="1" leveltileurl="tiles/node18/cf_%c/l_%l/c_%x/tile_%y.jpg" levelingroll="0" levelbiashidpi="1.000" leveltilesize="510" height="1500" levelingpitch="0" width="1500">
+      <level predecode="0" height="1500" preload="0" width="1500"/>
+      <level predecode="0" height="750" preload="0" width="750"/>
+      <level predecode="1" height="375" preload="1" width="375"/>
+      <preview strip="1" color="0x808080"/>
+    </input>
+    <view fovmode="2" pannorth="-76.0441">
+      <start tilt="0" pan="0" fov="100" projection="4"/>
+      <flyin tilt="-90" pan="0" fov="170" projection="9"/>
+      <min tilt="-90" pan="0" fovpixel="2"/>
+      <max tilt="90" pan="360" fov="140" fovstereographic="330" fovfisheye="360" scaletofit="1"/>
+    </view>
+    <userdata tags="SC_PART_005" nodeid="node18" title="" altitude="19.84" customnodeid="" comment="" longitude="85.785284" description="" datetime="6/21/2026 10:06 AM" info="" author="" latitude="19.785703" source="" heading="-76.0441" copyright=""/>
+    <hotspots height="20" wordwrap="1" smoothmovement="0" width="180">
+      <label borderradius="1" backgroundalpha="1" textcolor="0x000000" wordwrap="1" background="1" textalpha="1" height="20" borderalpha="1" backgroundcolor="0xffffff" enabled="1" bordercolor="0x000000" width="180" border="1"/>
+      <polystyle handcursor="1" backgroundalpha="0.25098" borderalpha="1" backgroundcolor="0x0000ff" bordercolor="0x0000ff" mode="0"/>
+      <hotspot skinid="ht_node" pan="-153.53" title="" distance="39.6164" url="{node17}" target="-149.1/-1.3/100.0" description="" tilt="-2.1" id="Point01"/>
+      <hotspot skinid="ht_node" pan="-327.06" title="" distance="16.1546" url="{node19}" target="-32.9/-10.0/100.0" description="" tilt="-5.07" id="Point02"/>
+    </hotspots>
+    <media>
+      <image popbackmode="0" pan="-329.240" handcursor="0" clickmode="0" roty="0.000" popoutscaling="100" hidepinned="0" rotx="0.000" tilt="9.160" rotz="0.000" stretch="1.000" fov="26.000" height="1016" id="Element02" width="1752">
+        <source url="media/towards_sterling_parking.png"/>
+      </image>
+      <image popbackmode="0" pan="-154.410" handcursor="0" clickmode="0" roty="-19.000" popoutscaling="100" hidepinned="0" rotx="0.000" tilt="9.570" rotz="0.000" stretch="1.000" fov="26.000" height="1016" id="Element04" width="1413">
+        <source url="media/towards_bhubaneswar-1.png"/>
+      </image>
+      <image popbackmode="0" pan="-153.230" handcursor="0" clickmode="0" roty="0.205" popoutscaling="100" hidepinned="0" rotx="72.165" tilt="-11.340" rotz="-0.094" stretch="2.000" fov="15.829" height="1920" id="Element03" width="1080">
+        <source url="media/Path.gif"/>
+      </image>
+      <image popbackmode="0" pan="-325.830" handcursor="0" clickmode="0" roty="4.265" popoutscaling="100" hidepinned="0" rotx="71.303" tilt="-15.860" rotz="1.035" stretch="1.956" fov="14.924" height="1920" id="Element01" width="1080">
+        <source url="media/Path.gif"/>
+      </image>
+    </media>
+    <transition zoomin="0" delay="none" zoomspeed="2" zoomout="0" blendcolor="0x000000" type="crossdissolve" zoomafterinfov="140" softedge="0" zoomfov="40" enabled="1" zoomoutpause="1" blendtime="1" zoomafteroutfov="40"/>
+    <animation animsequence="Animation01" clipsrandom="0" useinautorotation="0" syncanimationwithvideo="0"/>
+    <control lockedkeyboard="0" invertcontrol="1" contextfullscreen="1" contextvr="1" simulatemass="1" dblclickfullscreen="0" lockedkeyboardzoom="0" rubberband="0" sensitivity="8" speedwheel="1" lockedmouse="0" lockedwheel="0" zoomcentercursor="1" invertwheel="0" hideabout="0" contextprojections="0"/>
+  </panorama>
+  <panorama id="node19">
+    <input levelbias="0.400" overlap="1" leveltileurl="tiles/node19/cf_%c/l_%l/c_%x/tile_%y.jpg" levelingroll="0" levelbiashidpi="1.000" leveltilesize="510" height="1500" levelingpitch="0" width="1500">
+      <level predecode="0" height="1500" preload="0" width="1500"/>
+      <level predecode="0" height="750" preload="0" width="750"/>
+      <level predecode="1" height="375" preload="1" width="375"/>
+      <preview strip="1" color="0x808080"/>
+    </input>
+    <view fovmode="2" pannorth="-146.295">
+      <start tilt="0" pan="0" fov="100" projection="4"/>
+      <flyin tilt="-90" pan="0" fov="170" projection="9"/>
+      <min tilt="-90" pan="0" fovpixel="2"/>
+      <max tilt="90" pan="360" fov="140" fovstereographic="330" fovfisheye="360" scaletofit="1"/>
+    </view>
+    <userdata tags="SC_PART_005" nodeid="node19" title="" altitude="19.36" customnodeid="" comment="" longitude="85.785171" description="" datetime="6/21/2026 10:06 AM" info="" author="" latitude="19.785604" source="" heading="-146.295" copyright=""/>
+    <hotspots height="20" wordwrap="1" smoothmovement="0" width="180">
+      <label borderradius="1" backgroundalpha="1" textcolor="0x000000" wordwrap="1" background="1" textalpha="1" height="20" borderalpha="1" backgroundcolor="0xffffff" enabled="1" bordercolor="0x000000" width="180" border="1"/>
+      <polystyle handcursor="1" backgroundalpha="0.25098" borderalpha="1" backgroundcolor="0x0000ff" bordercolor="0x0000ff" mode="0"/>
+      <hotspot skinid="ht_node" pan="-209.08" title="" distance="16.1546" url="{node18}" target="-153.6/-0.1/100.0" description="" tilt="-0.26" id="Point01"/>
+    </hotspots>
+    <media>
+      <image popbackmode="0" pan="-112.200" handcursor="0" clickmode="0" roty="0.000" popoutscaling="100" hidepinned="0" rotx="0.000" tilt="2.810" rotz="0.000" stretch="1.000" fov="22.000" height="560" id="Element01" width="960">
+        <source url="media/Parking-1.gif"/>
+      </image>
+      <image popbackmode="0" pan="-209.860" handcursor="0" clickmode="0" roty="-19.000" popoutscaling="100" hidepinned="0" rotx="0.000" tilt="12.230" rotz="0.000" stretch="1.000" fov="26.000" height="1016" id="Element03" width="1413">
+        <source url="media/towards_bhubaneswar-1.png"/>
+      </image>
+      <image popbackmode="0" pan="-209.520" handcursor="0" clickmode="0" roty="0.205" popoutscaling="100" hidepinned="0" rotx="72.165" tilt="-10.520" rotz="-0.094" stretch="2.000" fov="15.829" height="1920" id="Element02" width="1080">
+        <source url="media/Path.gif"/>
+      </image>
+    </media>
+    <transition zoomin="0" delay="none" zoomspeed="2" zoomout="0" blendcolor="0x000000" type="crossdissolve" zoomafterinfov="140" softedge="0" zoomfov="40" enabled="1" zoomoutpause="1" blendtime="1" zoomafteroutfov="40"/>
+    <animation animsequence="Animation01" clipsrandom="0" useinautorotation="0" syncanimationwithvideo="0"/>
+    <control lockedkeyboard="0" invertcontrol="1" contextfullscreen="1" contextvr="1" simulatemass="1" dblclickfullscreen="0" lockedkeyboardzoom="0" rubberband="0" sensitivity="8" speedwheel="1" lockedmouse="0" lockedwheel="0" zoomcentercursor="1" invertwheel="0" hideabout="0" contextprojections="0"/>
+  </panorama>
+  <masternode>
+    <userdata tags="" title="" author="" comment="" copyright="" description=""/>
+    <animationsequences>
+      <sequence title="Animation01"/>
+    </animationsequences>
+  </masternode>
+</tour>

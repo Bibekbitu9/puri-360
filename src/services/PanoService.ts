@@ -4,8 +4,7 @@ export class PanoService {
    */
   static getNodeUrl(nodeId: string): string {
     // We assume the Pano2VR output is hosted at this path.
-    // In Pano2VR, passing startnode=ID or node=ID in URL hash or query params
-    return `/projects/puri_walk_through/index.html#${nodeId}`;
+    return `/projects/puri_demo/puri_demo/index.html#${nodeId}`;
   }
 
   /**
