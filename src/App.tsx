@@ -11,11 +11,10 @@ import { sortNodesByDistance, findNearestNode, calculateDistance } from './gis/h
 import { formatDistance } from './utils/distanceFormatter';
 import { PanoService } from './services/PanoService';
 import { LocationDetailsDrawer } from './components/LocationDetailsDrawer';
-import { Map, ChevronRight, Loader2, ChevronUp, ChevronDown } from 'lucide-react';
+import { Map, ChevronRight, Loader2, ChevronUp, ChevronDown, X } from 'lucide-react';
 import type { PanoramaNode } from './types/gis';
 import { ServiceSelectorModal } from './components/ServiceSelectorModal';
 import type { ServiceOption } from './components/ServiceSelectorModal';
-import { TopDirectionHUD } from './components/TopDirectionHUD';
 
 // Stagger animation variants for tagline words
 const taglineWordVariants: Variants = {
@@ -71,45 +70,9 @@ function App() {
   const [serviceMap, setServiceMap] = useState<Record<string, { name: string; latitude: number; longitude: number }[]>>({});
   const [targetServiceSpotOverrideName, setTargetServiceSpotOverrideName] = useState<string | null>(null);
   const [walkingDistance, setWalkingDistance] = useState<number | null>(null);
-  const [roadName, setRoadName] = useState<string>('Grand Road');
 
-  // Fetch dynamic road name from OpenStreetMap Nominatim reverse geocoding API
-  useEffect(() => {
-    if (activeNodeId && panoramas.length > 0) {
-      const activeNode = panoramas.find((p) => p.id === activeNodeId);
-      if (activeNode) {
-        const lat = activeNode.latitude;
-        const lon = activeNode.longitude;
-        const nodeFallback = activeNode.title.replace(/\s+Spot\s+\d+/i, '').replace(/\s+\d+/g, '').trim() || 'Grand Road';
 
-        const url = `https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lon}&zoom=18&addressdetails=1`;
-        
-        let isSubscribed = true;
-        fetch(url, {
-          headers: {
-            'User-Agent': 'Puri360VirtualGuide/1.0'
-          }
-        })
-          .then((res) => res.json())
-          .then((data) => {
-            if (isSubscribed && data && data.address) {
-              const fetchedRoad = data.address.road || data.address.suburb || data.address.neighbourhood || nodeFallback;
-              setRoadName(fetchedRoad);
-            }
-          })
-          .catch((err) => {
-            console.warn('Reverse geocoding failed, falling back to node title:', err);
-            if (isSubscribed) {
-              setRoadName(nodeFallback);
-            }
-          });
 
-        return () => {
-          isSubscribed = false;
-        };
-      }
-    }
-  }, [activeNodeId, panoramas]);
 
   const handleSelectService = (service: ServiceOption) => {
     setSelectedService(service);
@@ -239,17 +202,55 @@ function App() {
     }
   }, [sortedNodes, activeNodeId]);
 
-  // Fetch realistic walking distance from OSRM foot routing API
+  // Fetch walking distance from Google Maps Distance Matrix API or OSRM foot routing API from active virtual node to service location
   useEffect(() => {
     let isSubscribed = true;
     const activeNode = panoramas.find((p) => p.id === activeNodeId);
+
     if (activeNode && targetServiceSpot) {
       const startLat = activeNode.latitude;
       const startLon = activeNode.longitude;
       const endLat = targetServiceSpot.latitude;
       const endLon = targetServiceSpot.longitude;
-      const url = `https://router.project-osrm.org/route/v1/foot/${startLon},${startLat};${endLon},${endLat}?overview=false`;
 
+      const apiKey = import.meta.env.VITE_GOOGLE_MAPS_API_KEY;
+
+      if (apiKey) {
+        // Use Google Maps Distance Matrix API
+        const url = `https://maps.googleapis.com/maps/api/distancematrix/json?origins=${startLat},${startLon}&destinations=${endLat},${endLon}&mode=walking&key=${apiKey}`;
+
+        fetch(url)
+          .then((res) => res.json())
+          .then((data) => {
+            if (isSubscribed) {
+              if (data.status === 'OK' && data.rows && data.rows[0] && data.rows[0].elements && data.rows[0].elements[0] && data.rows[0].elements[0].status === 'OK') {
+                const distanceInMeters = data.rows[0].elements[0].distance.value;
+                setWalkingDistance(distanceInMeters);
+              } else {
+                console.warn('Google Maps Distance Matrix returned non-OK status, falling back to OSRM:', data);
+                fetchOSRMDistance(startLat, startLon, endLat, endLon);
+              }
+            }
+          })
+          .catch((err) => {
+            console.error('Google Maps API fetch failed, falling back to OSRM:', err);
+            if (isSubscribed) {
+              fetchOSRMDistance(startLat, startLon, endLat, endLon);
+            }
+          });
+      } else {
+        // Fall back directly to OSRM if no Google Maps API Key is defined
+        fetchOSRMDistance(startLat, startLon, endLat, endLon);
+      }
+    } else {
+      const timer = setTimeout(() => {
+        setWalkingDistance(null);
+      }, 0);
+      return () => clearTimeout(timer);
+    }
+
+    function fetchOSRMDistance(startLat: number, startLon: number, endLat: number, endLon: number) {
+      const url = `https://router.project-osrm.org/route/v1/foot/${startLon},${startLat};${endLon},${endLat}?overview=false`;
       fetch(url)
         .then((res) => res.json())
         .then((data) => {
@@ -262,16 +263,11 @@ function App() {
           }
         })
         .catch((err) => {
-          console.error('OSRM API fetch failed, falling back to Haversine:', err);
+          console.error('OSRM API fetch failed:', err);
           if (isSubscribed) {
             setWalkingDistance(null);
           }
         });
-    } else {
-      const timer = setTimeout(() => {
-        setWalkingDistance(null);
-      }, 0);
-      return () => clearTimeout(timer);
     }
 
     return () => {
@@ -280,32 +276,26 @@ function App() {
   }, [activeNodeId, targetServiceSpot, panoramas]);
 
 
-  // Determine if the destination is to the left or right of the current active node based on longitude (East-West road layout)
-  const pathDirection = useMemo(() => {
+  // Format dynamic walking distance or fallback Haversine distance
+  const distanceStr = useMemo(() => {
     if (!targetServiceSpot || panoramas.length === 0 || !activeNodeId) {
-      return null;
+      return '';
     }
     const activeNode = panoramas.find((p) => p.id === activeNodeId);
-    const targetNode = panoramas.find((p) => p.id === targetServiceSpot.nearestNodeId);
-    
-    if (!activeNode || !targetNode) {
-      return null;
+    if (!activeNode) return '';
+
+    if (walkingDistance !== null) {
+      return formatDistance(walkingDistance);
     }
 
-    if (activeNode.id === targetNode.id) {
-      return 'arrived';
-    }
+    const haversineDist = calculateDistance(
+      { latitude: activeNode.latitude, longitude: activeNode.longitude },
+      { latitude: targetServiceSpot.latitude, longitude: targetServiceSpot.longitude }
+    );
+    return `~${formatDistance(haversineDist)}`;
+  }, [walkingDistance, activeNodeId, targetServiceSpot, panoramas]);
 
-    // East-West axis: higher longitude is to the East (Gundicha Temple / Right)
-    // lower longitude is to the West (Jagannath Temple / Left)
-    if (activeNode.longitude < targetNode.longitude) {
-      return 'right';
-    } else if (activeNode.longitude > targetNode.longitude) {
-      return 'left';
-    }
-    
-    return 'arrived';
-  }, [activeNodeId, targetServiceSpot, panoramas]);
+
 
   // Determine active node and its index in the full list
   const activeResult = useMemo(() => {
@@ -317,26 +307,7 @@ function App() {
     return { item: sortedNodes[0], index: 0, list: sortedNodes };
   }, [sortedNodes, activeNodeId]);
 
-  // Calculate bearing angle from current active node to the target service spot
-  const bearing = useMemo(() => {
-    if (!activeResult || !targetServiceSpot) return 0;
-    const activeNode = activeResult.item.node;
-    const lat1 = activeNode.latitude;
-    const lon1 = activeNode.longitude;
-    const lat2 = targetServiceSpot.latitude;
-    const lon2 = targetServiceSpot.longitude;
 
-    const dLon = (lon2 - lon1) * Math.PI / 180;
-    const lat1Rad = lat1 * Math.PI / 180;
-    const lat2Rad = lat2 * Math.PI / 180;
-
-    const y = Math.sin(dLon) * Math.cos(lat2Rad);
-    const x = Math.cos(lat1Rad) * Math.sin(lat2Rad) -
-      Math.sin(lat1Rad) * Math.cos(lat2Rad) * Math.cos(dLon);
-
-    const brng = Math.atan2(y, x) * 180 / Math.PI;
-    return (brng + 360) % 360;
-  }, [activeResult, targetServiceSpot]);
 
   // Calculate current target service spot index
   const currentTargetIndex = useMemo(() => {
@@ -535,6 +506,7 @@ function App() {
           isOpen={isServiceModalOpen}
           onClose={() => setIsServiceModalOpen(false)}
           onSelectService={handleSelectService}
+          activeServiceIds={Object.keys(serviceMap)}
         />
       </div>
     );
@@ -558,27 +530,105 @@ function App() {
         allowFullScreen
       />
 
-      {/* Top Floating Direction HUD */}
-      <TopDirectionHUD
-        targetServiceSpot={targetServiceSpot}
-        bearing={bearing}
-        pathDirection={pathDirection}
-        onCancel={() => setSelectedService(null)}
-        distance={
-          targetServiceSpot
-            ? walkingDistance !== null
-              ? formatDistance(walkingDistance)
-              : `~${formatDistance(
-                  calculateDistance(
-                    { latitude: activeNode.latitude, longitude: activeNode.longitude },
-                    { latitude: targetServiceSpot.latitude, longitude: targetServiceSpot.longitude }
-                  )
-                )}`
-            : ''
-        }
-        serviceIconName={selectedService?.iconName}
-        roadName={roadName}
-      />
+      {/* Top Floating Distance HUD Container with orange gradient */}
+      <AnimatePresence>
+        {targetServiceSpot && (
+          <motion.div
+            key="top-distance-hud"
+            className="top-distance-hud"
+            initial={{ opacity: 0, y: -80, x: '-50%' }}
+            animate={{ opacity: 1, y: 0, x: '-50%' }}
+            exit={{ opacity: 0, y: -80, x: '-50%' }}
+            transition={{ type: 'spring', stiffness: 300, damping: 25 }}
+            style={{
+              position: 'absolute',
+              top: '20px',
+              left: '50%',
+              zIndex: 100,
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'space-between',
+              gap: '16px',
+              padding: '4px 24px',
+              borderRadius: '30px',
+              background: 'linear-gradient(135deg, #FF9933, #FF6A00)',
+              color: '#ffffff',
+              boxShadow: '0 8px 32px rgba(255, 122, 0, 0.4)',
+              minWidth: '280px',
+              maxWidth: '90vw',
+              border: '1px solid rgba(255, 255, 255, 0.2)',
+            }}
+          >
+            <div style={{ display: 'flex', alignItems: 'center', gap: '12px', flex: 1, minWidth: 0 }}>
+              <div style={{
+                background: 'rgba(255, 255, 255, 0.2)',
+                borderRadius: '50%',
+                width: '36px',
+                height: '36px',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                flexShrink: 0
+              }}>
+                <span style={{ fontSize: '18px' }}>
+                  {selectedService?.iconName === 'Droplet' && '💧'}
+                  {selectedService?.iconName === 'User' && '🚻'}
+                  {selectedService?.iconName === 'Plus' && '🏥'}
+                  {selectedService?.iconName === 'Shield' && '🛡️'}
+                  {selectedService?.iconName === 'Bus' && '🚌'}
+                  {selectedService?.iconName === 'Parking' && '🅿️'}
+                </span>
+              </div>
+              <div style={{ display: 'flex', flexDirection: 'column', minWidth: 0 }}>
+                <span style={{ fontSize: '10px', textTransform: 'uppercase', letterSpacing: '0.05em', color: 'rgba(255, 255, 255, 0.8)' }}>
+                  Distance to {selectedService?.title}
+                </span>
+                <span style={{ fontSize: '14px', fontWeight: 700, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+                  {targetServiceSpot.name}
+                </span>
+              </div>
+            </div>
+
+            <div style={{
+              display: 'flex',
+              gap: '4px',
+              alignItems: 'flex-end',
+              background: 'rgba(255, 255, 255, 0.15)',
+              padding: '6px 14px',
+              borderRadius: '20px',
+              flexShrink: 0
+            }}>
+              <span style={{ fontSize: '16px', fontWeight: 800, lineHeight: 1 }}>
+                {distanceStr.replace(/[^0-9.]/g, '')}
+              </span>
+              <span style={{ fontSize: '9px', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.05em', marginTop: '2px' }}>
+                {distanceStr.replace(/[0-9.\s~]/g, '') || 'M'}
+              </span>
+            </div>
+
+            <motion.button
+              onClick={() => setSelectedService(null)}
+              style={{
+                background: 'rgba(255, 255, 255, 0.2)',
+                border: 'none',
+                borderRadius: '50%',
+                width: '24px',
+                height: '24px',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                color: '#ffffff',
+                cursor: 'pointer',
+                flexShrink: 0
+              }}
+              whileHover={{ scale: 1.1, background: 'rgba(255, 255, 255, 0.3)' }}
+              whileTap={{ scale: 0.9 }}
+            >
+              <X size={14} style={{ strokeWidth: 2.5 }} />
+            </motion.button>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       {/* Floating Bottom Navigation Card Controls */}
       <AnimatePresence mode="wait">
@@ -615,139 +665,139 @@ function App() {
             exit={{ opacity: 0, y: 60, x: "-50%" }}
             transition={{ type: 'spring', stiffness: 300, damping: 28 }}
           >
-            <motion.div 
+            <motion.div
               className="viewport-nav-card"
               animate={{ y: [0, -3, 0] }}
               transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
             >
-            <div className="viewport-spot-info" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', paddingBottom: '8px', borderBottom: '1px solid rgba(255, 255, 255, 0.08)' }}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-                <motion.button
-                  onClick={() => setIsNavCardExpanded(false)}
-                  style={{
-                    background: 'rgba(255, 255, 255, 0.1)',
-                    border: 'none',
-                    borderRadius: '50%',
-                    width: '32px',
-                    height: '32px',
+              <div className="viewport-spot-info" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', paddingBottom: '8px', borderBottom: '1px solid rgba(255, 255, 255, 0.08)' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+                  <motion.button
+                    onClick={() => setIsNavCardExpanded(false)}
+                    style={{
+                      background: 'rgba(255, 255, 255, 0.1)',
+                      border: 'none',
+                      borderRadius: '50%',
+                      width: '32px',
+                      height: '32px',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      color: 'var(--on-surface)',
+                      cursor: 'pointer',
+                    }}
+                    title="Collapse navigation panel"
+                    whileHover={{ scale: 1.1, background: 'rgba(255, 255, 255, 0.2)' }}
+                    whileTap={{ scale: 0.9 }}
+                  >
+                    <ChevronDown size={18} />
+                  </motion.button>
+
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
+                    <motion.button
+                      className="active-service-badge"
+                      onClick={() => setIsServiceModalOpen(true)}
+                      title="Click to select service category"
+                      style={{ background: 'transparent', border: 'none', padding: 0, textAlign: 'left', cursor: 'pointer' }}
+                      whileHover={{ opacity: 0.8 }}
+                    >
+                      <span style={{ fontSize: '10px', color: 'rgba(218, 226, 253, 0.6)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+                        {selectedService ? 'CATEGORY (CHANGE)' : 'SEARCH CATEGORY'}
+                      </span>
+                    </motion.button>
+
+                    {selectedService && serviceNodesSorted.length > 0 ? (
+                      <span className="viewport-spot-title" style={{ fontSize: '16px', fontWeight: 700, display: 'flex', alignItems: 'center', gap: '6px' }}>
+                        {selectedService.iconName === 'Droplet' && <span style={{ fontSize: '18px' }}>💧</span>}
+                        {selectedService.iconName === 'User' && <span style={{ fontSize: '18px' }}>🚻</span>}
+                        {selectedService.iconName === 'Plus' && <span style={{ fontSize: '18px' }}>🏥</span>}
+                        {selectedService.iconName === 'Shield' && <span style={{ fontSize: '18px' }}>🛡️</span>}
+                        {selectedService.iconName === 'Bus' && <span style={{ fontSize: '18px' }}>🚌</span>}
+                        {selectedService.iconName === 'Parking' && <span style={{ fontSize: '18px' }}>🅿️</span>}
+                        <strong>{targetServiceSpot ? targetServiceSpot.name : selectedService.title}</strong>
+                        <span style={{ fontSize: '12px', color: 'var(--tertiary)', fontWeight: 600 }}>({targetServiceSpot ? currentTargetIndex + 1 : 1}/{serviceNodesSorted.length})</span>
+                      </span>
+                    ) : (
+                      <span className="viewport-spot-title" style={{ fontSize: '16px', fontWeight: 700 }}>
+                        <strong>{sortedNodes[0].node.title}</strong>
+                      </span>
+                    )}
+                  </div>
+                </div>
+
+                {/* Distance Badge matching Top HUD - Hidden if Top HUD is active to prevent duplication */}
+                {!targetServiceSpot && (
+                  <div style={{
+                    background: 'linear-gradient(135deg, rgba(255, 122, 0, 0.15), rgba(229, 57, 53, 0.1))',
+                    border: '1px solid rgba(255, 122, 0, 0.3)',
+                    borderRadius: 'var(--radius-md)',
+                    padding: '8px 12px',
                     display: 'flex',
+                    flexDirection: 'column',
                     alignItems: 'center',
                     justifyContent: 'center',
-                    color: 'var(--on-surface)',
-                    cursor: 'pointer',
-                  }}
-                  title="Collapse navigation panel"
-                  whileHover={{ scale: 1.1, background: 'rgba(255, 255, 255, 0.2)' }}
-                  whileTap={{ scale: 0.9 }}
+                    minWidth: '64px',
+                    boxShadow: '0 4px 12px rgba(255, 122, 0, 0.1)',
+                    flexShrink: 0
+                  }}>
+                    <span style={{
+                      fontSize: '18px',
+                      fontWeight: 800,
+                      color: 'var(--primary)',
+                      lineHeight: 1,
+                      whiteSpace: 'nowrap'
+                    }}>
+                      {formatDistance(sortedNodes[0].distanceMeters).replace(/[^0-9.]/g, '')}
+                    </span>
+                    <span style={{
+                      fontSize: '9px',
+                      fontWeight: 700,
+                      color: 'var(--tertiary)',
+                      textTransform: 'uppercase',
+                      letterSpacing: '0.05em',
+                      marginTop: '2px'
+                    }}>
+                      {formatDistance(sortedNodes[0].distanceMeters).replace(/[0-9.\s]/g, '') || 'M'}
+                    </span>
+                  </div>
+                )}
+              </div>
+              <div className="viewport-actions-row" style={{ paddingTop: '8px' }}>
+                <motion.button
+                  className="viewport-action-btn"
+                  onClick={() => setIsDetailsOpen(true)}
+                  whileHover={{ scale: 1.03 }}
+                  whileTap={{ scale: 0.96 }}
                 >
-                  <ChevronDown size={18} />
+                  <span>Details</span>
                 </motion.button>
 
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
-                  <motion.button
-                    className="active-service-badge"
-                    onClick={() => setIsServiceModalOpen(true)}
-                    title="Click to select service category"
-                    style={{ background: 'transparent', border: 'none', padding: 0, textAlign: 'left', cursor: 'pointer' }}
-                    whileHover={{ opacity: 0.8 }}
-                  >
-                    <span style={{ fontSize: '10px', color: 'rgba(218, 226, 253, 0.6)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
-                      {selectedService ? 'CATEGORY (CHANGE)' : 'SEARCH CATEGORY'}
-                    </span>
-                  </motion.button>
-                  
-                  {selectedService && serviceNodesSorted.length > 0 ? (
-                    <span className="viewport-spot-title" style={{ fontSize: '16px', fontWeight: 700, display: 'flex', alignItems: 'center', gap: '6px' }}>
-                      {selectedService.iconName === 'Droplet' && <span style={{fontSize: '18px'}}>💧</span>}
-                      {selectedService.iconName === 'User' && <span style={{fontSize: '18px'}}>🚻</span>}
-                      {selectedService.iconName === 'Plus' && <span style={{fontSize: '18px'}}>🏥</span>}
-                      {selectedService.iconName === 'Shield' && <span style={{fontSize: '18px'}}>🛡️</span>}
-                      {selectedService.iconName === 'Bus' && <span style={{fontSize: '18px'}}>🚌</span>}
-                      {selectedService.iconName === 'Parking' && <span style={{fontSize: '18px'}}>🅿️</span>}
-                      <strong>{targetServiceSpot ? targetServiceSpot.name : selectedService.title}</strong>
-                      <span style={{ fontSize: '12px', color: 'var(--tertiary)', fontWeight: 600 }}>({targetServiceSpot ? currentTargetIndex + 1 : 1}/{serviceNodesSorted.length})</span>
-                    </span>
-                  ) : (
-                    <span className="viewport-spot-title" style={{ fontSize: '16px', fontWeight: 700 }}>
-                      <strong>{sortedNodes[0].node.title}</strong>
-                    </span>
-                  )}
-                </div>
+                <motion.a
+                  className="viewport-action-btn"
+                  href={`https://www.google.com/maps/search/?api=1&query=${activeNode.latitude},${activeNode.longitude}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  style={{ textDecoration: 'none' }}
+                  whileHover={{ scale: 1.03 }}
+                  whileTap={{ scale: 0.96 }}
+                >
+                  <Map size={14} />
+                  <span>Map</span>
+                </motion.a>
+
+                <motion.button
+                  className="viewport-action-btn primary"
+                  onClick={handleNextNearest}
+                  disabled={!selectedService || serviceNodesSorted.length <= 1}
+                  whileHover={{ scale: 1.03 }}
+                  whileTap={{ scale: 0.96 }}
+                >
+                  <span>Next Location</span>
+                  <ChevronRight size={14} />
+                </motion.button>
               </div>
-
-              {/* Distance Badge matching Top HUD - Hidden if Top HUD is active to prevent duplication */}
-              {!targetServiceSpot && (
-                <div style={{
-                  background: 'linear-gradient(135deg, rgba(255, 122, 0, 0.15), rgba(229, 57, 53, 0.1))',
-                  border: '1px solid rgba(255, 122, 0, 0.3)',
-                  borderRadius: 'var(--radius-md)',
-                  padding: '8px 12px',
-                  display: 'flex',
-                  flexDirection: 'column',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  minWidth: '64px',
-                  boxShadow: '0 4px 12px rgba(255, 122, 0, 0.1)',
-                  flexShrink: 0
-                }}>
-                  <span style={{ 
-                    fontSize: '18px', 
-                    fontWeight: 800, 
-                    color: 'var(--primary)',
-                    lineHeight: 1,
-                    whiteSpace: 'nowrap'
-                  }}>
-                    {formatDistance(sortedNodes[0].distanceMeters).replace(/[^0-9.]/g, '')}
-                  </span>
-                  <span style={{ 
-                    fontSize: '9px', 
-                    fontWeight: 700, 
-                    color: 'var(--tertiary)', 
-                    textTransform: 'uppercase',
-                    letterSpacing: '0.05em',
-                    marginTop: '2px'
-                  }}>
-                    {formatDistance(sortedNodes[0].distanceMeters).replace(/[0-9.\s]/g, '') || 'M'}
-                  </span>
-                </div>
-              )}
-            </div>
-            <div className="viewport-actions-row" style={{ paddingTop: '8px' }}>
-              <motion.button
-                className="viewport-action-btn"
-                onClick={() => setIsDetailsOpen(true)}
-                whileHover={{ scale: 1.03 }}
-                whileTap={{ scale: 0.96 }}
-              >
-                <span>Details</span>
-              </motion.button>
-
-              <motion.a
-                className="viewport-action-btn"
-                href={`https://www.google.com/maps/search/?api=1&query=${activeNode.latitude},${activeNode.longitude}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                style={{ textDecoration: 'none' }}
-                whileHover={{ scale: 1.03 }}
-                whileTap={{ scale: 0.96 }}
-              >
-                <Map size={14} />
-                <span>Map</span>
-              </motion.a>
-
-              <motion.button
-                className="viewport-action-btn primary"
-                onClick={handleNextNearest}
-                disabled={!selectedService || serviceNodesSorted.length <= 1}
-                whileHover={{ scale: 1.03 }}
-                whileTap={{ scale: 0.96 }}
-              >
-                <span>Next Location</span>
-                <ChevronRight size={14} />
-              </motion.button>
-            </div>
+            </motion.div>
           </motion.div>
-        </motion.div>
         )}
       </AnimatePresence>
 
@@ -765,6 +815,7 @@ function App() {
         isOpen={isServiceModalOpen}
         onClose={() => setIsServiceModalOpen(false)}
         onSelectService={handleSelectService}
+        activeServiceIds={Object.keys(serviceMap)}
       />
     </div>
   );

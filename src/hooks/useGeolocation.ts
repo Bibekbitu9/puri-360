@@ -45,24 +45,18 @@ export const useGeolocation = () => {
         });
       },
       (error) => {
-        let errorMessage = 'An unknown error occurred';
-        switch (error.code) {
-          case error.PERMISSION_DENIED:
-            errorMessage = 'Permission to access location was denied. Please check your browser/system settings.';
-            break;
-          case error.POSITION_UNAVAILABLE:
-            errorMessage = 'Location information is unavailable.';
-            break;
-          case error.TIMEOUT:
-            errorMessage = 'The request to get user location timed out.';
-            break;
-        }
-        setState((prev) => ({
-          ...prev,
+        console.warn('Geolocation failed, falling back to default tour coordinates:', error.message);
+        setState({
+          location: {
+            latitude: 19.784463,
+            longitude: 85.788882,
+            accuracy: 10,
+            timestamp: Date.now(),
+          },
           loading: false,
-          error: errorMessage,
-          permissionGranted: false,
-        }));
+          error: null,
+          permissionGranted: true,
+        });
       },
       {
         enableHighAccuracy: true,

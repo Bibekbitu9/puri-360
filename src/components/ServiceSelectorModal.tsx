@@ -60,6 +60,7 @@ interface ServiceSelectorModalProps {
   isOpen: boolean;
   onClose: () => void;
   onSelectService: (service: ServiceOption) => void;
+  activeServiceIds?: string[];
 }
 
 // Temple Shikhara SVG outline
