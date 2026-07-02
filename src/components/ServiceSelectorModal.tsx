@@ -10,6 +10,7 @@ export interface ServiceOption {
   title: string;
   iconName: 'Droplet' | 'User' | 'Plus' | 'Shield' | 'Bus' | 'Parking';
   className: string;
+  isDisabled?: boolean;
 }
 
 const SERVICE_OPTIONS: ServiceOption[] = [
@@ -18,6 +19,7 @@ const SERVICE_OPTIONS: ServiceOption[] = [
     title: 'Drinking Water',
     iconName: 'Droplet',
     className: 'water',
+    isDisabled: true,
   },
   {
     id: 'toilets',
@@ -30,12 +32,14 @@ const SERVICE_OPTIONS: ServiceOption[] = [
     title: 'Medical Help',
     iconName: 'Plus',
     className: 'aid',
+    isDisabled: true,
   },
   {
     id: 'police_centre',
     title: 'Police',
     iconName: 'Shield',
     className: 'police',
+    isDisabled: true,
   },
   {
     id: 'parking',
@@ -48,6 +52,7 @@ const SERVICE_OPTIONS: ServiceOption[] = [
     title: 'Transport',
     iconName: 'Bus',
     className: 'transport',
+    isDisabled: true,
   },
 ];
 
@@ -201,23 +206,29 @@ export const ServiceSelectorModal: React.FC<ServiceSelectorModalProps> = ({
               {SERVICE_OPTIONS.map((option, index) => (
                 <motion.div
                   key={option.id}
-                  className="service-card"
-                  onClick={() => onSelectService(option)}
+                  className={`service-card ${option.isDisabled ? 'service-card-disabled' : ''}`}
+                  onClick={() => {
+                    if (!option.isDisabled) {
+                      onSelectService(option);
+                    }
+                  }}
                   custom={index}
                   initial="hidden"
                   animate="visible"
                   variants={cardVariants}
-                  whileHover={{ scale: 1.04, y: -3 }}
-                  whileTap={{ scale: 0.97 }}
+                  whileHover={!option.isDisabled ? { scale: 1.04, y: -3 } : {}}
+                  whileTap={!option.isDisabled ? { scale: 0.97 } : {}}
+                  style={option.isDisabled ? { opacity: 0.5, cursor: 'not-allowed', filter: 'grayscale(100%)' } : {}}
                 >
                   <motion.div
                     className={`service-icon-circle ${option.className}`}
-                    whileHover={{ scale: 1.1 }}
+                    whileHover={!option.isDisabled ? { scale: 1.1 } : {}}
                     transition={{ type: 'spring', stiffness: 400, damping: 20 }}
                   >
                     {getIcon(option.iconName, 60)}
                   </motion.div>
                   <span className="service-card-title">{option.title}</span>
+                  {option.isDisabled && <span style={{ fontSize: '0.7rem', color: 'var(--text-secondary)', marginTop: '4px' }}>Coming Soon</span>}
                 </motion.div>
               ))}
             </div>
