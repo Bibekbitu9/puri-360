@@ -2522,7 +2522,7 @@ navigator.share({ url: shareUrl });
 		}
 		me._btn_share_icon_container.appendChild(me._btn_share_icon);
 		me._btn_share.appendChild(me._btn_share_icon_container);
-		me._button_container.appendChild(me._btn_share);
+		// me._button_container.appendChild(me._btn_share);
 		el=me._btn_info=document.createElement('div');
 		el.ggId="btn_info";
 		el.ggParameter={ rx:0,ry:0,a:0,sx:1,sy:1,def:'' };
@@ -5936,7 +5936,7 @@ alert("The current view has been copied.");
 		}
 		me._btn_share_icon_container_phone.appendChild(me._btn_share_icon_phone);
 		me._btn_share_phone.appendChild(me._btn_share_icon_container_phone);
-		me._button_container_phone.appendChild(me._btn_share_phone);
+		// me._button_container_phone.appendChild(me._btn_share_phone);
 		el=me._btn_map_phone=document.createElement('div');
 		el.ggId="btn_map_phone";
 		el.ggParameter={ rx:0,ry:0,a:0,sx:1,sy:1,def:'' };

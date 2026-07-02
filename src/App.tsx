@@ -344,14 +344,19 @@ function App() {
     }
   }, [activeNodeId, selectedService]);
 
-  // Synchronize target destination node to the tour iframe dynamically
+  // Synchronize target destination node and coordinates to the tour iframe dynamically
   useEffect(() => {
     const sendTarget = () => {
       if (iframeRef.current && iframeRef.current.contentWindow) {
         const targetNodeId = targetServiceSpot?.nearestNodeId || null;
         iframeRef.current.contentWindow.postMessage({
           type: 'setTargetNode',
-          nodeId: targetNodeId
+          nodeId: targetNodeId,
+          targetServiceSpot: targetServiceSpot ? {
+            name: targetServiceSpot.name,
+            latitude: targetServiceSpot.latitude,
+            longitude: targetServiceSpot.longitude
+          } : null
         }, '*');
       }
     };
@@ -549,17 +554,17 @@ function App() {
               alignItems: 'center',
               justifyContent: 'space-between',
               gap: '16px',
-              padding: '4px 24px',
+              padding: '4px 16px',
               borderRadius: '30px',
               background: 'linear-gradient(135deg, #FF9933, #FF6A00)',
               color: '#ffffff',
               boxShadow: '0 8px 32px rgba(255, 122, 0, 0.4)',
-              minWidth: '280px',
+              minWidth: '200px',
               maxWidth: '90vw',
               border: '1px solid rgba(255, 255, 255, 0.2)',
             }}
           >
-            <div style={{ display: 'flex', alignItems: 'center', gap: '12px', flex: 1, minWidth: 0 }}>
+            <div>
               <div style={{
                 background: 'rgba(255, 255, 255, 0.2)',
                 borderRadius: '50%',
@@ -579,16 +584,7 @@ function App() {
                   {selectedService?.iconName === 'Parking' && '🅿️'}
                 </span>
               </div>
-              <div style={{ display: 'flex', flexDirection: 'column', minWidth: 0 }}>
-                <span style={{ fontSize: '10px', textTransform: 'uppercase', letterSpacing: '0.05em', color: 'rgba(255, 255, 255, 0.8)' }}>
-                  Distance to {selectedService?.title}
-                </span>
-                <span style={{ fontSize: '14px', fontWeight: 700, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
-                  {targetServiceSpot.name}
-                </span>
-              </div>
             </div>
-
             <div style={{
               display: 'flex',
               gap: '4px',
